@@ -7,8 +7,8 @@ const navHTML = `
   <nav class="site-nav">
     <div class="nav-container">
       <div class="logo">
-        <img src="https://www.dwarvenforged.com/img/logo.jpg" alt="Dwarven Forged Logo">
-        <h1 class="site-title"><a href="https://www.dwarvenforged.com">Dwarven Forged Stories</a></h1>
+        <img src="https://www.dwarvenforged.club/img/logo.jpg" alt="Dwarven Forged Logo">
+        <h1 class="site-title"><a href="https://www.dwarvenforged.club">Dwarven Forged Stories</a></h1>
       </div>
       <div class="nav-links">
         <div class="nav-dropdown">
@@ -37,7 +37,7 @@ const navHTML = `
           </div>
         </div>
         <a href="/stories/" class="nav-button">All Stories</a>
-        <a href="https://www.dwarvenforged.com" class="home-button">Return to Main Site</a>
+        <a href="https://www.dwarvenforged.club" class="home-button">Return to Main Site</a>
       </div>
     </div>
   </nav>
@@ -257,8 +257,8 @@ const navHTML = `
 		path: '/stories/story-0008/index.html',
 		partner: {
 		  name: 'StrainNavigator',
-		  image: 'https://www.dwarvenforged.com/stories/story-0008/StrainNavigator_Logo.jpg',
-		  link: 'https://strainnavigator.com',
+		  image: 'https://www.dwarvenforged.club/stories/story-0008/StrainNavigator_Logo.jpg',
+		  link: 'https://strainnavigator.club',
 		  tagline: 'Your ultimate cannabis growing assistant and strain tracking tools'
 		}
 	  },
@@ -270,8 +270,8 @@ const navHTML = `
 		path: '/stories/story-0012/index.html',
 		partner: {
 		  name: 'AI-Ministries',
-		  image: 'https://www.dwarvenforged.com/stories/story-0012/AI_Ministries_Logo.jpg',
-		  link: 'https://ai-ministries.com',
+		  image: 'https://www.dwarvenforged.club/stories/story-0012/AI_Ministries_Logo.jpg',
+		  link: 'https://ai-ministries.club',
 		  tagline: 'Exploring the intersection of AI, writing, and creativity'
 		}
 	  }
@@ -284,8 +284,8 @@ const navHTML = `
 		path: '/stories/story-2002/index.html',
 		partner: {
 		  name: 'GreenWrld',
-		  image: 'https://www.dwarvenforged.com/stories/story-2002/GreenWrld_Logo.jpg',
-		  link: 'https://greenwrldexclusive.com',
+		  image: 'https://www.dwarvenforged.club/stories/story-2002/GreenWrld_Logo.jpg',
+		  link: 'https://greenwrldexclusive.club',
 		  tagline: 'Growing green solutions across realms'
 		}
 	  },
@@ -296,8 +296,8 @@ const navHTML = `
 		path: '/stories/story-2005/index.html',
 		partner: {
 		  name: 'Gambit Growing',
-		  image: 'https://www.dwarvenforged.com/stories/story-2005/Gambit_Flag.jpg',
-		  link: 'https://gambitgrowing.com',
+		  image: 'https://www.dwarvenforged.club/stories/story-2005/Gambit_Flag.jpg',
+		  link: 'https://gambitgrowing.club',
 		  tagline: 'Innovative cultivation solutions for every realm'
 		}
 	  },
@@ -306,7 +306,7 @@ const navHTML = `
 		path: '/stories/story-2006/index.html',
 		partner: {
 		  name: 'Tóke\'s Recovery',
-		  image: 'https://www.dwarvenforged.com/stories/story-2006/Tokes_Recovery_Logo.jpg',
+		  image: 'https://www.dwarvenforged.club/stories/story-2006/Tokes_Recovery_Logo.jpg',
 		  link: 'https://discord.gg/hwy2yw7s6h', 
 		  tagline: 'Supporting healing journeys with community and understanding'
 		}
@@ -317,8 +317,8 @@ const navHTML = `
 		path: '/stories/story-2007/index.html',
 		partner: {
 		  name: 'Athena Nutrients',
-		  image: 'https://www.dwarvenforged.com/stories/story-2007/Athena_Nutrients_Logo.jpg',
-		  link: 'https://www.athenaag.com/',
+		  image: 'https://www.dwarvenforged.club/stories/story-2007/Athena_Nutrients_Logo.jpg',
+		  link: 'https://www.athenaag.club/',
 		  tagline: 'Perfect balance for professional results'
 		}
 	  }	  
