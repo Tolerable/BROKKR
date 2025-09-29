@@ -49,6 +49,8 @@
 	
 	<title>DwarvenForged</title>
 </head>
+
+
 <body>
 <script>
   // Immediately check for preview mode when page loads
@@ -344,9 +346,9 @@
                     </ul>
                 </div>
                 
-                <div class="footer-section">
-                    <h3>Contact</h3>
-                    <ul id="contact-links">
+				<div class="footer-section" id="contact">
+					<h3>Contact</h3>
+					<ul id="contact-links">
                         <!-- Contact links will be dynamically inserted here -->
                     </ul>
                 </div>
@@ -367,6 +369,19 @@
 
 	<!-- Core Scripts -->
 	<script src="js/config.js"></script>
+	<script src="js/agecheck.js"></script>
+	<script src="js/cookie.js"></script>
+
+	<!-- Google Analytics - After cookie consent -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-DQ6PNNP3E6"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	  gtag('config', 'G-DQ6PNNP3E6');
+	</script>
+
+	<script src="js/promotions.js"></script>
 	<script src="js/main.js"></script>
 </body>
 </html>

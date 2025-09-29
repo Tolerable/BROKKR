@@ -491,11 +491,13 @@ document.createElement = function(tagName) {
 				<div class="config-tab" data-tab="strainTree">Strain Tree</div>
 				<div class="config-tab" data-tab="about">About</div>
 				<div class="config-tab" data-tab="support">Support</div>
-            </div>
+			</div>
 
-			<!-- Config Path Selector -->
-			<h2>Configuration Source</h2>
-			<div class="form-group">
+			<!-- Basic Info Section -->
+			<div class="config-section active" id="basic-section">
+				<!-- Config Path Selector -->
+				<h2>Configuration Source</h2>
+				<div class="form-group">
 				<label for="config-path">Configuration File Path</label>
 				<div style="display: flex; gap: 10px; margin-bottom: 10px;">
 					<input type="text" id="config-path" placeholder="Path to config.js (e.g., js/config.js)" style="flex: 1;">
@@ -506,11 +508,9 @@ document.createElement = function(tagName) {
 					<div id="config-options" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;"></div>
 				</div>
 				<p class="help-text">Select a detected configuration or enter a custom path to your config.js file.</p>
-			</div>
-            
-            <!-- Basic Info Section -->
-            <div class="config-section active" id="basic-section">
-                <h2>Basic Site Information</h2>
+				</div>
+				
+				<h2>Basic Site Information</h2>
                 
                 <div class="form-group">
                     <label for="site-name">Site Name</label>
@@ -867,6 +867,34 @@ document.createElement = function(tagName) {
                         <option value="pulse">Pulse</option>
                     </select>
                 </div>
+
+				<h3>Background Audio</h3>
+
+				<div class="form-group">
+					<label for="background-audio-enabled">Enable Background Audio</label>
+					<select id="background-audio-enabled">
+						<option value="false" selected>No</option>
+						<option value="true">Yes</option>
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label for="background-audio-file">Audio File URL</label>
+					<input type="url" id="background-audio-file" value="" placeholder="audio/background.mp3">
+					<p class="help-text">MP3 file that will loop in the background</p>
+				</div>
+
+				<div class="form-group">
+					<label for="background-audio-volume">Volume</label>
+					<select id="background-audio-volume">
+						<option value="0.1">10%</option>
+						<option value="0.2">20%</option>
+						<option value="0.3" selected>30%</option>
+						<option value="0.5">50%</option>
+						<option value="0.7">70%</option>
+					</select>
+				</div>				
+				
             </div>
 
 			<div class="config-section" id="images-section">
@@ -1067,6 +1095,41 @@ document.createElement = function(tagName) {
 									
 									<button type="button" id="add-pack-btn" style="background: var(--primary-color); color: var(--text-color); border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; margin-top: 10px;">Add Pack Option</button>
 								</div>
+								
+								<!-- Promotional Settings Section -->
+								<div class="form-group">
+									<label for="product-promo-type" style="color: var(--secondary-color);">Promotional Badge</label>
+									<select id="product-promo-type">
+										<option value="none">No Promotion</option>
+										<option value="percentage">% OFF</option>
+										<option value="sale">SALE</option>
+										<option value="bogo">Buy One Get One</option>
+										<option value="new">NEW</option>
+										<option value="limited">LIMITED TIME</option>
+										<option value="custom">Custom Badge</option>
+									</select>
+								</div>
+
+								<div class="form-group" id="promo-value-group" style="display: none;">
+									<label for="product-promo-value" style="color: var(--secondary-color);">Badge Text/Percentage</label>
+									<input type="text" id="product-promo-value" placeholder="e.g., 25 or FLASH SALE">
+									<p style="font-size: 0.8rem; color: #aaa; margin-top: 3px;">For % OFF: enter number only. For custom: enter display text</p>
+								</div>
+
+								<div class="form-group" id="discount-group" style="display: none;">
+									<label for="product-discount-percent" style="color: var(--secondary-color);">Actual Discount %</label>
+									<input type="number" id="product-discount-percent" min="0" max="100" placeholder="25">
+									<p style="font-size: 0.8rem; color: #aaa; margin-top: 3px;">Percentage to reduce prices by</p>
+								</div>
+
+								<div class="form-group" id="bogo-type-group" style="display: none;">
+									<label for="product-bogo-type" style="color: var(--secondary-color);">BOGO Type</label>
+									<select id="product-bogo-type">
+										<option value="same">Buy This, Get Same Item Free</option>
+										<option value="any">Buy This, Get Any BOGO Item Free</option>
+									</select>
+								</div>								
+								
 							</div>
 						</div>
 						
@@ -1119,26 +1182,141 @@ document.createElement = function(tagName) {
                         <option value="false">No</option>
                     </select>
                 </div>
+
+				<div class="form-group">
+					<label for="enable-shipping">Enable Shipping Charges</label>
+					<select id="enable-shipping">
+						<option value="false" selected>Free Shipping (No charges)</option>
+						<option value="true">Charge Shipping</option>
+					</select>
+				</div>
+
+				<div class="form-group" id="shipping-settings" style="display: none;">
+					<label for="shipping-price">Shipping Price</label>
+					<input type="number" id="shipping-price" step="0.01" value="5.99" placeholder="5.99">
+					<p class="help-text">Flat rate shipping charge for all orders</p>
+				</div>
+
+				<div class="form-group">
+					<label for="show-free-shipping">Show "FREE SHIPPING" Label</label>
+					<select id="show-free-shipping">
+						<option value="true" selected>Yes - Show crossed out shipping price</option>
+						<option value="false">No - Don't mention shipping</option>
+					</select>
+					<p class="help-text">When shipping is free, show crossed-out price for perceived value</p>
+				</div>
                 
-                <div class="form-group">
-                    <label for="checkout-method">Checkout Method</label>
-                    <select id="checkout-method">
-                        <option value="email" selected>Email</option>
-                        <option value="form">Form Submission</option>
-                        <option value="external">External Checkout</option>
-                    </select>
-                </div>
+				<div class="form-group">
+					<label for="checkout-method">Checkout Method</label>
+					<select id="checkout-method">
+						<option value="email" selected>Email</option>
+						<option value="payment-processor">Payment Processor</option>
+						<option value="form">Form Submission</option>
+						<option value="external">External Checkout</option>
+					</select>
+				</div>
                 
                 <div class="form-group" id="external-checkout-group">
                     <label for="external-checkout-url">External Checkout URL</label>
                     <input type="url" id="external-checkout-url" value="">
                     <p class="help-text">Only needed if checkout method is "External"</p>
                 </div>
-                
-                <div class="form-group">
-                    <label for="analytics-id">Google Analytics ID (Optional)</label>
-                    <input type="text" id="analytics-id" value="">
-                </div>
+ 
+				<!-- Payment Processor Settings -->
+				<div class="form-group" id="payment-processor-group" style="display: none;">
+					<label for="payment-processor">Payment Processor</label>
+					<select id="payment-processor">
+						<option value="none">None - Email Only</option>
+						<option value="square">Square</option>
+						<option value="stripe">Stripe</option>
+						<option value="paypal">PayPal</option>
+					</select>
+					<p class="help-text">Choose your payment processor for online payments</p>
+				</div>
+
+				<!-- Square Configuration -->
+				<div class="form-group" id="square-config" style="display: none;">
+					<h4 style="color: var(--secondary-color); margin: 15px 0 10px 0;">Square Configuration</h4>
+					
+					<label for="square-app-id">Square Application ID</label>
+					<input type="text" id="square-app-id" placeholder="sandbox-sq0idb-...">
+					<p class="help-text">Your Square Application ID (use sandbox ID for testing)</p>
+					
+					<label for="square-location-id">Square Location ID</label>
+					<input type="text" id="square-location-id" placeholder="L...">
+					<p class="help-text">Your Square Location ID</p>
+					
+					<label for="square-environment">Environment</label>
+					<select id="square-environment">
+						<option value="sandbox">Sandbox (Testing)</option>
+						<option value="production">Production (Live)</option>
+					</select>
+				</div>
+
+				<!-- Stripe Configuration -->
+				<div class="form-group" id="stripe-config" style="display: none;">
+					<h4 style="color: var(--secondary-color); margin: 15px 0 10px 0;">Stripe Configuration</h4>
+					
+					<label for="stripe-publishable-key">Stripe Publishable Key</label>
+					<input type="text" id="stripe-publishable-key" placeholder="pk_test_... or pk_live_...">
+					<p class="help-text">Your Stripe Publishable Key (starts with pk_)</p>
+					
+					<label for="stripe-environment">Environment</label>
+					<select id="stripe-environment">
+						<option value="test">Test Mode</option>
+						<option value="live">Live Mode</option>
+					</select>
+				</div>
+
+				<!-- PayPal Configuration -->
+				<div class="form-group" id="paypal-config" style="display: none;">
+					<h4 style="color: var(--secondary-color); margin: 15px 0 10px 0;">PayPal Configuration</h4>
+					
+					<label for="paypal-client-id">PayPal Client ID</label>
+					<input type="text" id="paypal-client-id" placeholder="AY...">
+					<p class="help-text">Your PayPal Client ID</p>
+					
+					<label for="paypal-environment">Environment</label>
+					<select id="paypal-environment">
+						<option value="sandbox">Sandbox (Testing)</option>
+						<option value="production">Production (Live)</option>
+					</select>
+					
+					<label for="paypal-currency">Currency</label>
+					<select id="paypal-currency">
+						<option value="USD">USD</option>
+						<option value="EUR">EUR</option>
+						<option value="GBP">GBP</option>
+						<option value="CAD">CAD</option>
+						<option value="AUD">AUD</option>
+					</select>
+				</div>
+ 
+				<h3>Cookie Compliance</h3>
+
+				<div class="form-group">
+					<label for="enable-cookie-consent">Enable Cookie Consent Banner</label>
+					<select id="enable-cookie-consent">
+						<option value="false" selected>No</option>
+						<option value="true">Yes</option>
+					</select>
+					<p class="help-text">Show cookie consent banner to comply with privacy laws (GDPR, CCPA, etc.)</p>
+				</div>
+
+				<div class="form-group">
+					<label for="cookie-policy-url">Cookie Policy URL (Optional)</label>
+					<input type="url" id="cookie-policy-url" value="">
+					<p class="help-text">Link to your cookie policy page. Leave blank to hide the "Learn More" link.</p>
+				</div>
+
+				<div class="form-group">
+					<label for="cookie-redirect-decline">Redirect Users Who Decline Cookies</label>
+					<select id="cookie-redirect-decline">
+						<option value="true" selected>Yes - Send to Google.com</option>
+						<option value="false">No - Disable features instead</option>
+					</select>
+					<p class="help-text">What to do when users decline cookies. Redirect is recommended for legal protection.</p>
+				</div>
                 
 				<h3>Navigation</h3>
 				<p>Add or edit navigation items. First item is always Home.</p>
@@ -1553,6 +1731,71 @@ document.createElement = function(tagName) {
 				}
 			});
 
+			// Show/hide payment processor settings based on checkout method
+			document.getElementById('checkout-method').addEventListener('change', function() {
+				const paymentProcessorGroup = document.getElementById('payment-processor-group');
+				const externalCheckoutGroup = document.getElementById('external-checkout-group');
+				
+				if (this.value === 'payment-processor') {
+					paymentProcessorGroup.style.display = 'block';
+					externalCheckoutGroup.style.display = 'none';
+				} else if (this.value === 'external') {
+					externalCheckoutGroup.style.display = 'block';
+					paymentProcessorGroup.style.display = 'none';
+				} else {
+					// Hide all payment processor related sections when switching to Email/Form
+					paymentProcessorGroup.style.display = 'none';
+					externalCheckoutGroup.style.display = 'none';
+					
+					// Also hide all the specific processor configs
+					document.getElementById('square-config').style.display = 'none';
+					document.getElementById('stripe-config').style.display = 'none';
+					document.getElementById('paypal-config').style.display = 'none';
+					
+					// Reset the payment processor dropdown to "none"
+					document.getElementById('payment-processor').value = 'none';
+				}
+			});
+
+			// Show/hide specific payment processor configs
+			document.getElementById('payment-processor').addEventListener('change', function() {
+				// Hide all processor configs
+				document.getElementById('square-config').style.display = 'none';
+				document.getElementById('stripe-config').style.display = 'none';
+				document.getElementById('paypal-config').style.display = 'none';
+				
+				// Show selected processor config
+				if (this.value !== 'none') {
+					document.getElementById(this.value + '-config').style.display = 'block';
+				}
+			});
+
+			// Promotional type change handler
+			document.getElementById('product-promo-type').addEventListener('change', function() {
+				const promoType = this.value;
+				const valueGroup = document.getElementById('promo-value-group');
+				const discountGroup = document.getElementById('discount-group');
+				const bogoGroup = document.getElementById('bogo-type-group');
+				
+				valueGroup.style.display = 'none';
+				discountGroup.style.display = 'none';
+				bogoGroup.style.display = 'none';
+				
+				if (promoType !== 'none') {
+					if (promoType === 'percentage' || promoType === 'custom') {
+						valueGroup.style.display = 'block';
+					}
+					
+					if (promoType === 'percentage' || promoType === 'sale') {
+						discountGroup.style.display = 'block';
+					}
+					
+					if (promoType === 'bogo') {
+						bogoGroup.style.display = 'block';
+					}
+				}
+			});
+
 			// Add friend link
 			document.getElementById('add-friend-btn').addEventListener('click', function() {
 				const friendLinks = document.getElementById('friend-links');
@@ -1886,6 +2129,7 @@ document.createElement = function(tagName) {
 							name: 'Premium Collectible 1',
 							type: 'Premium Collection',
 							status: 'available',
+							delivery: 'physical',
 							image: 'img/product1.jpg',
 							additionalImages: [],
 							description: 'This is a premium collectible with exceptional qualities.',
@@ -2226,9 +2470,6 @@ document.createElement = function(tagName) {
 				safeSetValue('product-notes', isNewProduct ? '' : product.notes);
 				safeSetValue('product-enable-hover', isNewProduct ? 'false' : (product.enableHoverImage ? 'true' : 'false'));
 
-				// Set hidden flag - determine if product should be hidden
-				const isHidden = isNewProduct ? false : !!product.hidden;
-				
 				// Create or update the visibility control
 				let visibilityGroup = document.getElementById('product-visibility-group');
 				if (!visibilityGroup) {
@@ -2239,8 +2480,8 @@ document.createElement = function(tagName) {
 					visibilityGroup.innerHTML = `
 						<label for="product-visibility" style="color: var(--secondary-color);">Product Visibility</label>
 						<select id="product-visibility">
-							<option value="visible" ${!isHidden ? 'selected' : ''}>Visible - Show in product list</option>
-							<option value="hidden" ${isHidden ? 'selected' : ''}>Hidden - Keep in database but don't display</option>
+							<option value="visible">Visible - Show in product list</option>
+							<option value="hidden">Hidden - Keep in database but don't display</option>
 						</select>
 						<p style="font-size: 0.8rem; color: #aaa; margin-top: 3px;">Hidden products are saved but not displayed on your site.</p>
 					`;
@@ -2252,12 +2493,13 @@ document.createElement = function(tagName) {
 						const productIdGroup = productIdField.closest('.form-group');
 						parentNode.insertBefore(visibilityGroup, productIdGroup.nextSibling);
 					}
-				} else {
-					// If it exists, just update the select value
-					const visibilitySelect = visibilityGroup.querySelector('select');
-					if (visibilitySelect) {
-						visibilitySelect.value = isHidden ? 'hidden' : 'visible';
-					}
+				}
+				
+				// Set visibility based on product data
+				const isHidden = isNewProduct ? false : !!product.hidden;
+				const visibilitySelect = document.getElementById('product-visibility');
+				if (visibilitySelect) {
+					visibilitySelect.value = isHidden ? 'hidden' : 'visible';
 				}
 
 				const enableHoverSelect = document.getElementById('product-enable-hover');
@@ -2308,8 +2550,12 @@ document.createElement = function(tagName) {
 				
 				// Set delivery type and digital content
 				const deliverySelect = document.getElementById('product-delivery');
-				if (deliverySelect && !isNewProduct) {
-					deliverySelect.value = product.delivery || 'physical';
+				if (deliverySelect) {
+					deliverySelect.value = isNewProduct ? 'physical' : (product.delivery || 'physical');
+					
+					// Trigger the change event to update the UI
+					const changeEvent = new Event('change');
+					deliverySelect.dispatchEvent(changeEvent);
 				}
 				safeSetValue('digital-content', isNewProduct ? '' : (product.digitalContent || ''));
 				
@@ -2331,6 +2577,41 @@ document.createElement = function(tagName) {
 							<h4 style="margin: 15px 0 5px 0; font-size: 1rem; color: var(--secondary-color); font-family: var(--font-heading);">Pack Options</h4>
 							<div id="pack-options" style="max-height: 180px; overflow-y: auto; border: 1px solid var(--primary-color); border-radius: 5px; padding: 5px; background: rgba(0, 0, 0, 0.2);"></div>
 							<button type="button" id="add-pack-btn" style="background: var(--primary-color); color: var(--text-color); border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; margin-top: 10px;">Add Pack Option</button>
+							
+							<h4 style="margin: 15px 0 5px 0; font-size: 1rem; color: var(--secondary-color); font-family: var(--font-heading);">Promotional Settings</h4>
+							
+							<div class="form-group">
+								<label for="product-promo-type" style="color: var(--secondary-color);">Promotional Badge</label>
+								<select id="product-promo-type">
+									<option value="none">No Promotion</option>
+									<option value="percentage">% OFF</option>
+									<option value="sale">SALE</option>
+									<option value="bogo">Buy One Get One</option>
+									<option value="new">NEW</option>
+									<option value="limited">LIMITED TIME</option>
+									<option value="custom">Custom Badge</option>
+								</select>
+							</div>
+
+							<div class="form-group" id="promo-value-group" style="display: none;">
+								<label for="product-promo-value" style="color: var(--secondary-color);">Badge Text/Percentage</label>
+								<input type="text" id="product-promo-value" placeholder="e.g., 25 or FLASH SALE">
+								<p style="font-size: 0.8rem; color: #aaa; margin-top: 3px;">For % OFF: enter number only. For custom: enter display text</p>
+							</div>
+
+							<div class="form-group" id="discount-group" style="display: none;">
+								<label for="product-discount-percent" style="color: var(--secondary-color);">Actual Discount %</label>
+								<input type="number" id="product-discount-percent" min="0" max="100" placeholder="25">
+								<p style="font-size: 0.8rem; color: #aaa; margin-top: 3px;">Percentage to reduce prices by</p>
+							</div>
+
+							<div class="form-group" id="bogo-type-group" style="display: none;">
+								<label for="product-bogo-type" style="color: var(--secondary-color);">BOGO Type</label>
+								<select id="product-bogo-type">
+									<option value="same">Buy This, Get Same Item Free</option>
+									<option value="any">Buy This, Get Any BOGO Item Free</option>
+								</select>
+							</div>
 						`;
 						
 						// Add the pack options section to the right column
@@ -2394,9 +2675,15 @@ document.createElement = function(tagName) {
 				
 				// Set up delivery type change handler
 				if (deliverySelect) {
+					// SAVE THE CURRENT VALUE BEFORE CLONING
+					const savedValue = deliverySelect.value;
+					
 					// Remove existing listener to prevent duplicates
 					const newDeliverySelect = deliverySelect.cloneNode(true);
 					deliverySelect.parentNode.replaceChild(newDeliverySelect, deliverySelect);
+					
+					// RESTORE THE VALUE AFTER CLONING
+					newDeliverySelect.value = savedValue;
 					
 					newDeliverySelect.addEventListener('change', function() {
 						console.log("Delivery type changed to:", this.value);
@@ -2413,10 +2700,10 @@ document.createElement = function(tagName) {
 						}
 					});
 				}
-				
+
 				// Set up event handlers for buttons
 				setupProductEditorEventHandlers();
-				
+
 				// Show modal
 				modal.style.display = 'block';
 				
@@ -2427,6 +2714,36 @@ document.createElement = function(tagName) {
 					"packOptionsSectionExists": !!packOptionsSection,
 					"packOptionsSectionDisplay": packOptionsSection ? packOptionsSection.style.display : 'N/A'
 				});
+
+				// NOW SET PROMOTIONAL VALUES AFTER ALL FORM FIELDS ARE CREATED
+				// Reset promotional field visibility first
+				const valueGroup = document.getElementById('promo-value-group');
+				const discountGroup = document.getElementById('discount-group');
+				const bogoGroup = document.getElementById('bogo-type-group');
+				if (valueGroup) valueGroup.style.display = 'none';
+				if (discountGroup) discountGroup.style.display = 'none';
+				if (bogoGroup) bogoGroup.style.display = 'none';
+
+				// Set promotional values AFTER the form fields exist
+				if (!isNewProduct && product.promotional) {
+					safeSetValue('product-promo-type', product.promotional.type || 'none');
+					safeSetValue('product-promo-value', product.promotional.value || '');
+					safeSetValue('product-discount-percent', product.promotional.discountPercent || '');
+					safeSetValue('product-bogo-type', product.promotional.bogoType || 'same');
+				} else {
+					// Set defaults for new products
+					safeSetValue('product-promo-type', 'none');
+					safeSetValue('product-promo-value', '');
+					safeSetValue('product-discount-percent', '');
+					safeSetValue('product-bogo-type', 'same');
+				}
+
+				// Trigger promotional type change to show/hide fields AFTER setting values
+				const promoTypeSelect = document.getElementById('product-promo-type');
+				if (promoTypeSelect) {
+					const changeEvent = new Event('change');
+					promoTypeSelect.dispatchEvent(changeEvent);
+				}
 			}
 
 			function setupHoverImageHandlers() {
@@ -2731,7 +3048,7 @@ document.createElement = function(tagName) {
 				const productDelivery = document.getElementById('product-delivery').value;
 				const digitalContent = document.getElementById('digital-content').value;
 				
-				// Get visibility status (add this)
+				// Get visibility status
 				const visibilitySelect = document.getElementById('product-visibility');
 				const isHidden = visibilitySelect ? visibilitySelect.value === 'hidden' : false;
 				
@@ -2814,6 +3131,45 @@ document.createElement = function(tagName) {
 					displayOrder = products[productId].displayOrder;
 				}
 				
+				// Get promotional settings with proper type-based filtering
+				const promoType = document.getElementById('product-promo-type').value;
+				const promoValue = document.getElementById('product-promo-value').value;
+				const discountPercent = document.getElementById('product-discount-percent').value;
+				const bogoType = document.getElementById('product-bogo-type').value;
+				
+				// Create promotional object based on type - only include relevant fields
+				let promotional = {
+					type: promoType,
+					enabled: promoType !== 'none'
+				};
+				
+				// Only add relevant fields based on promotional type
+				switch(promoType) {
+					case 'percentage':
+						promotional.value = promoValue || '';
+						promotional.discountPercent = discountPercent || '';
+						break;
+						
+					case 'custom':
+						promotional.value = promoValue || '';
+						break;
+						
+					case 'sale':
+						promotional.discountPercent = discountPercent || '';
+						break;
+						
+					case 'bogo':
+						promotional.bogoType = bogoType || 'same';
+						break;
+						
+					case 'new':
+					case 'limited':
+					case 'none':
+					default:
+						// For these types, only type and enabled are needed
+						break;
+				}
+				
 				// Create or update product - maintain all fields
 				products[productId] = {
 					id: productId,
@@ -2835,8 +3191,9 @@ document.createElement = function(tagName) {
 					enableHoverImage: document.getElementById('product-enable-hover').value === 'true',
 					hoverImage: document.getElementById('product-enable-hover').value === 'true' ? 
 						document.getElementById('product-hover-image').value : '',
-					hidden: isHidden,  // Add the hidden flag
-					displayOrder: displayOrder  // Add the display order
+					hidden: isHidden,
+					displayOrder: displayOrder,
+					promotional: promotional
 				};
 				
 				// For debugging - check what's being saved
@@ -3253,16 +3610,45 @@ document.createElement = function(tagName) {
 					}
 				});
                 
-                // Show/hide External Checkout URL based on checkout method
-                document.getElementById('checkout-method').addEventListener('change', function() {
-                    const externalCheckoutGroup = document.getElementById('external-checkout-group');
-                    
-                    if (this.value === 'external') {
-                        externalCheckoutGroup.style.display = 'block';
-                    } else {
-                        externalCheckoutGroup.style.display = 'none';
-                    }
-                });
+				// Show/hide payment processor settings based on checkout method
+				document.getElementById('checkout-method').addEventListener('change', function() {
+					const paymentProcessorGroup = document.getElementById('payment-processor-group');
+					const externalCheckoutGroup = document.getElementById('external-checkout-group');
+					
+					if (this.value === 'payment-processor') {
+						paymentProcessorGroup.style.display = 'block';
+						externalCheckoutGroup.style.display = 'none';
+					} else if (this.value === 'external') {
+						externalCheckoutGroup.style.display = 'block';
+						paymentProcessorGroup.style.display = 'none';
+					} else {
+						paymentProcessorGroup.style.display = 'none';
+						externalCheckoutGroup.style.display = 'none';
+					}
+				});
+
+				// Show/hide specific payment processor configs
+				document.getElementById('payment-processor').addEventListener('change', function() {
+					// Hide all processor configs
+					document.getElementById('square-config').style.display = 'none';
+					document.getElementById('stripe-config').style.display = 'none';
+					document.getElementById('paypal-config').style.display = 'none';
+					
+					// Show selected processor config
+					if (this.value !== 'none') {
+						document.getElementById(this.value + '-config').style.display = 'block';
+					}
+				});
+
+				// Show/hide shipping settings based on enable shipping
+				document.getElementById('enable-shipping').addEventListener('change', function() {
+					const shippingSettings = document.getElementById('shipping-settings');
+					if (this.value === 'true') {
+						shippingSettings.style.display = 'block';
+					} else {
+						shippingSettings.style.display = 'none';
+					}
+				});
                 
                 // Show/hide Floating Object Image URL based on special feature type
                 document.getElementById('special-feature-type').addEventListener('change', function() {
@@ -3521,6 +3907,11 @@ document.createElement = function(tagName) {
 								type: document.getElementById('special-feature-type').value,
 								image: document.getElementById('floating-object-image').value,
 								behavior: document.getElementById('special-feature-behavior').value
+							},
+							backgroundAudio: {
+								enabled: document.getElementById('background-audio-enabled').value === 'true',
+								file: document.getElementById('background-audio-file').value,
+								volume: parseFloat(document.getElementById('background-audio-volume').value)
 							}
 						},                        
 						strainTree: {
@@ -3557,13 +3948,38 @@ document.createElement = function(tagName) {
 						advanced: {
 							enableShop: document.getElementById('enable-shop').value === 'true',
 							enableLocalStorage: document.getElementById('enable-local-storage').value === 'true',
+							enableShipping: document.getElementById('enable-shipping').value === 'true',
+							shippingPrice: parseFloat(document.getElementById('shipping-price').value) || 0,
+							showFreeShipping: document.getElementById('show-free-shipping').value === 'true',
 							checkoutMethod: document.getElementById('checkout-method').value,
 							externalCheckoutUrl: document.getElementById('external-checkout-url').value,
-							analyticsId: document.getElementById('analytics-id').value,
 							orderEmail: document.getElementById('order-email').value,
+							
+							// Payment Processor Configuration
+							paymentProcessor: {
+								type: document.getElementById('payment-processor').value,
+								square: {
+									appId: document.getElementById('square-app-id').value,
+									locationId: document.getElementById('square-location-id').value,
+									environment: document.getElementById('square-environment').value
+								},
+								stripe: {
+									publishableKey: document.getElementById('stripe-publishable-key').value,
+									environment: document.getElementById('stripe-environment').value
+								},
+								paypal: {
+									clientId: document.getElementById('paypal-client-id').value,
+									environment: document.getElementById('paypal-environment').value,
+									currency: document.getElementById('paypal-currency').value
+								}
+							},
+							
 							enableAgeCheck: document.getElementById('enable-age-check').value === 'true',
 							ageCheckMinimum: parseInt(document.getElementById('age-check-minimum').value) || 21,
-							ageRedirectUrl: document.getElementById('age-redirect-url').value || 'https://www.google.com'
+							ageRedirectUrl: document.getElementById('age-redirect-url').value || 'https://www.google.com',
+							enableCookieConsent: document.getElementById('enable-cookie-consent').value === 'true',
+							cookiePolicyUrl: document.getElementById('cookie-policy-url').value,
+							cookieRedirectOnDecline: document.getElementById('cookie-redirect-decline').value === 'true'
 						}
 					};
 				}
@@ -4106,15 +4522,40 @@ document.createElement = function(tagName) {
 				
 				// Function to update any UI that depends on form values
 				function updateDependentUI() {
-					// Set visibility for external checkout URL field
+					// Set visibility for payment processor fields
 					const checkoutMethod = document.getElementById('checkout-method');
+					const paymentProcessorGroup = document.getElementById('payment-processor-group');
 					const externalCheckoutGroup = document.getElementById('external-checkout-group');
-					
-					if (checkoutMethod && externalCheckoutGroup) {
-						if (checkoutMethod.value === 'external') {
-							externalCheckoutGroup.style.display = 'block';
-						} else {
+
+					if (checkoutMethod && paymentProcessorGroup && externalCheckoutGroup) {
+						if (checkoutMethod.value === 'payment-processor') {
+							paymentProcessorGroup.style.display = 'block';
 							externalCheckoutGroup.style.display = 'none';
+						} else if (checkoutMethod.value === 'external') {
+							externalCheckoutGroup.style.display = 'block';
+							paymentProcessorGroup.style.display = 'none';
+						} else {
+							paymentProcessorGroup.style.display = 'none';
+							externalCheckoutGroup.style.display = 'none';
+						}
+					}
+
+					// Set visibility for specific payment processor configs
+					const paymentProcessor = document.getElementById('payment-processor');
+					if (paymentProcessor) {
+						// Hide all processor configs first
+						const configs = ['square-config', 'stripe-config', 'paypal-config'];
+						configs.forEach(configId => {
+							const configEl = document.getElementById(configId);
+							if (configEl) configEl.style.display = 'none';
+						});
+						
+						// Show selected processor config
+						if (paymentProcessor.value !== 'none') {
+							const selectedConfig = document.getElementById(paymentProcessor.value + '-config');
+							if (selectedConfig) {
+								selectedConfig.style.display = 'block';
+							}
 						}
 					}
 					
@@ -4591,6 +5032,14 @@ document.createElement = function(tagName) {
 						}
 					}
 					
+					// Strain Tree settings - ADD THIS SECTION
+					if (config.strainTree) {
+						safeSetValue('enable-strain-tree', config.strainTree.enabled ? 'true' : 'false');
+						safeSetValue('strain-tree-title', config.strainTree.title);
+						safeSetValue('strain-tree-description', config.strainTree.description);
+						safeSetValue('strain-data-path', config.strainTree.dataPath);
+					}
+					
 					// Advanced Settings
 					if (config.advanced) {
 						safeSetValue('enable-local-storage', config.advanced.enableLocalStorage ? 'true' : 'false');
@@ -4600,13 +5049,67 @@ document.createElement = function(tagName) {
 						safeSetValue('enable-age-check', config.advanced.enableAgeCheck ? 'true' : 'false');
 						safeSetValue('age-check-minimum', config.advanced.ageCheckMinimum || 21);
 						safeSetValue('age-redirect-url', config.advanced.ageRedirectUrl || 'https://www.google.com');
+
+						safeSetValue('enable-shipping', config.advanced.enableShipping ? 'true' : 'false');
+						safeSetValue('shipping-price', config.advanced.shippingPrice || 5.99);
+						safeSetValue('show-free-shipping', config.advanced.showFreeShipping ? 'true' : 'false');
+
+						// Trigger the change event to show/hide shipping settings
+						const enableShippingSelect = document.getElementById('enable-shipping');
+						if (enableShippingSelect) {
+							const event = new Event('change');
+							enableShippingSelect.dispatchEvent(event);
+						}
 						
 						// Trigger the change event to show/hide age check settings
 						const enableAgeCheckSelect = document.getElementById('enable-age-check');
 						if (enableAgeCheckSelect) {
 							const event = new Event('change');
 							enableAgeCheckSelect.dispatchEvent(event);
-						}							
+						}
+
+						safeSetValue('enable-cookie-consent', config.advanced.enableCookieConsent ? 'true' : 'false');
+						safeSetValue('cookie-policy-url', config.advanced.cookiePolicyUrl || '');
+						safeSetValue('cookie-redirect-decline', config.advanced.cookieRedirectOnDecline !== false ? 'true' : 'false');
+						
+					}
+
+					// Payment Processor Settings
+					if (config.advanced && config.advanced.paymentProcessor) {
+						safeSetValue('payment-processor', config.advanced.paymentProcessor.type || 'none');
+						
+						// Square settings
+						if (config.advanced.paymentProcessor.square) {
+							safeSetValue('square-app-id', config.advanced.paymentProcessor.square.appId);
+							safeSetValue('square-location-id', config.advanced.paymentProcessor.square.locationId);
+							safeSetValue('square-environment', config.advanced.paymentProcessor.square.environment);
+						}
+						
+						// Stripe settings
+						if (config.advanced.paymentProcessor.stripe) {
+							safeSetValue('stripe-publishable-key', config.advanced.paymentProcessor.stripe.publishableKey);
+							safeSetValue('stripe-environment', config.advanced.paymentProcessor.stripe.environment);
+						}
+						
+						// PayPal settings
+						if (config.advanced.paymentProcessor.paypal) {
+							safeSetValue('paypal-client-id', config.advanced.paymentProcessor.paypal.clientId);
+							safeSetValue('paypal-environment', config.advanced.paymentProcessor.paypal.environment);
+							safeSetValue('paypal-currency', config.advanced.paymentProcessor.paypal.currency);
+						}
+					}
+
+					// Trigger change events to show/hide the appropriate sections
+					const checkoutMethodSelect = document.getElementById('checkout-method');
+					if (checkoutMethodSelect) {
+						const event = new Event('change');
+						checkoutMethodSelect.dispatchEvent(event);
+					}
+
+					const paymentProcessorSelect = document.getElementById('payment-processor');
+					if (paymentProcessorSelect) {
+						const event = new Event('change');
+						paymentProcessorSelect.dispatchEvent(event);
 					}
 
 					if (config.legal) {
@@ -4736,27 +5239,6 @@ document.createElement = function(tagName) {
 				loadStrainTreeConfig();
 			});
 			
-			// Add strain tree config to the main config generation
-			const originalGenerateConfig = window.generateConfig || function() { return {}; };
-			window.generateConfig = function() {
-				const config = originalGenerateConfig();
-				
-				// Add strain tree config - FIXED boolean conversion
-				const strainTreeEnabled = document.getElementById('enable-strain-tree').value;
-				
-				config.strainTree = {
-					enabled: strainTreeEnabled === 'true', // This will properly convert string 'false' to boolean false
-					title: document.getElementById('strain-tree-title').value,
-					description: document.getElementById('strain-tree-description').value,
-					dataPath: document.getElementById('strain-data-path').value || 'data/straindata.json'
-				};
-				
-				// Log the actual value being set to help with debugging
-				console.log('Setting strainTree.enabled to:', strainTreeEnabled === 'true', 
-							'from dropdown value:', strainTreeEnabled);
-				
-				return config;
-			};
 		</script>
 		<script>
 		// Add cache-busting parameter to all existing images on the page
