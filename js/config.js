@@ -9,11 +9,11 @@
         "heroBackground": "img/hero-bg.jpg",
         "socialPreview": "",
         "showHeroText": false,
-        "email": "dwarvenforgedshop@sitepackages.net",
+        "email": "contact@dwarvenforged.club",
         "socialLinks": [
             {
                 "name": "Instagram",
-                "url": "https://www.instagram.club/dwarvenforged/"
+                "url": "https://www.instagram.com/dwarvenforged/"
             }
         ],
         "copyright": "© 2025-2026 Dwarven Forged LLC. All rights reserved."
@@ -837,12 +837,12 @@
     "advanced": {
         "enableShop": true,
         "enableLocalStorage": true,
-        "enableShipping": false,
-        "shippingPrice": 5.99,
+        "enableShipping": true,
+        "shippingPrice": 10,
         "showFreeShipping": false,
         "checkoutMethod": "email",
         "externalCheckoutUrl": "",
-        "orderEmail": "orders@example.com",
+        "orderEmail": "orders@dwarvenforged.club",
         "paymentProcessor": {
             "type": "none",
             "square": {
@@ -863,7 +863,7 @@
         "enableAgeCheck": true,
         "ageCheckMinimum": 21,
         "ageRedirectUrl": "https://www.google.com",
-        "enableCookieConsent": false,
+        "enableCookieConsent": true,
         "cookiePolicyUrl": "",
         "cookieRedirectOnDecline": true
     }
