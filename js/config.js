@@ -57,10 +57,15 @@
             "type": "floatingObject",
             "image": "img/floating-object.png",
             "behavior": "float"
+        },
+        "backgroundAudio": {
+            "enabled": false,
+            "file": "",
+            "volume": 0.3
         }
     },
     "strainTree": {
-        "enabled": false,
+        "enabled": true,
         "title": "Strain Genetics Explorer",
         "description": "Explore the genetic relationships between our strains.",
         "dataPath": "data/straindata.json"
@@ -518,7 +523,11 @@
                 "enableHoverImage": false,
                 "hoverImage": "",
                 "hidden": false,
-                "displayOrder": 19
+                "displayOrder": 19,
+                "promotional": {
+                    "type": "new",
+                    "enabled": true
+                }
             },
             "product-1746999759173": {
                 "id": "product-1746999759173",
@@ -540,7 +549,11 @@
                 "enableHoverImage": false,
                 "hoverImage": "",
                 "hidden": false,
-                "displayOrder": 22
+                "displayOrder": 22,
+                "promotional": {
+                    "type": "new",
+                    "enabled": true
+                }
             },
             "product-1747018112345": {
                 "id": "product-1747018112345",
@@ -743,7 +756,11 @@
                 "enableHoverImage": false,
                 "hoverImage": "",
                 "hidden": false,
-                "displayOrder": 20
+                "displayOrder": 20,
+                "promotional": {
+                    "type": "new",
+                    "enabled": true
+                }
             },
             "product-1748375198125": {
                 "id": "product-1748375198125",
@@ -765,7 +782,11 @@
                 "enableHoverImage": false,
                 "hoverImage": "",
                 "hidden": false,
-                "displayOrder": 21
+                "displayOrder": 21,
+                "promotional": {
+                    "type": "new",
+                    "enabled": true
+                }
             }
         }
     },
@@ -790,19 +811,19 @@
     "friendLinks": [
         {
             "name": "StrainNavigator",
-            "url": "https://www.strainnavigator.club/",
+            "url": "https://www.strainnavigator.com/",
             "image": "img/friends/Strain_Navigator_Logo.jpg",
             "description": "Your ultimate cannabis growing assistant"
         },
         {
             "name": "Gambit Growing Solutions",
-            "url": "https://gambitgrowing.club/",
+            "url": "https://gambitgrowing.com/",
             "image": "img/friends/Gambit_Flag.jpg",
             "description": "Innovative cultivation solutions for every realm"
         },
         {
             "name": "Athena® Ag",
-            "url": "https://www.athenaag.club/",
+            "url": "https://www.athenaag.com/",
             "image": "img/friends/Athena_Nutrients_Logo.jpg",
             "description": "Perfect balance for professional results"
         }
@@ -816,12 +837,34 @@
     "advanced": {
         "enableShop": true,
         "enableLocalStorage": true,
+        "enableShipping": false,
+        "shippingPrice": 5.99,
+        "showFreeShipping": false,
         "checkoutMethod": "email",
         "externalCheckoutUrl": "",
-        "analyticsId": "",
-        "orderEmail": "orders@example.club",
+        "orderEmail": "orders@example.com",
+        "paymentProcessor": {
+            "type": "none",
+            "square": {
+                "appId": "",
+                "locationId": "",
+                "environment": "sandbox"
+            },
+            "stripe": {
+                "publishableKey": "",
+                "environment": "test"
+            },
+            "paypal": {
+                "clientId": "",
+                "environment": "sandbox",
+                "currency": "USD"
+            }
+        },
         "enableAgeCheck": true,
         "ageCheckMinimum": 21,
-        "ageRedirectUrl": "https://www.google.club"
+        "ageRedirectUrl": "https://www.google.com",
+        "enableCookieConsent": false,
+        "cookiePolicyUrl": "",
+        "cookieRedirectOnDecline": true
     }
 };
