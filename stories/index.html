@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dwarven Forged Stories - Legends of the Seeds</title>
+  
+  <!-- Open Graph / Facebook / Discord -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.dwarvenforged.com/stories/">
+  <meta property="og:title" content="Dwarven Forged Stories">
+  <meta property="og:description" content="Explore the mythic tales behind our seed strains, forged in the ancient traditions of the dwarven masters and the secrets of nature's deepest magic.">
+  <meta property="og:image" content="https://www.dwarvenforged.com/stories/social-preview.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://www.dwarvenforged.com/stories/">
+  <meta property="twitter:title" content="Dwarven Forged Stories">
+  <meta property="twitter:description" content="Explore the mythic tales behind our seed strains, forged in the ancient traditions of the dwarven masters and the secrets of nature's deepest magic.">
+  <meta property="twitter:image" content="https://www.dwarvenforged.com/stories/social-preview.jpg">
+    
+    <!-- Link to External CSS -->
+    <link rel="stylesheet" href="/stories/shared/styles.css">
+    
+    <style>
+        .collection-tabs {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+            border-bottom: 2px solid #8B4513;
+        }
+        
+        .tab-button {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            color: #8B4513;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-button:hover {
+            background-color: rgba(139, 69, 19, 0.1);
+        }
+        
+        .tab-button.active {
+            color: #A0522D;
+            border-bottom-color: #A0522D;
+            background-color: rgba(139, 69, 19, 0.05);
+        }
+        
+        .collection-content {
+            display: none;
+        }
+        
+        .collection-content.active {
+            display: block;
+        }
+        
+        .reading-order h3 {
+            color: #8B4513;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #8B4513;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="" alt="Logo">
+                <h1>Story Site</h1>
+            </div>
+            <a href="#" class="home-button">Return to Main Site</a>
+        </header>
+
+        <div class="page-title">
+            <h2>Story Collection</h2>
+            <p>Welcome to our story collection.</p>
+        </div>
+        
+        <div class="collection-tabs">
+            <div class="loading">Loading collections...</div>
+        </div>
+
+        <div class="audio-note">
+            <h3>
+                <svg class="audio-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                </svg>
+                Audio Experience
+            </h3>
+            <p>Enjoy stories with audio narration.</p>
+        </div>
+
+        <footer>
+            <p>© 2025 Dwarven Forged Stories. All stories are original works.</p>
+            <p>Image and Audio Generation provided by: Pollinations.ai - Powering Creativity</p>
+        </footer>
+    </div>
+
+    <script src="/stories/js/stories-config.js"></script>
+    <script src="/stories/js/story-main.js"></script>
+</body>
+</html>

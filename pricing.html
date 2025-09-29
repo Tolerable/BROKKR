@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dwarven Forge Genetics - The Halls of Asgard</title>
+    <link rel="stylesheet" href="/css/pricing-styles.css">
+</head>
+<body>
+    <!-- Add site header -->
+    <header class="site-header">
+        <div class="header-container">
+            <div class="logo-container">
+                <a href="/index.html" class="logo-link">
+                    <img src="/img/logo.jpg" alt="DwarvenForged" class="header-logo">
+                    <h1 class="site-title">DwarvenForged</h1>
+                </a>
+            </div>
+			<nav>
+				<ul class="main-navigation">
+					<li><a href="/index.html#products">Collections</a></li>
+					<li><a href="/pricing.html" class="active">Membership</a></li>
+					<li><a href="/index.html#strain-tree-section">Genetics Explorer</a></li>
+					<li><a href="/index.html#about">Our Forge</a></li>
+					<li>
+						<a href="#" id="cart-link-pricing">
+							<span>Collection Box</span>
+							<span id="cart-count" class="cart-badge">0</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+        </div>
+    </header>
+    
+    <div class="container">
+    <div class="container">
+        <header class="header">
+            <h1 class="main-title">The Halls of Asgard</h1>
+            <p class="subtitle">Join the Brotherhood of Elite Cultivators</p>
+            <p class="description">
+                Welcome to the sacred halls where only the most dedicated seed collectors gather. 
+                Choose your path in the realm of premium genetics, forged by dwarven masters 
+                and blessed by the gods themselves.
+            </p>
+        </header>
+
+        <!-- Annual Subscription Tiers -->
+        <div class="section">
+            <h2 class="section-title">Annual Brotherhood Memberships</h2>
+            <p class="section-subtitle">Secure your place in Valhalla for the full breeding season</p>
+            
+            <div class="pricing-grid">
+                <!-- Einherjar Tier -->
+                <div class="pricing-card">
+                    <div class="card-title">Einherjar</div>
+                    <div class="card-subtitle">The Starter Warriors</div>
+                    <div class="price-display">
+                        <span class="price">$99</span>
+                        <span class="price-period">/ year</span>
+                        <div class="value-breakdown">
+                            <div class="pack-value">5 packs (worth $125)</div>
+                            <div class="merch-value">+ Lanyard ($10 value)</div>
+                            <div class="shipping-note">+ Free shipping on included items</div>
+                            
+                        </div>
+                    </div>
+                    <ul class="features">
+                        <li>5 Pack Choices from Annual Releases</li>
+                        <li>5% Discount on Additional Packs</li>
+                        <li>Early Access (48h before public)</li>
+                        <li>Digital Growing Guides & Strain Notes</li>
+                        <li>Members-Only Discord Channel</li>
+                        <li>Dwarven Forge Lanyard Included</li>
+                    </ul>
+                    <button class="cta-button" onclick="selectPlan('einherjar')">Join the Warriors</button>
+                </div>
+
+                <!-- Valkyrie Tier -->
+                <div class="pricing-card">
+                    <div class="popular-badge">Most Popular</div>
+                    <div class="card-title">Valkyrie</div>
+                    <div class="card-subtitle">The Dedicated Collectors</div>
+                    <div class="price-display">
+                        <span class="price">$199</span>
+                        <span class="price-period">/ year</span>
+                        <div class="value-breakdown">
+                            <div class="pack-value">*10 releases (worth $250)</div>
+                            <div class="merch-value">+ Choice of Beanie/Bandana/Tank Top</div>
+							<div class="merch-value">($15-25 value)</div>
+                            <div class="shipping-note">+ Free shipping on seed orders</div>
+                            
+                        </div>
+                    </div>
+                    <ul class="features">
+                        <li>*10 of Annual Releases Included</li>
+                        <li>10% Discount on Additional Packs</li>
+                        <li>Choice of Merch: Beanie, Bandana, or Tank Top</li>
+                        <li>Exclusive Limited Edition Access</li>
+                        <li>Priority Customer Support</li>
+                        <li>Birthday Month Surprise Pack</li>
+                        <li>Beta Tester Consideration</li>
+                    </ul>
+                    <button class="cta-button" onclick="selectPlan('valkyrie')">Ascend to Valhalla</button>
+                </div>
+
+                <!-- AllFather Tier -->
+                <div class="pricing-card">
+                    <div class="card-title">AllFather</div>
+                    <div class="card-subtitle">The Vault Keepers</div>
+                    <div class="price-display">
+                        <span class="price">$399</span>
+                        <span class="price-period">/ year</span>
+                        <div class="value-breakdown">
+                            <div class="pack-value">*All 12 releases + 3-4 bonus (~15+ packs worth $375+)</div>
+                            <div class="merch-value">+ Premium Hoodie ($45 value)</div>
+                            <div class="shipping-note">+ Collector's Box + Free shipping on seed orders</div>
+                            
+                        </div>
+                    </div>
+                    <ul class="features">
+                        <li>*All 12 Annual Releases + 3-4 Exclusive Bonus Packs</li>
+                        <li>15% Discount on Additional Packs</li>
+                        <li>Annual Collector's Box with Custom Packaging</li>
+                        <li>Premium Dwarven Forge Hoodie Included</li>
+                        <li>Direct Breeder Communication Access</li>
+                        <li>First Access to ALL Limited Drops</li>
+                        <li>Custom Strain Input Consideration</li>
+                        <li>Exclusive Event Invitations</li>
+                    </ul>
+                    <button class="cta-button" onclick="selectPlan('allfather')">Rule the Realm</button>
+                </div>
+            </div>
+			<br>
+            <div class="disclaimer">
+                <p><strong>*</strong> Projected releases based on breeding schedules. Actual count may vary due to growing conditions and quality standards.<br>Equivalent value guaranteed if release targets not met. Free shipping applies to seed orders only.</p>
+            </div>
+        </div>
+
+        <!-- Regular Seed Packs -->
+        <div class="section">
+            <h2 class="section-title">Individual Pack Adventures</h2>
+            <p class="section-subtitle">Perfect for those who prefer to forge their own path, one pack at a time</p>
+            
+            <div class="regular-packs-grid" style="grid-template-columns: repeat(3, 1fr); max-width: 900px; margin: 0 auto;">
+                <div class="regular-pack-card">
+                    <div class="pack-name">Regular 6-Pack</div>
+                    <div class="pack-description">Standard Genetics (5+1 bonus)</div>
+                    <div class="pack-details">6 regular seeds<br>(~3-4 females expected)</div>
+                    <div class="pack-price">$25</div>
+                    <button class="cta-button" onclick="buyPack('regular-6')">Add to Cart</button>
+                </div>
+                
+                <div class="regular-pack-card">
+                    <div class="pack-name">Regular 12-Pack</div>
+                    <div class="pack-description">Standard Genetics (10+2 bonus)</div>
+                    <div class="pack-details">12 regular seeds<br>(~6-8 females expected)</div>
+                    <div class="pack-price">$45</div>
+                    <button class="cta-button" onclick="buyPack('regular-12')">Add to Cart</button>
+                </div>
+
+                <div class="regular-pack-card">
+                    <div class="pack-name">Tester 3-Pack</div>
+                    <div class="pack-description">Try Before You Buy</div>
+                    <div class="pack-details">3 premium seeds<br>(sample new genetics)</div>
+                    <div class="pack-price">$15</div>
+                    <button class="cta-button" onclick="buyPack('tester-3')">Add to Cart</button>
+                </div>
+				
+                <div class="regular-pack-card">
+                    <div class="pack-name">Feminized 5-Pack</div>
+                    <div class="pack-description">Premium Feminized</div>
+                    <div class="pack-details">5 feminized seeds<br>(99% female expected)</div>
+                    <div class="pack-price">$25</div>
+                    <button class="cta-button" onclick="buyPack('fem-5')">Add to Cart</button>
+                </div>
+                
+                <div class="regular-pack-card">
+                    <div class="pack-name">Feminized 10-Pack</div>
+                    <div class="pack-description">Premium Feminized</div>
+                    <div class="pack-details">10 feminized seeds<br>(99% female expected)</div>
+                    <div class="pack-price">$45</div>
+                    <button class="cta-button" onclick="buyPack('fem-10')">Add to Cart</button>
+                </div>
+
+                <div class="regular-pack-card">
+                    <div class="pack-name">Breeder's Mixed</div>
+                    <div class="pack-description">Curator's Selection</div>
+                    <div class="pack-details">6 handpicked seeds<br>(breeder's favorites)</div>
+                    <div class="pack-price">$45</div>
+                    <button class="cta-button" onclick="buyPack('mixed')">Add to Cart</button>
+                </div>
+            </div>
+			<br>
+            <div class="shipping-info-section">
+                <p><strong>Shipping:</strong> $5 for seed orders | $10 when adding merch | Free shipping on subscription seed orders</p>
+            </div>
+        </div>
+
+		<!-- Merchandise Section -->
+				<div class="section">
+					<h2 class="section-title">Dwarven Forge Merchandise</h2>
+					<p class="section-subtitle">Represent the forge with premium gear</p>
+					
+					<div class="merch-grid">
+						<div class="merch-card">
+							<div class="merch-name">Premium Hoodie</div>
+							<div class="merch-price">$45</div>
+							<div class="merch-note">Included with AllFather</div>
+						</div>
+						<div class="merch-card">
+							<div class="merch-name">T-Shirt</div>
+							<div class="merch-price">$25</div>
+							<div class="merch-note">Premium cotton blend</div>
+						</div>
+						<div class="merch-card">
+							<div class="merch-name">Shorts</div>
+							<div class="merch-price">$25</div>
+							<div class="merch-note">Comfortable style</div>
+						</div>
+						<div class="merch-card">
+							<div class="merch-name">Baseball Cap</div>
+							<div class="merch-price">$20</div>
+							<div class="merch-note">Premium logo</div>
+						</div>
+						<div class="merch-card">
+							<div class="merch-name">Tank Top</div>
+							<div class="merch-price">$25</div>
+							<div class="merch-note">Choice option with Valkyrie</div>
+						</div>
+						<div class="merch-card">
+							<div class="merch-name">Beanie</div>
+							<div class="merch-price">$15</div>
+							<div class="merch-note">Choice option with Valkyrie</div>
+						</div>
+						<div class="merch-card">
+							<div class="merch-name">Bandana</div>
+							<div class="merch-price">$10</div>
+							<div class="merch-note">Choice option with Valkyrie</div>
+						</div>
+						<div class="merch-card">
+							<div class="merch-name">Lanyard</div>
+							<div class="merch-price">$10</div>
+							<div class="merch-note">Included with Einherjar</div>
+						</div>
+					</div>
+				</div>
+
+        <!-- Limited Releases -->
+        <div class="limited-releases">
+            <div class="limited-header">
+                <h3 class="limited-title">🔥 Limited Edition Releases</h3>
+                <p style="color: #e8d5b7; font-style: italic;">Ultra-rare genetics in extremely limited quantities</p>
+            </div>
+            
+            <div class="limited-grid">
+                <div class="limited-card">
+                    <div class="pack-name" style="color: #ff6b35;">Vault Exclusive</div>
+                    <div class="pack-description">Ultra-Limited Release</div>
+                    <div class="pack-details">3-5 seeds only<br>Hand-selected phenotypes<br>Limited to 25-50 packs worldwide</div>
+                    <div class="pack-price" style="color: #ff6b35;">$125</div>
+                    <div class="subscription-note">AllFather members get first access</div>
+                    <button class="cta-button" style="background: linear-gradient(135deg, #ff6b35, #f7931e);" onclick="buyPack('vault')">Get Exclusive Access</button>
+                </div>
+                
+                <div class="limited-card">
+                    <div class="pack-name" style="color: #ff6b35;">F1 Prototype</div>
+                    <div class="pack-description">First-Generation Cross</div>
+                    <div class="pack-details">5 prototype seeds<br>Never-before-released genetics<br>Limited seasonal releases</div>
+                    <div class="pack-price" style="color: #ff6b35;">$100</div>
+                    <div class="subscription-note">Valkyrie+ members get early access</div>
+                    <button class="cta-button" style="background: linear-gradient(135deg, #ff6b35, #f7931e);" onclick="buyPack('f1')">Secure Prototype</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tester Program -->
+        <div class="tester-section">
+            <h3 class="tester-title">🧪 Official Tester Program</h3>
+            <p class="tester-description">
+                Join our elite testing team and help shape the future of Dwarven genetics.<br> 
+                Get exclusive access to unreleased strains in exchange for detailed grow reports.
+            </p>
+            
+            <div class="tester-benefits">
+                <div class="tester-benefit">
+                    <h4>Free Test Seeds</h4>
+                    <p>Receive 2 prototype packs quarterly for testing and feedback</p>
+                </div>
+                <div class="tester-benefit">
+                    <h4>10% Off Seeds Only</h4>
+                    <p>Discount on all regular and limited release seeds (excludes merch)</p>
+                </div>
+                <div class="tester-benefit">
+                    <h4>Direct Breeder Access</h4>
+                    <p>Communicate directly with our breeding team</p>
+                </div>
+                <div class="tester-benefit">
+                    <h4>Name Recognition</h4>
+                    <p>Top testers may get strains named after them</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 2rem;">
+                <button class="cta-button" style="width: auto; padding: 1rem 3rem;" onclick="applyTester()">
+                    Apply for Tester Program - $149/year
+                </button>
+                <p style="margin-top: 1rem; color: #d4af37; font-style: italic;">
+                    Limited spots available - application review required
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Plan selection
+        function selectPlan(plan) {
+            alert(`Selected ${plan.charAt(0).toUpperCase() + plan.slice(1)} annual subscription! Redirecting to checkout...`);
+            // Here you would integrate with your payment processor
+        }
+
+        // Pack purchase
+        function buyPack(type) {
+            alert(`Added ${type} pack to cart! Redirecting to checkout...`);
+            // Here you would integrate with your shopping cart
+        }
+
+        // Tester application
+        function applyTester() {
+            alert('Opening tester application form... This would redirect to a detailed application page.');
+            // Here you would open application form or redirect
+        }
+
+		// Add interactive animations
+		document.addEventListener('DOMContentLoaded', function() {
+			// Load and display cart count
+			function updateCartDisplay() {
+				const storedCart = localStorage.getItem('siteCart');
+				const cartCount = document.getElementById('cart-count');
+				
+				if (storedCart && cartCount) {
+					const cart = JSON.parse(storedCart);
+					const count = cart.reduce((total, item) => total + item.quantity, 0);
+					cartCount.textContent = count;
+				}
+			}
+			
+			// Handle cart link click
+			const cartLink = document.getElementById('cart-link-pricing');
+			if (cartLink) {
+				cartLink.addEventListener('click', function(e) {
+					e.preventDefault();
+					
+					const confirmed = confirm("Go to main site to view your Collection Box?\n\nClick OK to go to main site\nClick Cancel to stay on pricing page");
+					
+					if (confirmed) {
+						window.location.href = '/index.html';
+					}
+					// If cancelled, do nothing - stay on pricing page
+				});
+			}
+			
+			// Update cart display on page load
+			updateCartDisplay();
+			
+			// Update cart display if storage changes (in case user has multiple tabs open)
+			window.addEventListener('storage', updateCartDisplay);
+
+			// Animate cards on scroll
+			const observerOptions = {
+				threshold: 0.1,
+				rootMargin: '0px 0px -50px 0px'
+			};
+			
+			const observer = new IntersectionObserver(function(entries) {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						entry.target.style.opacity = '1';
+						entry.target.transform = 'translateY(0)';
+					}
+				});
+			}, observerOptions);
+			
+			// Initially hide cards for animation
+			document.querySelectorAll('.pricing-card, .regular-pack-card, .limited-card, .merch-card').forEach(card => {
+				card.style.opacity = '0';
+				card.style.transform = 'translateY(30px)';
+				card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+				observer.observe(card);
+			});
+			
+			// Add subtle hover effects to buttons
+			document.querySelectorAll('.cta-button').forEach(button => {
+				button.addEventListener('mouseenter', function() {
+					this.style.transform = 'translateY(-2px) scale(1.02)';
+				});
+				
+				button.addEventListener('mouseleave', function() {
+					this.style.transform = 'translateY(0) scale(1)';
+				});
+			});
+
+			// Add sparkle effect on hover for limited cards
+			document.querySelectorAll('.limited-card').forEach(card => {
+				card.addEventListener('mouseenter', function() {
+					this.style.boxShadow = '0 15px 40px rgba(255, 107, 53, 0.3)';
+				});
+				
+				card.addEventListener('mouseleave', function() {
+					this.style.boxShadow = 'none';
+				});
+			});
+		});
+    </script>
+	
+	<!-- Legal Disclaimer -->
+	<div class="legal-disclaimer">
+		<div class="container">
+			<p><strong>Legal Disclaimer:</strong> DwarvenForged sells seeds for souvenir and collectible purposes only. Cannabis seeds are not legal in some countries and DwarvenForged strongly advises you not to take seeds where they are not permitted. DwarvenForged does not accept any responsibility for any violation of customs regulations or local laws. All responsibility falls on the purchaser to determine the legal status of seeds in their country of residence. Any information provided is for educational purposes only.</p>
+		</div>
+	</div>
+	
+</body>
+</html>

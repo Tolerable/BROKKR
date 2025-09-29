@@ -1,0 +1,651 @@
+:root {
+    --primary-color: #b87333;
+    --secondary-color: #c69c6d;
+    --tertiary-color: #a23e25;
+    --highlight-color: #e6c200;
+    --alert-color: #a23e25;
+    --background-color: #2e2119;
+    --text-color: #f5f0e6;
+    
+    --font-heading: 'Oswald', sans-serif;
+    --font-body: 'Lato', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.legal-disclaimer {
+    padding: 15px 0;
+    margin-top: 2rem;
+}
+
+.legal-disclaimer p {
+    font-size: 0.7rem;
+    color: #888;
+    text-align: center;
+    margin: 0;
+    line-height: 1.3;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Just the metal texture background - subtle and readable */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/img/metal-texture.jpg');
+    background-repeat: repeat;
+    opacity: 0.3;
+    z-index: -10;
+    pointer-events: none;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/img/metal-texture.jpg');
+    background-repeat: repeat;
+    opacity: 0.5;
+    z-index: -15;
+    pointer-events: none;
+}
+
+/* Site Header Styles - Match main site exactly */
+.site-header {
+    padding: 20px 0;
+    background: rgba(10, 14, 23, 0.8);  /* Same as main site */
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid var(--primary-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo-link {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.header-logo {
+    height: 60px;
+    width: auto;
+    margin-right: 15px;
+    border-radius: 10px;
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 0 15px rgba(184, 115, 51, 0.7);
+}
+
+.site-title {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: var(--text-color);
+    text-shadow: 0 0 10px var(--secondary-color), 0 0 20px var(--secondary-color);
+    letter-spacing: 1px;
+}
+
+.main-navigation {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+.main-navigation a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    padding: 8px 12px;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.main-navigation a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(198, 156, 109, 0.2), transparent);
+    transition: all 0.5s;
+    z-index: -1;
+}
+
+.main-navigation a:hover,
+.main-navigation a.active {
+    color: var(--secondary-color);
+    text-shadow: 0 0 5px var(--secondary-color);
+}
+
+.main-navigation a:hover::before,
+.main-navigation a.active::before {
+    left: 100%;
+}
+
+.cart-badge {
+    background-color: var(--secondary-color);
+    color: var(--background-color);
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+#cart-link-pricing {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 4rem;
+    position: relative;
+}
+
+.main-title {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--highlight-color);
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+
+.description {
+    font-size: 1.1rem;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+.section {
+    margin-bottom: 5rem;
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--highlight-color);
+    text-align: center;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+    margin-bottom: 3rem;
+    font-style: italic;
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.regular-packs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.merch-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.pricing-card {
+    background: rgba(46, 33, 25, 0.8);
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.regular-pack-card {
+    background: rgba(46, 33, 25, 0.6);
+    border: 1px solid var(--primary-color);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.merch-card {
+    background: rgba(46, 33, 25, 0.4);
+    border: 1px solid var(--primary-color);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.regular-pack-card:hover,
+.merch-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(230, 194, 0, 0.15);
+    border-color: var(--secondary-color);
+}
+
+.pricing-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(230, 194, 0, 0.2);
+    border-color: var(--secondary-color);
+}
+
+.popular-badge {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    background: linear-gradient(135deg, var(--alert-color), var(--tertiary-color));
+    color: white;
+    padding: 8px 20px;
+    border-radius: 0 10px 0 15px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.card-title {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--highlight-color);
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.card-subtitle {
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    color: var(--secondary-color);
+}
+
+.price-display {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--highlight-color);
+}
+
+.price-period {
+    font-size: 1rem;
+    color: var(--secondary-color);
+    margin-left: 0.5rem;
+}
+
+.value-breakdown {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+}
+
+.pack-value {
+    margin-bottom: 0.25rem;
+}
+
+.merch-value {
+    margin-bottom: 0.25rem;
+    color: #90EE90;
+}
+
+.shipping-note {
+    color: var(--primary-color);
+    font-style: italic;
+}
+
+.savings-highlight {
+    color: #90EE90;
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+.features {
+    list-style: none;
+    margin-bottom: 2rem;
+}
+
+.features li {
+    padding: 0.5rem 0;
+    position: relative;
+    padding-left: 2rem;
+}
+
+.features li::before {
+    content: '⚒️';
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+}
+
+.cta-button {
+    width: 100%;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--tertiary-color));
+    color: var(--text-color);
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: var(--font-heading);
+}
+
+.cta-button:hover {
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(230, 194, 0, 0.4);
+}
+
+.shipping-info-section {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1rem;
+    background: rgba(46, 33, 25, 0.6);
+    border-radius: 8px;
+    border: 1px solid var(--primary-color);
+}
+
+.disclaimer {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1rem;
+    background: rgba(230, 194, 0, 0.05);
+    border-radius: 8px;
+    border: 1px solid var(--secondary-color);
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+}
+
+.pack-name {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    color: var(--highlight-color);
+    margin-bottom: 0.5rem;
+}
+
+.pack-description {
+    color: var(--secondary-color);
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+
+.pack-details {
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.pack-price {
+    font-size: 1.8rem;
+    color: var(--highlight-color);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.merch-name {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    color: var(--highlight-color);
+    margin-bottom: 0.5rem;
+}
+
+.merch-price {
+    font-size: 1.4rem;
+    color: var(--secondary-color);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.merch-note {
+    font-size: 0.85rem;
+    color: #90EE90;
+    font-style: italic;
+}
+
+.subscription-note {
+    font-size: 0.85rem;
+    color: #90EE90;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.tester-section {
+    background: rgba(46, 33, 25, 0.8);
+    border: 2px solid var(--secondary-color);
+    border-radius: 10px;
+    padding: 3rem;
+    text-align: center;
+    margin: 4rem 0;
+}
+
+.tester-title {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    color: var(--highlight-color);
+    margin-bottom: 1rem;
+}
+
+.tester-description {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tester-benefits {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.tester-benefit {
+    background: rgba(46, 33, 25, 0.6);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid var(--primary-color);
+}
+
+.tester-benefit h4 {
+    color: var(--highlight-color);
+    margin-bottom: 0.5rem;
+    font-family: var(--font-heading);
+}
+
+.limited-releases {
+    background: rgba(162, 62, 37, 0.1);
+    border: 2px solid var(--alert-color);
+    border-radius: 10px;
+    padding: 2rem;
+    margin: 3rem 0;
+}
+
+.limited-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.limited-title {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--alert-color);
+    margin-bottom: 0.5rem;
+}
+
+.limited-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.limited-card {
+    background: rgba(46, 33, 25, 0.6);
+    border: 1px solid var(--alert-color);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.calculator {
+    background: rgba(46, 33, 25, 0.8);
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+    padding: 2rem;
+    margin: 4rem 0;
+    text-align: center;
+}
+
+.calculator-title {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--highlight-color);
+    margin-bottom: 1.5rem;
+}
+
+.calculator-input {
+    display: inline-block;
+    margin: 1rem;
+}
+
+.calculator-input label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+.calculator-input input, .calculator-input select {
+    padding: 0.75rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--text-color);
+    font-size: 1rem;
+    width: 150px;
+}
+
+.calculator-result {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(230, 194, 0, 0.1);
+    border-radius: 10px;
+    border: 1px solid var(--secondary-color);
+}
+
+.hidden {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .main-navigation {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .main-title {
+        font-size: 2.5rem;
+    }
+    
+    .pricing-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .container {
+        padding: 1rem;
+    }
+	
+    .merch-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }	
+}
+
+@media (max-width: 480px) {
+    .merch-grid {
+        grid-template-columns: 1fr;
+    }
+}

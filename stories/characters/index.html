@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brokkr Saga - Character Bible Editor</title>
+    <style>
+        :root {
+            --primary-bg: #0d0e12;
+            --card-bg: #1e2028;
+            --accent-color: #bb8c65;
+            --primary-text: #ffffff;
+            --secondary-text: #a5a9b7;
+            --border-color: #2a2c37;
+            --search-bg: #2a2c37;
+            --inconsistency-color: #ff6b6b;
+            --notes-color: #4ecdc4;
+            --edit-bg: #2d3748;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--primary-text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 2px solid var(--accent-color);
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--accent-color);
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: var(--secondary-text);
+            font-size: 1.1em;
+        }
+
+        .file-controls {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .search-controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            padding: 12px;
+            background-color: var(--search-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--primary-text);
+            font-size: 16px;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            padding: 8px 16px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--secondary-text);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-button:hover,
+        .tab-button.active {
+            background-color: var(--accent-color);
+            color: var(--primary-text);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+        }
+
+        .entry-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .entry-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-color);
+        }
+
+        .entry-card.has-inconsistency {
+            border-left: 4px solid var(--inconsistency-color);
+        }
+
+        .entry-card.editing {
+            border-color: var(--notes-color);
+            background-color: var(--edit-bg);
+        }
+
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .entry-name {
+            color: var(--accent-color);
+            font-size: 1.4em;
+            font-weight: bold;
+        }
+
+        .entry-type {
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .entry-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .entry-section {
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-bottom: 5px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 2px;
+            font-size: 0.95em;
+        }
+
+        .section-content {
+            color: var(--primary-text);
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .edit-field {
+            width: 100%;
+            padding: 8px;
+            background-color: var(--search-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--primary-text);
+            font-size: 0.9em;
+            font-family: inherit;
+        }
+
+        .edit-textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .edit-array {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        .array-item {
+            background-color: var(--search-bg);
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 0.8em;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .remove-item {
+            cursor: pointer;
+            color: var(--inconsistency-color);
+            font-weight: bold;
+        }
+
+        .add-item-input {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .button {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .button-small {
+            padding: 4px 8px;
+            font-size: 11px;
+        }
+
+        .button-primary {
+            background-color: var(--accent-color);
+            color: var(--primary-text);
+        }
+
+        .button-secondary {
+            background-color: var(--search-bg);
+            color: var(--secondary-text);
+        }
+
+        .button-success {
+            background-color: #48bb78;
+            color: var(--primary-text);
+        }
+
+        .button-danger {
+            background-color: var(--inconsistency-color);
+            color: var(--primary-text);
+        }
+
+        .button:hover {
+            opacity: 0.8;
+        }
+
+        .inconsistency-highlight {
+            background-color: rgba(255, 107, 107, 0.2);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 600px;
+            width: 90%;
+            margin: 5% auto;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 30px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            color: var(--secondary-text);
+            cursor: pointer;
+        }
+
+        .close-button:hover {
+            color: var(--accent-color);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--secondary-text);
+        }
+
+        .empty-state h3 {
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .control-button {
+            padding: 15px;
+            background-color: var(--accent-color);
+            color: var(--primary-text);
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .control-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .search-controls {
+                flex-direction: column;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .controls {
+                bottom: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Brokkr Saga Character Bible Editor</h1>
+            <p class="subtitle">Edit and manage story consistency data</p>
+        </header>
+
+        <div class="file-controls">
+            <h3>Data Management</h3>
+            <div style="margin-top: 15px;">
+                <input type="file" id="jsonFile" accept=".json" style="margin-right: 15px;">
+                <button class="button button-primary" onclick="loadJsonFile()">Load JSON</button>
+                <button class="button button-success" onclick="saveToFile()">Save to File</button>
+                <button class="button button-secondary" onclick="addNewEntry()">Add New Entry</button>
+            </div>
+        </div>
+
+        <div class="search-controls" id="searchControls" style="display: none;">
+            <input type="text" class="search-box" id="searchBox" placeholder="Search entries...">
+            <div class="filter-tabs">
+                <button class="tab-button active" data-type="all">All</button>
+                <button class="tab-button" data-type="characters">Characters</button>
+                <button class="tab-button" data-type="locations">Locations</button>
+                <button class="tab-button" data-type="concepts">Concepts</button>
+                <button class="tab-button" data-type="timeline">Timeline</button>
+                <button class="tab-button" data-type="stories">Stories</button>
+            </div>
+        </div>
+
+        <div class="content-grid" id="contentGrid">
+            <div class="empty-state">
+                <h3>No Data Loaded</h3>
+                <p>Load a JSON file or add new entries to begin.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Entry Modal -->
+    <div class="modal" id="entryModal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Add New Entry</h2>
+            <form id="entryForm">
+                <div class="form-group">
+                    <label class="form-label">Name/Title</label>
+                    <input type="text" class="edit-field" id="entryName" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Type</label>
+                    <select class="edit-field" id="entryType" required>
+                        <option value="character">Character</option>
+                        <option value="location">Location</option>
+                        <option value="concept">Concept</option>
+                        <option value="timeline">Timeline Event</option>
+                        <option value="story">Story</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea class="edit-field edit-textarea" id="entryDescription"></textarea>
+                </div>
+                <div style="text-align: right;">
+                    <button type="button" class="button button-secondary" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="button button-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="control-button" onclick="addNewEntry()" title="Add New Entry">+</button>
+        <button class="control-button" onclick="saveToFile()" title="Save to File">💾</button>
+    </div>
+
+    <script>
+        let characterBible = {
+            characters: [],
+            locations: [],
+            concepts: [],
+            timeline: [],
+            stories: [],
+            metadata: {}
+        };
+
+        let editingEntry = null;
+
+        // Auto-load from site
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFromSite();
+        });
+
+        async function loadFromSite() {
+            try {
+                const response = await fetch('/stories/characters/brokkr-character-bible.json');
+                if (response.ok) {
+                    const data = await response.json();
+                    characterBible = data;
+                    renderAll();
+                    document.getElementById('searchControls').style.display = 'flex';
+                    console.log('Character bible loaded from site');
+                } else {
+                    console.warn('Could not load from site:', response.status);
+                }
+            } catch (error) {
+                console.warn('Error loading from site:', error);
+            }
+        }
+
+        function loadJsonFile() {
+            const fileInput = document.getElementById('jsonFile');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                alert('Please select a JSON file first.');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    characterBible = data;
+                    renderAll();
+                    document.getElementById('searchControls').style.display = 'flex';
+                    alert('Data loaded successfully!');
+                } catch (error) {
+                    alert('Error parsing JSON file: ' + error.message);
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function renderAll() {
+            const allEntries = [
+                ...(characterBible.characters || []),
+                ...(characterBible.locations || []), 
+                ...(characterBible.concepts || []),
+                ...(characterBible.timeline || []),
+                ...(characterBible.stories || [])
+            ];
+            renderEntries(allEntries);
+        }
+
+        function renderEntries(entries) {
+            const grid = document.getElementById('contentGrid');
+            
+            if (!entries || entries.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state">
+                        <h3>No Entries Found</h3>
+                        <p>Load a JSON file or add new entries to begin.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = entries.map(entry => renderEntryCard(entry)).join('');
+        }
+
+        function renderEntryCard(entry) {
+            const isEditing = editingEntry && editingEntry.id === entry.id;
+            const hasInconsistency = (entry.notes && entry.notes.includes('INCONSISTENCY')) || 
+                                     (entry.physical && entry.physical.includes('INCONSISTENCY')) ||
+                                     (entry.details && entry.details.includes('INCONSISTENCY')) ||
+                                     (entry.inconsistencies && entry.inconsistencies.length > 0);
+
+            return `
+                <div class="entry-card ${hasInconsistency ? 'has-inconsistency' : ''} ${isEditing ? 'editing' : ''}" data-type="${entry.type}">
+                    <div class="entry-header">
+                        <div class="entry-name">${entry.name || entry.title || 'Unnamed'}</div>
+                        <div class="entry-actions">
+                            <button class="button button-small button-primary" onclick="editEntry('${entry.id}')">
+                                ${isEditing ? 'Cancel' : 'Edit'}
+                            </button>
+                            <button class="button button-small button-danger" onclick="deleteEntry('${entry.id}')">Delete</button>
+                        </div>
+                    </div>
+                    <div class="entry-type">${entry.type || 'unknown'}</div>
+                    
+                    ${isEditing ? renderEditForm(entry) : renderDisplayContent(entry)}
+                </div>
+            `;
+        }
+
+        function renderDisplayContent(entry) {
+            const isStory = entry.type === 'story';
+            let content = '';
+            
+            // Basic fields
+            if (entry.description) {
+                content += `
+                    <div class="entry-section">
+                        <div class="section-title">Description</div>
+                        <div class="section-content">${highlightInconsistencies(entry.description)}</div>
+                    </div>
+                `;
+            }
+
+            if (isStory && entry.number) {
+                content += `
+                    <div class="entry-section">
+                        <div class="section-title">Story Number</div>
+                        <div class="section-content">${entry.number}</div>
+                    </div>
+                `;
+            }
+
+            // Non-story fields
+            if (!isStory) {
+                const fields = [
+                    ['Physical Description', entry.physical],
+                    ['Details', entry.details],
+                    ['Background', entry.background],
+                    ['Relationships', entry.relationships],
+                    ['Timeline', entry.timeline],
+                    ['Abilities', entry.abilities],
+                    ['Significance', entry.significance]
+                ];
+
+                fields.forEach(([title, value]) => {
+                    if (value) {
+                        content += `
+                            <div class="entry-section">
+                                <div class="section-title">${title}</div>
+                                <div class="section-content">${highlightInconsistencies(value)}</div>
+                            </div>
+                        `;
+                    }
+                });
+            }
+
+            // Story-specific array fields
+            if (isStory) {
+                const storyArrayFields = [
+                    ['Main Characters', entry.mainCharacters],
+                    ['Key Locations', entry.keyLocations],
+                    ['Key Concepts', entry.keyConcepts],
+                    ['Timeline Events', entry.timelineEvents]
+                ];
+
+                storyArrayFields.forEach(([title, arr]) => {
+                    if (arr && arr.length > 0) {
+                        content += `
+                            <div class="entry-section">
+                                <div class="section-title">${title}</div>
+                                <div class="edit-array">
+                                    ${arr.map(item => `<span class="array-item">${item}</span>`).join('')}
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+
+                // Story Outline
+                if (entry.outline && Object.keys(entry.outline).length > 0) {
+                    content += `
+                        <div class="entry-section">
+                            <div class="section-title">Story Outline</div>
+                            <div class="section-content">
+                                <pre style="background: var(--search-bg); padding: 10px; border-radius: 4px; overflow-x: auto; font-size: 0.8em;">${JSON.stringify(entry.outline, null, 2)}</pre>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+
+            // Common array fields
+            const commonArrayFields = [
+                ['Story References', entry.storyReferences],
+                ['Inconsistencies', entry.inconsistencies]
+            ];
+
+            commonArrayFields.forEach(([title, arr]) => {
+                if (arr && arr.length > 0) {
+                    content += `
+                        <div class="entry-section">
+                            <div class="section-title">${title}</div>
+                            <div class="edit-array">
+                                ${arr.map(item => `<span class="array-item">${highlightInconsistencies(item)}</span>`).join('')}
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+
+            // Notes
+            if (entry.notes) {
+                content += `
+                    <div class="entry-section">
+                        <div class="section-title">Notes</div>
+                        <div class="section-content">${highlightInconsistencies(entry.notes)}</div>
+                    </div>
+                `;
+            }
+
+            return content;
+        }
+
+        function renderEditForm(entry) {
+            const isStory = entry.type === 'story';
+            
+            return `
+                <div class="edit-form">
+                    <div class="form-group">
+                        <label class="form-label">Description</label>
+                        <textarea class="edit-field edit-textarea" onchange="updateField('${entry.id}', 'description', this.value)">${entry.description || ''}</textarea>
+                    </div>
+                    
+                    ${!isStory ? `
+                        <div class="form-group">
+                            <label class="form-label">Physical Description</label>
+                            <textarea class="edit-field edit-textarea" onchange="updateField('${entry.id}', 'physical', this.value)">${entry.physical || ''}</textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Background</label>
+                            <textarea class="edit-field edit-textarea" onchange="updateField('${entry.id}', 'background', this.value)">${entry.background || ''}</textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Relationships</label>
+                            <textarea class="edit-field edit-textarea" onchange="updateField('${entry.id}', 'relationships', this.value)">${entry.relationships || ''}</textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Abilities</label>
+                            <textarea class="edit-field edit-textarea" onchange="updateField('${entry.id}', 'abilities', this.value)">${entry.abilities || ''}</textarea>
+                        </div>
+                    ` : ''}
+                    
+                    ${isStory ? `
+                        <div class="form-group">
+                            <label class="form-label">Story Number</label>
+                            <input type="number" class="edit-field" onchange="updateField('${entry.id}', 'number', parseInt(this.value))" value="${entry.number || ''}">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Main Characters</label>
+                            <div class="edit-array">
+                                ${(entry.mainCharacters || []).map((char, index) => `
+                                    <div class="array-item">
+                                        ${char} <span class="remove-item" onclick="removeArrayItem('${entry.id}', 'mainCharacters', ${index})">×</span>
+                                    </div>
+                                `).join('')}
+                                <input type="text" class="edit-field add-item-input" placeholder="Add character" 
+                                       onkeypress="if(event.key==='Enter') addArrayItem('${entry.id}', 'mainCharacters', this)">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Key Locations</label>
+                            <div class="edit-array">
+                                ${(entry.keyLocations || []).map((loc, index) => `
+                                    <div class="array-item">
+                                        ${loc} <span class="remove-item" onclick="removeArrayItem('${entry.id}', 'keyLocations', ${index})">×</span>
+                                    </div>
+                                `).join('')}
+                                <input type="text" class="edit-field add-item-input" placeholder="Add location" 
+                                       onkeypress="if(event.key==='Enter') addArrayItem('${entry.id}', 'keyLocations', this)">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Key Concepts</label>
+                            <div class="edit-array">
+                                ${(entry.keyConcepts || []).map((concept, index) => `
+                                    <div class="array-item">
+                                        ${concept} <span class="remove-item" onclick="removeArrayItem('${entry.id}', 'keyConcepts', ${index})">×</span>
+                                    </div>
+                                `).join('')}
+                                <input type="text" class="edit-field add-item-input" placeholder="Add concept" 
+                                       onkeypress="if(event.key==='Enter') addArrayItem('${entry.id}', 'keyConcepts', this)">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Timeline Events</label>
+                            <div class="edit-array">
+                                ${(entry.timelineEvents || []).map((event, index) => `
+                                    <div class="array-item">
+                                        ${event} <span class="remove-item" onclick="removeArrayItem('${entry.id}', 'timelineEvents', ${index})">×</span>
+                                    </div>
+                                `).join('')}
+                                <input type="text" class="edit-field add-item-input" placeholder="Add timeline event" 
+                                       onkeypress="if(event.key==='Enter') addArrayItem('${entry.id}', 'timelineEvents', this)">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Story Outline (JSON format)</label>
+                            <textarea class="edit-field edit-textarea" style="min-height: 120px; font-family: monospace;" 
+                                      onchange="updateOutline('${entry.id}', this.value)">${JSON.stringify(entry.outline || {}, null, 2)}</textarea>
+                            <small style="color: var(--secondary-text);">Format: {"act1": {"scene1": "description", "scene2": "description"}, "act2": {...}}</small>
+                        </div>
+                    ` : ''}
+                    
+                    <div class="form-group">
+                        <label class="form-label">Story References</label>
+                        <div class="edit-array">
+                            ${(entry.storyReferences || []).map((ref, index) => `
+                                <div class="array-item">
+                                    ${ref} <span class="remove-item" onclick="removeArrayItem('${entry.id}', 'storyReferences', ${index})">×</span>
+                                </div>
+                            `).join('')}
+                            <input type="text" class="edit-field add-item-input" placeholder="Add story reference" 
+                                   onkeypress="if(event.key==='Enter') addArrayItem('${entry.id}', 'storyReferences', this)">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Inconsistencies</label>
+                        <div class="edit-array">
+                            ${(entry.inconsistencies || []).map((inc, index) => `
+                                <div class="array-item">
+                                    ${inc} <span class="remove-item" onclick="removeArrayItem('${entry.id}', 'inconsistencies', ${index})">×</span>
+                                </div>
+                            `).join('')}
+                            <input type="text" class="edit-field add-item-input" placeholder="Add inconsistency" 
+                                   onkeypress="if(event.key==='Enter') addArrayItem('${entry.id}', 'inconsistencies', this)">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Notes</label>
+                        <textarea class="edit-field edit-textarea" onchange="updateField('${entry.id}', 'notes', this.value)">${entry.notes || ''}</textarea>
+                    </div>
+                    
+                    <div style="text-align: right; margin-top: 20px;">
+                        <button class="button button-success" onclick="saveEntry('${entry.id}')">Save Changes</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function editEntry(id) {
+            if (editingEntry && editingEntry.id === id) {
+                // Cancel editing
+                editingEntry = null;
+            } else {
+                // Start editing
+                editingEntry = findEntryById(id);
+            }
+            renderAll();
+        }
+
+        function updateField(id, field, value) {
+            const entry = findEntryById(id);
+            if (entry) {
+                entry[field] = value;
+            }
+        }
+
+        function updateOutline(id, value) {
+            const entry = findEntryById(id);
+            if (entry) {
+                try {
+                    entry.outline = JSON.parse(value);
+                } catch (e) {
+                    console.warn('Invalid JSON for outline:', e);
+                    // Keep the text as-is if it's not valid JSON yet
+                }
+            }
+        }
+
+        function addArrayItem(id, field, input) {
+            const entry = findEntryById(id);
+            if (entry && input.value.trim()) {
+                if (!entry[field]) entry[field] = [];
+                entry[field].push(input.value.trim());
+                input.value = '';
+                renderAll();
+            }
+        }
+
+        function removeArrayItem(id, field, index) {
+            const entry = findEntryById(id);
+            if (entry && entry[field]) {
+                entry[field].splice(index, 1);
+renderAll();
+            }
+        }
+
+        function saveEntry(id) {
+            editingEntry = null;
+            renderAll();
+            alert('Changes saved!');
+        }
+
+        function deleteEntry(id) {
+            if (confirm('Are you sure you want to delete this entry?')) {
+                ['characters', 'locations', 'concepts', 'timeline', 'stories'].forEach(type => {
+                    characterBible[type] = characterBible[type].filter(entry => entry.id !== id);
+                });
+                renderAll();
+            }
+        }
+
+        function findEntryById(id) {
+            const allEntries = [
+                ...(characterBible.characters || []),
+                ...(characterBible.locations || []),
+                ...(characterBible.concepts || []),
+                ...(characterBible.timeline || []),
+                ...(characterBible.stories || [])
+            ];
+            return allEntries.find(entry => entry.id === id);
+        }
+
+        function addNewEntry() {
+            document.getElementById('modalTitle').textContent = 'Add New Entry';
+            document.getElementById('entryForm').innerHTML = `
+                <div class="form-group">
+                    <label class="form-label">Name/Title</label>
+                    <input type="text" class="edit-field" id="entryName" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Type</label>
+                    <select class="edit-field" id="entryType" required onchange="toggleStoryFields()">
+                        <option value="character">Character</option>
+                        <option value="location">Location</option>
+                        <option value="concept">Concept</option>
+                        <option value="timeline">Timeline Event</option>
+                        <option value="story">Story</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea class="edit-field edit-textarea" id="entryDescription"></textarea>
+                </div>
+                <div id="storyFields" style="display: none;">
+                    <div class="form-group">
+                        <label class="form-label">Story Number</label>
+                        <input type="number" class="edit-field" id="entryNumber">
+                    </div>
+                </div>
+                <div id="characterFields">
+                    <div class="form-group">
+                        <label class="form-label">Physical Description</label>
+                        <textarea class="edit-field edit-textarea" id="entryPhysical"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Background</label>
+                        <textarea class="edit-field edit-textarea" id="entryBackground"></textarea>
+                    </div>
+                </div>
+                <div style="text-align: right;">
+                    <button type="button" class="button button-secondary" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="button button-primary">Create Entry</button>
+                </div>
+            `;
+            document.getElementById('entryModal').style.display = 'block';
+        }
+
+        function toggleStoryFields() {
+            const type = document.getElementById('entryType').value;
+            const storyFields = document.getElementById('storyFields');
+            const characterFields = document.getElementById('characterFields');
+            
+            if (type === 'story') {
+                storyFields.style.display = 'block';
+                characterFields.style.display = 'none';
+            } else {
+                storyFields.style.display = 'none';
+                characterFields.style.display = 'block';
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('entryModal').style.display = 'none';
+        }
+
+        document.getElementById('entryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('entryName').value.trim();
+            const type = document.getElementById('entryType').value;
+            const description = document.getElementById('entryDescription').value.trim();
+            
+            const newEntry = {
+                id: Date.now().toString(),
+                name: name,
+                title: name,
+                type: type,
+                description: description,
+                storyReferences: [],
+                inconsistencies: [],
+                notes: ''
+            };
+
+            // Add type-specific fields
+            if (type === 'story') {
+                const number = document.getElementById('entryNumber')?.value;
+                if (number) newEntry.number = parseInt(number);
+                newEntry.mainCharacters = [];
+                newEntry.keyLocations = [];
+                newEntry.keyConcepts = [];
+                newEntry.timelineEvents = [];
+                newEntry.outline = {};
+            } else {
+                const physical = document.getElementById('entryPhysical')?.value?.trim();
+                const background = document.getElementById('entryBackground')?.value?.trim();
+                if (physical) newEntry.physical = physical;
+                if (background) newEntry.background = background;
+                
+                // Add other fields based on type
+                if (type === 'character') {
+                    newEntry.relationships = '';
+                    newEntry.abilities = '';
+                }
+                if (type === 'location') {
+                    newEntry.details = '';
+                    newEntry.significance = '';
+                }
+                if (type === 'concept') {
+                    newEntry.details = '';
+                    newEntry.significance = '';
+                }
+                if (type === 'timeline') {
+                    newEntry.details = '';
+                    newEntry.significance = '';
+                    newEntry.order = 1;
+                }
+            }
+            
+            // Add to appropriate array
+            const targetArray = type + 's';
+            characterBible[targetArray] = characterBible[targetArray] || [];
+            characterBible[targetArray].push(newEntry);
+            
+            closeModal();
+            renderAll();
+            document.getElementById('searchControls').style.display = 'flex';
+            alert('New entry added!');
+        });
+
+        function saveToFile() {
+            characterBible.metadata = characterBible.metadata || {};
+            characterBible.metadata.lastUpdated = new Date().toISOString();
+            
+            const dataStr = JSON.stringify(characterBible, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = `brokkr-character-bible-${new Date().toISOString().split('T')[0]}.json`;
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+            
+            alert('File saved successfully!');
+        }
+
+        function highlightInconsistencies(text) {
+            if (!text) return '';
+            return text.replace(/(INCONSISTENCY|CRITICAL|RESOLVE|MAJOR|CONFLICT)/gi, 
+                '<span class="inconsistency-highlight">$1</span>');
+        }
+
+        // Search and filter functionality
+        document.getElementById('searchBox')?.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const activeType = document.querySelector('.tab-button.active').dataset.type;
+            
+            let allEntries = [];
+            
+            if (activeType === 'all') {
+                allEntries = [
+                    ...(characterBible.characters || []),
+                    ...(characterBible.locations || []),
+                    ...(characterBible.concepts || []),
+                    ...(characterBible.timeline || []),
+                    ...(characterBible.stories || [])
+                ];
+            } else {
+                allEntries = characterBible[activeType] || [];
+            }
+            
+            if (searchTerm) {
+                allEntries = allEntries.filter(entry => {
+                    const searchableText = [
+                        entry.name,
+                        entry.title,
+                        entry.description,
+                        entry.physical,
+                        entry.background,
+                        entry.notes
+                    ].filter(text => text).join(' ').toLowerCase();
+                    
+                    return searchableText.includes(searchTerm);
+                });
+            }
+            
+            renderEntries(allEntries);
+        });
+
+        // Tab filtering
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const type = this.dataset.type;
+                let entries = [];
+                
+                if (type === 'all') {
+                    entries = [
+                        ...(characterBible.characters || []),
+                        ...(characterBible.locations || []),
+                        ...(characterBible.concepts || []),
+                        ...(characterBible.timeline || []),
+                        ...(characterBible.stories || [])
+                    ];
+                } else {
+                    entries = characterBible[type] || [];
+                }
+                
+                renderEntries(entries);
+            });
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('entryModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>				
