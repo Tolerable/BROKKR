@@ -13,7 +13,7 @@
         "socialLinks": [
             {
                 "name": "Instagram",
-                "url": "https://www.instagram.com/dwarvenforged/"
+                "url": "https://www.instagram.club/dwarvenforged/"
             }
         ],
         "copyright": "© 2025-2026 Dwarven Forged LLC. All rights reserved."
@@ -790,19 +790,19 @@
     "friendLinks": [
         {
             "name": "StrainNavigator",
-            "url": "https://www.strainnavigator.com/",
+            "url": "https://www.strainnavigator.club/",
             "image": "img/friends/Strain_Navigator_Logo.jpg",
             "description": "Your ultimate cannabis growing assistant"
         },
         {
             "name": "Gambit Growing Solutions",
-            "url": "https://gambitgrowing.com/",
+            "url": "https://gambitgrowing.club/",
             "image": "img/friends/Gambit_Flag.jpg",
             "description": "Innovative cultivation solutions for every realm"
         },
         {
             "name": "Athena® Ag",
-            "url": "https://www.athenaag.com/",
+            "url": "https://www.athenaag.club/",
             "image": "img/friends/Athena_Nutrients_Logo.jpg",
             "description": "Perfect balance for professional results"
         }
@@ -819,9 +819,9 @@
         "checkoutMethod": "email",
         "externalCheckoutUrl": "",
         "analyticsId": "",
-        "orderEmail": "orders@example.com",
+        "orderEmail": "orders@example.club",
         "enableAgeCheck": true,
         "ageCheckMinimum": 21,
-        "ageRedirectUrl": "https://www.google.com"
+        "ageRedirectUrl": "https://www.google.club"
     }
 };
