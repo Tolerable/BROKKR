@@ -6,8 +6,8 @@ const storiesConfig = {
         "title": "Dwarven Forged Stories",
         "subtitle": "Legends of the Seeds",
         "description": "Explore the mythic tales behind our seed strains, forged in the ancient traditions of the dwarven masters and the secrets of nature's deepest magic.",
-        "logoUrl": "https://www.dwarvenforged.com/img/logo.jpg",
-        "homeUrl": "https://www.dwarvenforged.com",
+        "logoUrl": "https://www.dwarvenforged.club/img/logo.jpg",
+        "homeUrl": "https://www.dwarvenforged.club",
         "audioNote": "All stories in the Brokkr Saga are available as audio recordings, bringing these mythic tales to life through sound."
     },
     "collections": {
