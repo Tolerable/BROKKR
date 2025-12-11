@@ -820,17 +820,9 @@ function applySiteConfig() {
 }
 
 function initializeAgeCheck() {
-    const siteConfig = window.siteConfig;
-    
-    // Check if age verification is enabled
-    if (siteConfig.advanced && siteConfig.advanced.enableAgeCheck) {
-        // Load the external age check script
-        const script = document.createElement('script');
-        script.src = 'js/agecheck.js';  // Make sure path is correct
-        script.onload = () => console.log('Age check script loaded');
-        script.onerror = () => console.error('Failed to load age check script');
-        document.head.appendChild(script);
-    }
+    // agecheck.js is already loaded via index.html - don't load it again
+    // This avoids "redeclaration of const AGE_VERIFICATION_KEY" error
+    console.log('Age check initialized (script loaded via index.html)');
 }
 
 // Open product modal in read-only mode (when shop is disabled)
