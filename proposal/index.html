@@ -455,7 +455,11 @@
             applyTheme(themes[currentThemeIndex]);
         }
 
-        // Proposal loading
+        // Backend config (AI-MINISTRIES)
+        const BACKEND_URL = 'https://todhqdgatlejylifqpni.supabase.co';
+        const BACKEND_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRvZGhxZGdhdGxlanlsaWZxcG5pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA1NTA3ODEsImV4cCI6MjA3NjEyNjc4MX0.4CQ4ijUlf3Y4OGr5IFrVgCjrqT4dJ0CuEZAt_tlPBig';
+
+        // Proposal loading - tries backend first, falls back to local JSON
         async function loadProposal() {
             const params = new URLSearchParams(window.location.search);
             const proposalId = params.get('id');
@@ -465,13 +469,48 @@
                 return;
             }
 
-            try {
-                const response = await fetch(`data/${proposalId}.json`);
-                if (!response.ok) throw new Error('Not found');
+            let data = null;
 
-                const data = await response.json();
+            // Try 1: Fetch from AI-MINISTRIES backend
+            try {
+                const response = await fetch(`${BACKEND_URL}/rest/v1/rpc/get_proposal`, {
+                    method: 'POST',
+                    headers: {
+                        'apikey': BACKEND_KEY,
+                        'Authorization': `Bearer ${BACKEND_KEY}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ p_id: proposalId })
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    if (result && result.id) {
+                        data = result;
+                        console.log('Loaded from backend');
+                    }
+                }
+            } catch (e) {
+                console.log('Backend unavailable, trying local...');
+            }
+
+            // Try 2: Fallback to local JSON
+            if (!data) {
+                try {
+                    const response = await fetch(`data/${proposalId}.json`);
+                    if (response.ok) {
+                        data = await response.json();
+                        console.log('Loaded from local JSON');
+                    }
+                } catch (e) {
+                    console.log('Local JSON not found');
+                }
+            }
+
+            // Render or show error
+            if (data) {
                 renderProposal(data);
-            } catch (error) {
+            } else {
                 showError(`Proposal "${proposalId}" not found`);
             }
         }

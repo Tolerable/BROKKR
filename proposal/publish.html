@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publish Proposal</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #0d0d0d;
+            color: #e8e8e8;
+            padding: 40px;
+            min-height: 100vh;
+        }
+        .container { max-width: 600px; margin: 0 auto; }
+        h1 { color: #ffd700; margin-bottom: 10px; }
+        .subtitle { color: #888; margin-bottom: 30px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; color: #aaa; font-size: 0.9rem; }
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            color: #fff;
+            border-radius: 6px;
+            font-family: inherit;
+        }
+        textarea { min-height: 300px; font-family: monospace; font-size: 0.85rem; }
+        input:focus, textarea:focus { border-color: #e94560; outline: none; }
+        .btn {
+            padding: 12px 24px;
+            background: #e94560;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+        .btn:hover { background: #c73e54; }
+        .btn-secondary { background: #333; }
+        .btn-secondary:hover { background: #444; }
+        .status { margin-top: 20px; padding: 15px; border-radius: 6px; }
+        .status.success { background: #1a3a1a; border: 1px solid #2d5a2d; }
+        .status.error { background: #3a1a1a; border: 1px solid #5a2d2d; }
+        .help { font-size: 0.8rem; color: #666; margin-top: 5px; }
+        .preview-link { color: #e94560; text-decoration: none; }
+        .preview-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Publish Proposal</h1>
+        <p class="subtitle">Push a local proposal to the AI-MINISTRIES backend</p>
+
+        <div class="form-group">
+            <label>Proposal ID</label>
+            <input type="text" id="proposalId" placeholder="e.g., jw2026">
+            <p class="help">Must match your local JSON filename (without .json)</p>
+        </div>
+
+        <div class="form-group">
+            <label>Owner Site</label>
+            <input type="text" id="ownerSite" value="dwarvenforged.club">
+        </div>
+
+        <div class="form-group">
+            <label>JSON Content (paste from data/xxx.json or load below)</label>
+            <textarea id="jsonContent" placeholder='{"id": "...", "title": "...", ...}'></textarea>
+        </div>
+
+        <div>
+            <button class="btn" onclick="loadLocal()">Load from Local</button>
+            <button class="btn" onclick="publishToBackend()">Publish to Backend</button>
+            <button class="btn btn-secondary" onclick="previewProposal()">Preview</button>
+        </div>
+
+        <div id="status"></div>
+    </div>
+
+    <script>
+        const BACKEND_URL = 'https://todhqdgatlejylifqpni.supabase.co';
+        const BACKEND_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRvZGhxZGdhdGxlanlsaWZxcG5pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA1NTA3ODEsImV4cCI6MjA3NjEyNjc4MX0.4CQ4ijUlf3Y4OGr5IFrVgCjrqT4dJ0CuEZAt_tlPBig';
+
+        async function loadLocal() {
+            const id = document.getElementById('proposalId').value.trim();
+            if (!id) {
+                showStatus('Enter a proposal ID first', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`data/${id}.json`);
+                if (!response.ok) throw new Error('Not found');
+                const data = await response.json();
+                document.getElementById('jsonContent').value = JSON.stringify(data, null, 2);
+                showStatus(`Loaded ${id}.json from local`, 'success');
+            } catch (e) {
+                showStatus(`Could not load data/${id}.json`, 'error');
+            }
+        }
+
+        async function publishToBackend() {
+            const id = document.getElementById('proposalId').value.trim();
+            const ownerSite = document.getElementById('ownerSite').value.trim();
+            const jsonText = document.getElementById('jsonContent').value.trim();
+
+            if (!id || !jsonText) {
+                showStatus('Fill in ID and JSON content', 'error');
+                return;
+            }
+
+            let data;
+            try {
+                data = JSON.parse(jsonText);
+            } catch (e) {
+                showStatus('Invalid JSON: ' + e.message, 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${BACKEND_URL}/rest/v1/rpc/upsert_proposal`, {
+                    method: 'POST',
+                    headers: {
+                        'apikey': BACKEND_KEY,
+                        'Authorization': `Bearer ${BACKEND_KEY}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        p_id: id,
+                        p_owner_site: ownerSite,
+                        p_title: data.title,
+                        p_subtitle: data.subtitle || null,
+                        p_badge: data.badge || 'Proposal',
+                        p_meta: data.meta || {},
+                        p_sections: data.sections || {},
+                        p_signature: data.signature || {},
+                        p_footer: data.footer || null
+                    })
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.success) {
+                    showStatus(`Published! <a href="?id=${id}" class="preview-link">View proposal</a>`, 'success');
+                } else {
+                    showStatus('Backend error: ' + JSON.stringify(result), 'error');
+                }
+            } catch (e) {
+                showStatus('Network error: ' + e.message, 'error');
+            }
+        }
+
+        function previewProposal() {
+            const id = document.getElementById('proposalId').value.trim();
+            if (id) {
+                window.open(`?id=${id}`, '_blank');
+            }
+        }
+
+        function showStatus(msg, type) {
+            document.getElementById('status').innerHTML = `<div class="status ${type}">${msg}</div>`;
+        }
+    </script>
+</body>
+</html>
