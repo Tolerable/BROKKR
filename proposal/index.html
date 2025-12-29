@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jayy Wick x Bryan Rousey | Cannabis Brand Proposal</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Artist-Branded Cannabis Strain - MJBizCon 2026">
+    <meta property="og:description" content="Strategic collaboration proposal: Jayy Wick x Bryan Rousey exclusive cannabis strain launch">
+    <meta property="og:type" content="website">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --accent: #e94560;
+            --accent-dark: #c73e54;
+            --gold: #d4af37;
+            --text: #333;
+            --text-light: #666;
+            --bg: #fafafa;
+            --white: #fff;
+            --border: #e5e5e5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        /* Hero Header */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #16213e 100%);
+            color: var(--white);
+            padding: 60px 0 50px;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .hero-sub {
+            font-size: 1.15rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .hero-meta {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+            opacity: 0.85;
+        }
+
+        .hero-meta span {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-meta strong {
+            font-weight: 600;
+            color: var(--gold);
+        }
+
+        /* Action Bar */
+        .action-bar {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .action-bar .container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-dark);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid var(--border);
+            color: var(--text);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Main Content */
+        main {
+            padding: 50px 0;
+        }
+
+        section {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 35px 40px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+
+        h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin: 25px 0 12px;
+        }
+
+        h3:first-of-type {
+            margin-top: 5px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+
+        strong {
+            color: var(--primary);
+        }
+
+        /* Highlight Box */
+        .highlight {
+            background: linear-gradient(135deg, #fff5f6 0%, #fef8f0 100%);
+            border-left: 4px solid var(--accent);
+            padding: 25px 30px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight h3 {
+            margin-top: 0;
+            color: var(--accent);
+        }
+
+        .highlight ul {
+            margin-bottom: 0;
+        }
+
+        /* Lists */
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            padding: 10px 0 10px 28px;
+            position: relative;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        ul li:last-child {
+            border-bottom: none;
+        }
+
+        ul li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 16px;
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        /* Tables */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th {
+            background: var(--primary);
+            color: white;
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tr:hover td {
+            background: #f9f9f9;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Budget Total */
+        .budget-total {
+            background: linear-gradient(135deg, var(--primary) 0%, #16213e 100%);
+            color: white;
+            padding: 25px 30px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .budget-total .label {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+
+        .budget-total .amount {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        /* Talking Points */
+        .points-grid {
+            display: grid;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .point {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 18px 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .point:hover {
+            background: #f0f1f2;
+        }
+
+        .point-check {
+            width: 24px;
+            height: 24px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: white;
+            font-size: 0.75rem;
+        }
+
+        .point-text strong {
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .point-text span {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Final Note */
+        .final-note {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .final-note h3 {
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .final-note p {
+            color: rgba(255,255,255,0.9);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 50px 0;
+            background: var(--white);
+            border-top: 1px solid var(--border);
+        }
+
+        .signature {
+            margin-bottom: 20px;
+        }
+
+        .signature-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .signature-title {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .footer-note {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 30px;
+        }
+
+        /* Print Styles */
+        @media print {
+            .action-bar {
+                display: none;
+            }
+
+            body {
+                font-size: 11pt;
+            }
+
+            section {
+                box-shadow: none;
+                border: 1px solid #ddd;
+                page-break-inside: avoid;
+            }
+
+            .hero {
+                padding: 30px 0;
+            }
+
+            .hero h1 {
+                font-size: 24pt;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-meta {
+                gap: 20px;
+            }
+
+            section {
+                padding: 25px 20px;
+            }
+
+            .container {
+                padding: 0 20px;
+            }
+
+            th, td {
+                padding: 10px 12px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Header -->
+    <header class="hero">
+        <div class="container">
+            <span class="hero-badge">Exclusive Collaboration</span>
+            <h1>Artist-Branded Cannabis Strain</h1>
+            <p class="hero-sub">MJBizCon 2026 Launch Proposal</p>
+            <div class="hero-meta">
+                <span><strong>Artist</strong>Jayy Wick</span>
+                <span><strong>Cultivator</strong>Bryan Rousey</span>
+                <span><strong>Launch Date</strong>December 1-4, 2026</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Action Bar -->
+    <div class="action-bar">
+        <div class="container">
+            <button class="btn btn-primary" onclick="window.print()">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z"/><path d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2V7z"/></svg>
+                Download PDF
+            </button>
+            <a href="mailto:?subject=Jayy%20Wick%20Cannabis%20Strain%20Proposal&body=Check%20out%20this%20proposal" class="btn btn-outline">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/></svg>
+                Share via Email
+            </a>
+        </div>
+    </div>
+
+    <main>
+        <div class="container">
+
+            <!-- Executive Summary -->
+            <section>
+                <h2>1. Executive Summary</h2>
+                <p>This project proposes a strategic collaboration between cannabis breeder <strong>Bryan Rousey</strong> and hip hop artist <strong>Jayy Wick</strong> to develop, produce, launch, and commercialize an exclusive artist-branded cannabis strain - timed with <strong>MJBizCon 2026</strong> (December 1-4 in Las Vegas).</p>
+
+                <p>The strain will align with Jayy Wick's creative identity and launch alongside music releases, live events, and merchandise.</p>
+
+                <div class="highlight">
+                    <h3>Why This Matters</h3>
+                    <ul>
+                        <li>Aligns Jayy Wick's cultural brand with cannabis industry exposure</li>
+                        <li>Uses MJBizCon - the largest cannabis trade convention - as a launch platform</li>
+                        <li>Builds ongoing revenue through licensed flower runs, dispensary distribution, and artist-directed sales</li>
+                        <li>Invests in professional cultivation infrastructure and proprietary genetics</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Artist Profile -->
+            <section>
+                <h2>2. Artist Profile - Jayy Wick</h2>
+
+                <h3>Artist Snapshot</h3>
+                <ul>
+                    <li>Hip-hop artist with recent single <em>Pork Chop Sammich</em></li>
+                    <li>Hip-hop/rap genre with growing social media presence</li>
+                    <li>Active on Apple Music and streaming platforms</li>
+                </ul>
+
+                <h3>Value to Cannabis Brand</h3>
+                <ul>
+                    <li>Authentic cultural relevance where cannabis intersects hip-hop fans</li>
+                    <li>Active content creation potential for promotion</li>
+                    <li>Growing identity that benefits from lifestyle branding synergy</li>
+                </ul>
+            </section>
+
+            <!-- Project Goals -->
+            <section>
+                <h2>3. Project Goals & Outcomes</h2>
+
+                <h3>A. Product Development</h3>
+                <ul>
+                    <li><strong>Brand Strain Name:</strong> Co-developed with Jayy Wick</li>
+                    <li><strong>Genetics:</strong> Custom-bred phenotype targeting exceptional terpene profile</li>
+                    <li><strong>Final Strain Selection:</strong> 6 months breeding + phenotype hunt</li>
+                    <li><strong>Commercial Production:</strong> Two full flower runs before launch</li>
+                </ul>
+
+                <h3>B. Brand Integration</h3>
+                <ul>
+                    <li><strong>Packaging & Artwork:</strong> Original design reflecting Jayy Wick's music/imagery</li>
+                    <li><strong>Marketing Collateral:</strong> Digital, print, lifestyle photos, video assets</li>
+                    <li><strong>Seasonal Drops:</strong> Coordinated with music releases or tour dates</li>
+                </ul>
+
+                <h3>C. Distribution & Sales</h3>
+                <ul>
+                    <li><strong>Dispensary Presence:</strong> Las Vegas / Nevada dispensaries</li>
+                    <li><strong>Tour Merch + Cannabis Bundles:</strong> Optional artist tours</li>
+                    <li><strong>Online & Direct Sales:</strong> Compliant NFT/collector editions (if applicable)</li>
+                </ul>
+            </section>
+
+            <!-- Timeline -->
+            <section>
+                <h2>4. Project Timeline</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Phase</th>
+                                <th>Timeline</th>
+                                <th>Key Tasks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Breeding & Phenotype Selection</td>
+                                <td>Jun - Nov 2025</td>
+                                <td>Create & stabilize custom genetics</td>
+                            </tr>
+                            <tr>
+                                <td>Greenhouse Build & Setup</td>
+                                <td>Jun - Nov 2025</td>
+                                <td>Install systems, infrastructure, remote ops</td>
+                            </tr>
+                            <tr>
+                                <td>First Flower Run</td>
+                                <td>Dec 2025 - Mar 2026</td>
+                                <td>Plant, grow, harvest</td>
+                            </tr>
+                            <tr>
+                                <td>Second Flower Run</td>
+                                <td>Mar - Jun 2026</td>
+                                <td>Increased volume for launch inventory</td>
+                            </tr>
+                            <tr>
+                                <td>Product Packaging & Labeling</td>
+                                <td>Jul - Sep 2026</td>
+                                <td>Artwork, compliance, market prep</td>
+                            </tr>
+                            <tr>
+                                <td>Pre-Launch Marketing</td>
+                                <td>Oct - Nov 2026</td>
+                                <td>Campaign rollout</td>
+                            </tr>
+                            <tr style="background: #fff5f6;">
+                                <td><strong>Official Launch</strong></td>
+                                <td><strong>Dec 1-4, 2026</strong></td>
+                                <td><strong>MJBizCon - live event push</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Financial Overview -->
+            <section>
+                <h2>5. Financial Overview</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Amount</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Greenhouse Build & Infrastructure</td>
+                                <td>$10,000</td>
+                                <td>Climate control, irrigation, safety</td>
+                            </tr>
+                            <tr>
+                                <td>Greenhouse Operations (12 Months)</td>
+                                <td>$20,000</td>
+                                <td>Nutrients, labor, utilities</td>
+                            </tr>
+                            <tr>
+                                <td>Breeding & Cultivation Time</td>
+                                <td>$20,000 - $30,000</td>
+                                <td>Project lead compensation</td>
+                            </tr>
+                            <tr>
+                                <td>Marketing & Branding</td>
+                                <td>$10,000 - $15,000</td>
+                                <td>Packaging, design, pre-launch ads</td>
+                            </tr>
+                            <tr>
+                                <td>Event Presence (MJBizCon)</td>
+                                <td>$10,000</td>
+                                <td>Booth, staffing, promos</td>
+                            </tr>
+                            <tr>
+                                <td>Contingency (15%)</td>
+                                <td>$9,000 - $10,500</td>
+                                <td>Risk buffer</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="budget-total">
+                    <div class="label">Total Estimated Budget</div>
+                    <div class="amount">$70,000 - $85,000</div>
+                </div>
+
+                <p style="margin-top: 20px; font-size: 0.9rem; color: var(--text-light);">
+                    <em>Note: Capital needed upfront with staged draw based on milestone delivery.</em>
+                </p>
+            </section>
+
+            <!-- Operational Setup -->
+            <section>
+                <h2>6. Operational Setup</h2>
+
+                <h3>Location</h3>
+                <p>Facility located just outside Las Vegas - key for:</p>
+                <ul>
+                    <li>Logistical convenience for MJBizCon</li>
+                    <li>Nevada cannabis compliance</li>
+                    <li>Transportation to regional dispensaries</li>
+                </ul>
+
+                <h3>Compliance</h3>
+                <p>We'll coordinate with local licensed partners and ensure all product packaging and testing meets Nevada state requirements.</p>
+            </section>
+
+            <!-- Marketing Strategy -->
+            <section>
+                <h2>7. Marketing Strategy</h2>
+
+                <h3>Brand Identity</h3>
+                <ul>
+                    <li>Artist visuals + cannabis identity converge</li>
+                    <li>High-quality photo/video shoot with Jayy Wick</li>
+                    <li>Release at event + streaming platform cross-promo</li>
+                </ul>
+
+                <h3>Pre-Launch Awareness</h3>
+                <ul>
+                    <li>Teaser campaigns on social media</li>
+                    <li>Limited pre-order run</li>
+                    <li>Influencer integrations</li>
+                </ul>
+
+                <h3>Launch Events</h3>
+                <ul>
+                    <li>MJBizCon booth experience</li>
+                    <li>Pop-up launch party</li>
+                    <li>Special edition merchandise</li>
+                </ul>
+
+                <h3>Post-Launch</h3>
+                <ul>
+                    <li>Seasonal drops tied to music releases</li>
+                    <li>Tour integrations</li>
+                    <li>Bundle packages</li>
+                </ul>
+            </section>
+
+            <!-- Contract Structure -->
+            <section>
+                <h2>8. Contract Structure</h2>
+
+                <h3>Term</h3>
+                <p>12-month exclusive release period ending December 2027</p>
+
+                <h3>Revenue Split</h3>
+                <p>Negotiated percentage for artist / cultivation team / investor(s). Typical structures include:</p>
+                <ul>
+                    <li>Artist royalty % on wholesale</li>
+                    <li>Brand share of special product tiers</li>
+                    <li>Performance bonus metrics</li>
+                </ul>
+
+                <h3>Deliverables</h3>
+                <ul>
+                    <li>Timelines and milestones for product creation</li>
+                    <li>Branding & co-ownership clauses</li>
+                    <li>Rights for artist to use product in promotions</li>
+                    <li>Exclusivity region & channels</li>
+                </ul>
+            </section>
+
+            <!-- Investor Talking Points -->
+            <section>
+                <h2>9. Investor Talking Points</h2>
+                <div class="points-grid">
+                    <div class="point">
+                        <div class="point-check">1</div>
+                        <div class="point-text">
+                            <strong>Cultural Relevance</strong>
+                            <span>Hip hop + cannabis = enduring market synergy</span>
+                        </div>
+                    </div>
+                    <div class="point">
+                        <div class="point-check">2</div>
+                        <div class="point-text">
+                            <strong>High Visibility Launch</strong>
+                            <span>MJBizCon 2026 - peak investment spotlight</span>
+                        </div>
+                    </div>
+                    <div class="point">
+                        <div class="point-check">3</div>
+                        <div class="point-text">
+                            <strong>Revenue Diversity</strong>
+                            <span>Wholesale, retail, direct sales, tour merchandise</span>
+                        </div>
+                    </div>
+                    <div class="point">
+                        <div class="point-check">4</div>
+                        <div class="point-text">
+                            <strong>Compliant & Scalable</strong>
+                            <span>Nevada location + regulatory adherence</span>
+                        </div>
+                    </div>
+                    <div class="point">
+                        <div class="point-check">5</div>
+                        <div class="point-text">
+                            <strong>Unique IP</strong>
+                            <span>Proprietary strain tied to artist name</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Final Note -->
+            <div class="final-note">
+                <h3>The Opportunity</h3>
+                <p>This project isn't just about a product - it's a <strong>lifestyle brand launch</strong> with music, cannabis culture, and ongoing monetization opportunities. If positioned right, this could become one of the most talked-about artist collaborations in the cannabis space for 2026.</p>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="signature">
+                <div class="signature-name">Bryan Rousey</div>
+                <div class="signature-title">Cannabis Breeder & Cultivator</div>
+            </div>
+            <p class="footer-note">
+                Confidential Business Proposal - For intended recipients only
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
