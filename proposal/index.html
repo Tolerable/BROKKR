@@ -178,9 +178,26 @@
 
         <div class="dashboard-header">
             <h2>Your Proposals</h2>
-            <div>
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <a href="https://eztunes.xyz/bugs/?site=brokkr" target="_blank" class="btn btn-secondary" title="Report a bug">Report Bug</a>
                 <button class="btn" onclick="showCreateForm()">+ New Proposal</button>
                 <button class="btn btn-secondary" onclick="signOut()">Sign Out</button>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div id="stats-bar" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 30px;">
+            <div style="background: #1a1a1a; padding: 20px; border-radius: 8px; text-align: center;">
+                <div style="font-size: 2rem; color: #ffd700;" id="stat-total">-</div>
+                <div style="color: #888; font-size: 0.85rem;">Total Proposals</div>
+            </div>
+            <div style="background: #1a1a1a; padding: 20px; border-radius: 8px; text-align: center;">
+                <div style="font-size: 2rem; color: #e94560;" id="stat-views">-</div>
+                <div style="color: #888; font-size: 0.85rem;">Total Views</div>
+            </div>
+            <div style="background: #1a1a1a; padding: 20px; border-radius: 8px; text-align: center;">
+                <div style="font-size: 2rem; color: #4ecdc4;" id="stat-active">-</div>
+                <div style="color: #888; font-size: 0.85rem;">Active</div>
             </div>
         </div>
 
@@ -249,9 +266,15 @@
     </div>
 
     <script>
-        // Backend config
+        // Backend config (AI-MINISTRIES)
         const BACKEND_URL = 'https://todhqdgatlejylifqpni.supabase.co';
         const BACKEND_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRvZGhxZGdhdGxlanlsaWZxcG5pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA1NTA3ODEsImV4cCI6MjA3NjEyNjc4MX0.4CQ4ijUlf3Y4OGr5IFrVgCjrqT4dJ0CuEZAt_tlPBig';
+
+        // Allowed admins only
+        const ALLOWED_EMAILS = [
+            'timlbowen@gmail.com',      // Rev
+            'bryan@brokkr.com'          // Bryan (update with real email)
+        ];
 
         let currentUser = null;
 
@@ -265,11 +288,17 @@
         });
 
         async function signIn() {
-            const email = document.getElementById('auth-email').value.trim();
+            const email = document.getElementById('auth-email').value.trim().toLowerCase();
             const password = document.getElementById('auth-password').value;
 
             if (!email || !password) {
                 alert('Please enter email and password');
+                return;
+            }
+
+            // Check allowed emails
+            if (!ALLOWED_EMAILS.includes(email)) {
+                alert('Access denied. This system is restricted to authorized BROKKR admins only.');
                 return;
             }
 
@@ -326,6 +355,13 @@
                 });
 
                 const proposals = await resp.json();
+
+                // Update stats
+                const totalViews = proposals.reduce((sum, p) => sum + (p.views || 0), 0);
+                const activeCount = proposals.filter(p => p.status === 'active').length;
+                document.getElementById('stat-total').textContent = proposals.length;
+                document.getElementById('stat-views').textContent = totalViews;
+                document.getElementById('stat-active').textContent = activeCount;
 
                 if (!proposals || proposals.length === 0) {
                     container.innerHTML = `
