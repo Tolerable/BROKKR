@@ -28,6 +28,8 @@
         }
         .header h1 { color: #ffd700; font-size: 2rem; margin-bottom: 10px; }
         .header p { color: #aaa; }
+        .header .powered { font-size: 0.75rem; color: #666; margin-top: 10px; }
+        .header .powered a { color: #e94560; text-decoration: none; }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 30px; }
 
@@ -64,8 +66,19 @@
             transition: background 0.2s;
         }
         .btn:hover { background: #c73e54; }
+        .btn:disabled { background: #444; cursor: not-allowed; }
         .btn-secondary { background: #333; }
         .btn-secondary:hover { background: #444; }
+
+        .error-msg {
+            background: rgba(255, 82, 82, 0.1);
+            border: 1px solid rgba(255, 82, 82, 0.3);
+            color: #ff5252;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
 
         /* Dashboard */
         .dashboard { display: none; }
@@ -76,8 +89,27 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
         }
         .dashboard-header h2 { color: #ffd700; }
+        .dashboard-header .actions { display: flex; gap: 10px; align-items: center; }
+
+        /* Stats */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .stat-card .value { font-size: 2rem; color: #ffd700; }
+        .stat-card .label { color: #888; font-size: 0.85rem; }
 
         /* Proposals Grid */
         .proposals-grid {
@@ -105,7 +137,7 @@
             margin-bottom: 10px;
         }
         .proposal-card .meta { color: #888; font-size: 0.9rem; margin-bottom: 15px; }
-        .proposal-card .actions { display: flex; gap: 10px; }
+        .proposal-card .actions { display: flex; gap: 10px; flex-wrap: wrap; }
         .proposal-card .btn { padding: 8px 16px; font-size: 0.85rem; }
 
         /* Create/Edit Form */
@@ -117,15 +149,9 @@
         }
         .proposal-form.active { display: block; }
         .proposal-form h2 { color: #ffd700; margin-bottom: 25px; }
-
         .form-group { margin-bottom: 20px; }
-        .form-group label {
-            display: block;
-            color: #aaa;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
-        }
-        .form-group input, .form-group textarea, .form-group select {
+        .form-group label { display: block; color: #aaa; margin-bottom: 8px; font-size: 0.9rem; }
+        .form-group input, .form-group textarea {
             width: 100%;
             padding: 12px 15px;
             background: #0d0d0d;
@@ -137,45 +163,45 @@
         }
         .form-group textarea { min-height: 150px; resize: vertical; }
         .form-group input:focus, .form-group textarea:focus { border-color: #e94560; outline: none; }
-
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-
         .form-actions { display: flex; gap: 15px; margin-top: 30px; }
 
-        /* Status Messages */
-        .status {
-            padding: 15px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-            display: none;
-        }
+        .status { padding: 15px; border-radius: 6px; margin-bottom: 20px; display: none; }
         .status.success { display: block; background: #1a3a1a; border: 1px solid #2d5a2d; }
         .status.error { display: block; background: #3a1a1a; border: 1px solid #5a2d2d; }
 
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 60px;
-            color: #666;
-        }
+        .empty-state { text-align: center; padding: 60px; color: #666; }
         .empty-state h3 { color: #888; margin-bottom: 10px; }
+
+        .user-info { color: #888; font-size: 0.9rem; }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #444;
+            font-size: 0.8rem;
+            border-top: 1px solid #222;
+            margin-top: 60px;
+        }
+        footer a { color: #e94560; text-decoration: none; }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>BROKKR</h1>
-        <p>Proposal Management System</p>
-        <p style="font-size: 0.75rem; color: #666; margin-top: 10px;">Powered by AI-MINISTRIES</p>
+        <h1>Proposal Management System</h1>
     </div>
 
     <!-- Auth Section -->
     <div id="auth-section" class="auth-section">
-        <h2>Sign In</h2>
-        <input type="email" id="auth-email" placeholder="Email">
-        <input type="password" id="auth-password" placeholder="Password">
-        <button class="btn" onclick="signIn()">Sign In</button>
+        <h2>Admin Sign In</h2>
+        <div id="errorMsg" class="error-msg"></div>
+        <form id="signinForm" onsubmit="handleSignIn(event)">
+            <input type="email" id="signinEmail" placeholder="Email" required autocomplete="email">
+            <input type="password" id="signinPassword" placeholder="Password" required autocomplete="current-password">
+            <button type="submit" class="btn" id="signinBtn">Sign In</button>
+        </form>
         <p style="margin-top: 20px; color: #666; font-size: 0.85rem;">
-            BROKKR Admin Access Only
+            Use your AI-Ministries account
         </p>
     </div>
 
@@ -184,33 +210,33 @@
         <div id="status-msg" class="status"></div>
 
         <div class="dashboard-header">
-            <h2>Your Proposals</h2>
-            <div style="display: flex; gap: 10px; align-items: center;">
-                <a href="https://eztunes.xyz/bugs/?site=brokkr" target="_blank" class="btn btn-secondary" title="Report a bug">Report Bug</a>
+            <div>
+                <h2>Your Proposals</h2>
+                <span class="user-info" id="user-info"></span>
+            </div>
+            <div class="actions">
+                <a href="https://eztunes.xyz/bugs/?site=brokkr" target="_blank" class="btn btn-secondary">Report Bug</a>
                 <button class="btn" onclick="showCreateForm()">+ New Proposal</button>
-                <button class="btn btn-secondary" onclick="signOut()">Sign Out</button>
+                <button class="btn btn-secondary" onclick="handleSignOut()">Sign Out</button>
             </div>
         </div>
 
-        <!-- Quick Stats -->
-        <div id="stats-bar" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 30px;">
-            <div style="background: #1a1a1a; padding: 20px; border-radius: 8px; text-align: center;">
-                <div style="font-size: 2rem; color: #ffd700;" id="stat-total">-</div>
-                <div style="color: #888; font-size: 0.85rem;">Total Proposals</div>
+        <div class="stats-bar">
+            <div class="stat-card">
+                <div class="value" id="stat-total">-</div>
+                <div class="label">Total Proposals</div>
             </div>
-            <div style="background: #1a1a1a; padding: 20px; border-radius: 8px; text-align: center;">
-                <div style="font-size: 2rem; color: #e94560;" id="stat-views">-</div>
-                <div style="color: #888; font-size: 0.85rem;">Total Views</div>
+            <div class="stat-card">
+                <div class="value" id="stat-views" style="color: #e94560;">-</div>
+                <div class="label">Total Views</div>
             </div>
-            <div style="background: #1a1a1a; padding: 20px; border-radius: 8px; text-align: center;">
-                <div style="font-size: 2rem; color: #4ecdc4;" id="stat-active">-</div>
-                <div style="color: #888; font-size: 0.85rem;">Active</div>
+            <div class="stat-card">
+                <div class="value" id="stat-active" style="color: #4ecdc4;">-</div>
+                <div class="label">Active</div>
             </div>
         </div>
 
-        <div id="proposals-list" class="proposals-grid">
-            <!-- Proposals loaded here -->
-        </div>
+        <div id="proposals-list" class="proposals-grid"></div>
 
         <!-- Create/Edit Form -->
         <div id="proposal-form" class="proposal-form">
@@ -272,103 +298,104 @@
         </div>
     </div>
 
+    <footer>
+        <p>BROKKR Proposal System</p>
+        <p style="margin-top: 5px;">Powered by <a href="https://ai-ministries.com">AI-MINISTRIES</a></p>
+    </footer>
+
+    <!-- Use the SAME auth as AI-MINISTRIES -->
+    <script src="js/ai_ministries_auth.js"></script>
+    <script src="js/passport.js"></script>
     <script>
-        // Backend config (AI-MINISTRIES)
+        // AI-MINISTRIES Backend
         const BACKEND_URL = 'https://todhqdgatlejylifqpni.supabase.co';
         const BACKEND_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRvZGhxZGdhdGxlanlsaWZxcG5pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA1NTA3ODEsImV4cCI6MjA3NjEyNjc4MX0.4CQ4ijUlf3Y4OGr5IFrVgCjrqT4dJ0CuEZAt_tlPBig';
 
-        // Allowed admins only
-        const ALLOWED_EMAILS = [
-            'timlbowen@gmail.com',      // Rev
-            'bryan@brokkr.com'          // Bryan (update with real email)
-        ];
+        // Error display
+        function showError(msg) {
+            const el = document.getElementById('errorMsg');
+            el.textContent = msg;
+            el.style.display = 'block';
+        }
 
-        let currentUser = null;
+        function hideError() {
+            document.getElementById('errorMsg').style.display = 'none';
+        }
 
-        // Check for existing session
-        document.addEventListener('DOMContentLoaded', () => {
-            const savedUser = localStorage.getItem('brokkr_user');
-            if (savedUser) {
-                currentUser = JSON.parse(savedUser);
-                showDashboard();
-            }
-        });
+        // Sign In using AI-Ministries auth
+        async function handleSignIn(e) {
+            e.preventDefault();
+            hideError();
 
-        async function signIn() {
-            const email = document.getElementById('auth-email').value.trim().toLowerCase();
-            const password = document.getElementById('auth-password').value;
-
-            if (!email || !password) {
-                alert('Please enter email and password');
-                return;
-            }
-
-            // Check allowed emails
-            if (!ALLOWED_EMAILS.includes(email)) {
-                alert('Access denied. This system is restricted to authorized BROKKR admins only.');
-                return;
-            }
+            const btn = document.getElementById('signinBtn');
+            btn.disabled = true;
+            btn.textContent = 'Signing in...';
 
             try {
-                const resp = await fetch(`${BACKEND_URL}/auth/v1/token?grant_type=password`, {
-                    method: 'POST',
-                    headers: {
-                        'apikey': BACKEND_KEY,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ email, password })
-                });
+                const email = document.getElementById('signinEmail').value;
+                const password = document.getElementById('signinPassword').value;
 
-                const data = await resp.json();
+                // Use the same auth as AI-Ministries
+                await window.aiAuth.signIn(email, password);
 
-                if (data.access_token) {
-                    currentUser = {
-                        email: email,
-                        token: data.access_token,
-                        refresh_token: data.refresh_token
-                    };
-                    localStorage.setItem('brokkr_user', JSON.stringify(currentUser));
-                    showDashboard();
-                } else {
-                    alert('Login failed: ' + (data.error_description || data.msg || 'Unknown error'));
-                }
-            } catch (e) {
-                alert('Connection error: ' + e.message);
+                // Link to PASSPORT
+                const displayName = window.aiAuth.getDisplayName();
+                await window.passport.signIn(email, displayName);
+
+                updateUI();
+            } catch (err) {
+                showError(err.message);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Sign In';
             }
         }
 
-        function signOut() {
-            currentUser = null;
-            localStorage.removeItem('brokkr_user');
-            document.getElementById('auth-section').style.display = 'block';
-            document.getElementById('dashboard').classList.remove('active');
+        // Sign Out
+        async function handleSignOut() {
+            await window.aiAuth.signOut();
+            window.passport.signOut();
+            updateUI();
         }
 
-        async function showDashboard() {
-            document.getElementById('auth-section').style.display = 'none';
-            document.getElementById('dashboard').classList.add('active');
-            await loadProposals();
+        // Update UI based on auth state
+        function updateUI() {
+            const isAuth = window.aiAuth.isAuthenticated();
+
+            document.getElementById('auth-section').style.display = isAuth ? 'none' : 'block';
+            document.getElementById('dashboard').classList.toggle('active', isAuth);
+
+            if (isAuth) {
+                const user = window.aiAuth.getUser();
+                const name = window.aiAuth.getDisplayName();
+                document.getElementById('user-info').textContent = `Signed in as ${name}`;
+                loadProposals();
+            }
         }
 
+        // Load proposals from backend
         async function loadProposals() {
             const container = document.getElementById('proposals-list');
+            const token = window.aiAuth.getToken();
 
             try {
                 const resp = await fetch(`${BACKEND_URL}/rest/v1/proposals?select=id,title,badge,views,status,created_at&order=created_at.desc`, {
                     headers: {
                         'apikey': BACKEND_KEY,
-                        'Authorization': `Bearer ${currentUser?.token || BACKEND_KEY}`
+                        'Authorization': `Bearer ${token || BACKEND_KEY}`
                     }
                 });
 
                 const proposals = await resp.json();
 
                 // Update stats
-                const totalViews = proposals.reduce((sum, p) => sum + (p.views || 0), 0);
-                const activeCount = proposals.filter(p => p.status === 'active').length;
-                document.getElementById('stat-total').textContent = proposals.length;
-                document.getElementById('stat-views').textContent = totalViews;
-                document.getElementById('stat-active').textContent = activeCount;
+                if (Array.isArray(proposals)) {
+                    const totalViews = proposals.reduce((sum, p) => sum + (p.views || 0), 0);
+                    const activeCount = proposals.filter(p => p.status === 'active').length;
+                    document.getElementById('stat-total').textContent = proposals.length;
+                    document.getElementById('stat-views').textContent = totalViews;
+                    document.getElementById('stat-active').textContent = activeCount;
+                }
 
                 if (!proposals || proposals.length === 0) {
                     container.innerHTML = `
@@ -385,7 +412,7 @@
                         <span class="badge">${p.badge || 'Proposal'}</span>
                         <h3>${p.title}</h3>
                         <div class="meta">
-                            ID: ${p.id} • ${p.views || 0} views • ${p.status || 'active'}
+                            ID: ${p.id} &bull; ${p.views || 0} views &bull; ${p.status || 'active'}
                         </div>
                         <div class="actions">
                             <a href="view.html?id=${p.id}" class="btn" target="_blank">View</a>
@@ -416,12 +443,13 @@
         }
 
         async function editProposal(id) {
+            const token = window.aiAuth.getToken();
             try {
                 const resp = await fetch(`${BACKEND_URL}/rest/v1/rpc/get_proposal`, {
                     method: 'POST',
                     headers: {
                         'apikey': BACKEND_KEY,
-                        'Authorization': `Bearer ${currentUser?.token || BACKEND_KEY}`,
+                        'Authorization': `Bearer ${token || BACKEND_KEY}`,
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({ p_id: id })
@@ -458,6 +486,7 @@
         async function saveProposal() {
             const id = document.getElementById('prop-id').value.trim();
             const jsonText = document.getElementById('prop-json').value.trim();
+            const token = window.aiAuth.getToken();
 
             if (!id) {
                 alert('Please enter a proposal ID');
@@ -465,8 +494,6 @@
             }
 
             let proposalData;
-
-            // If JSON provided, use that
             if (jsonText) {
                 try {
                     proposalData = JSON.parse(jsonText);
@@ -475,15 +502,12 @@
                     return;
                 }
             } else {
-                // Build from form fields
                 proposalData = {
                     id: id,
                     title: document.getElementById('prop-title').value || 'Untitled Proposal',
                     subtitle: document.getElementById('prop-subtitle').value || '',
                     badge: document.getElementById('prop-badge').value || 'Proposal',
-                    meta: {
-                        artist: document.getElementById('prop-artist').value || ''
-                    },
+                    meta: { artist: document.getElementById('prop-artist').value || '' },
                     sections: {
                         summary: {
                             title: '1. Executive Summary',
@@ -503,7 +527,7 @@
                     method: 'POST',
                     headers: {
                         'apikey': BACKEND_KEY,
-                        'Authorization': `Bearer ${currentUser?.token || BACKEND_KEY}`,
+                        'Authorization': `Bearer ${token || BACKEND_KEY}`,
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
@@ -520,7 +544,6 @@
                 });
 
                 const result = await resp.json();
-
                 if (result.success) {
                     showStatus('Proposal saved successfully!', 'success');
                     hideForm();
@@ -554,11 +577,18 @@
             el.className = 'status ' + type;
             setTimeout(() => { el.className = 'status'; }, 5000);
         }
-    </script>
 
-    <footer style="text-align: center; padding: 40px; color: #444; font-size: 0.8rem; border-top: 1px solid #222; margin-top: 60px;">
-        <p>BROKKR Proposal System</p>
-        <p style="margin-top: 5px;">Powered by <a href="https://ai-ministries.com" style="color: #e94560; text-decoration: none;">AI-MINISTRIES</a></p>
-    </footer>
+        // Auth change callback
+        window.onAuthChange = function(user) {
+            updateUI();
+        };
+
+        // Init
+        document.addEventListener('DOMContentLoaded', async () => {
+            await window.aiAuth.init();
+            await window.passport.init();
+            updateUI();
+        });
+    </script>
 </body>
 </html>
