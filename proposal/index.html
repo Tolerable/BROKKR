@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jayy Wick x Bryan Rousey | Cannabis Brand Proposal</title>
+    <title>Business Proposal</title>
 
-    <!-- Open Graph -->
-    <meta property="og:title" content="Artist-Branded Cannabis Strain - MJBizCon 2026">
-    <meta property="og:description" content="Strategic collaboration proposal: Jayy Wick x Bryan Rousey exclusive cannabis strain launch">
+    <!-- Open Graph - will be updated dynamically -->
+    <meta property="og:title" content="Business Proposal">
+    <meta property="og:description" content="Professional business proposal">
     <meta property="og:type" content="website">
 
     <!-- Google Fonts -->
@@ -54,11 +54,7 @@
             --point-hover: #2a2a2a;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -69,11 +65,40 @@
             transition: background 0.3s, color 0.3s;
         }
 
-        .container {
-            max-width: 850px;
-            margin: 0 auto;
-            padding: 0 30px;
+        .container { max-width: 850px; margin: 0 auto; padding: 0 30px; }
+
+        /* Loading State */
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            gap: 20px;
         }
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Error State */
+        .error-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 40px;
+        }
+        .error-state h1 { font-family: 'Playfair Display', serif; color: var(--accent); margin-bottom: 15px; }
+        .error-state p { color: var(--text-light); margin-bottom: 20px; }
+        .error-state code { background: var(--point-bg); padding: 10px 20px; border-radius: 6px; font-size: 0.9rem; }
 
         /* Hero Header */
         .hero {
@@ -82,7 +107,6 @@
             padding: 60px 0 50px;
             text-align: center;
         }
-
         .hero-badge {
             display: inline-block;
             background: var(--accent);
@@ -95,7 +119,6 @@
             text-transform: uppercase;
             margin-bottom: 20px;
         }
-
         .hero h1 {
             font-family: 'Playfair Display', serif;
             font-size: 2.8rem;
@@ -104,32 +127,10 @@
             line-height: 1.2;
             color: #ffffff;
         }
-
-        .hero-sub {
-            font-size: 1.15rem;
-            color: #ffffff;
-            margin-bottom: 30px;
-            font-weight: 400;
-        }
-
-        .hero-meta {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.9);
-        }
-
-        .hero-meta span {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .hero-meta strong {
-            font-weight: 600;
-            color: var(--gold);
-        }
+        .hero-sub { font-size: 1.15rem; color: #ffffff; margin-bottom: 30px; font-weight: 400; }
+        .hero-meta { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; font-size: 0.9rem; color: rgba(255,255,255,0.9); }
+        .hero-meta span { display: flex; flex-direction: column; }
+        .hero-meta strong { font-weight: 600; color: var(--gold); }
 
         /* Action Bar */
         .action-bar {
@@ -141,14 +142,7 @@
             z-index: 100;
             transition: background 0.3s;
         }
-
-        .action-bar .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
+        .action-bar .container { display: flex; justify-content: center; align-items: center; gap: 15px; flex-wrap: wrap; }
 
         .btn {
             display: inline-flex;
@@ -164,26 +158,10 @@
             border: none;
             font-family: inherit;
         }
-
-        .btn-primary {
-            background: var(--accent);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: var(--accent-dark);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 1.5px solid var(--border);
-            color: var(--text);
-        }
-
-        .btn-outline:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn-primary:hover { background: var(--accent-dark); }
+        .btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--text); }
+        .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
 
         /* Theme Toggle */
         .theme-toggle {
@@ -199,29 +177,15 @@
             color: var(--text);
             transition: all 0.2s;
         }
-
-        .theme-toggle:hover {
-            border-color: var(--accent);
-        }
-
-        .theme-toggle svg {
-            width: 16px;
-            height: 16px;
-        }
-
-        .theme-icon {
-            display: none;
-        }
-
+        .theme-toggle:hover { border-color: var(--accent); }
+        .theme-toggle svg { width: 16px; height: 16px; }
+        .theme-icon { display: none; }
         [data-theme="light"] .theme-icon.light { display: block; }
         [data-theme="dark"] .theme-icon.dark { display: block; }
         [data-theme="system"] .theme-icon.system { display: block; }
 
         /* Main Content */
-        main {
-            padding: 50px 0;
-        }
-
+        main { padding: 50px 0; }
         section {
             background: var(--card-bg);
             border-radius: 12px;
@@ -230,10 +194,7 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             transition: background 0.3s;
         }
-
-        [data-theme="dark"] section {
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        }
+        [data-theme="dark"] section { box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
 
         h2 {
             font-family: 'Playfair Display', serif;
@@ -244,38 +205,15 @@
             border-bottom: 2px solid var(--accent);
             display: inline-block;
         }
+        [data-theme="dark"] h2 { color: var(--gold); }
 
-        [data-theme="dark"] h2 {
-            color: var(--gold);
-        }
+        h3 { font-size: 1rem; font-weight: 600; color: var(--primary); margin: 25px 0 12px; }
+        [data-theme="dark"] h3 { color: var(--text); }
+        h3:first-of-type { margin-top: 5px; }
 
-        h3 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--primary);
-            margin: 25px 0 12px;
-        }
-
-        [data-theme="dark"] h3 {
-            color: var(--text);
-        }
-
-        h3:first-of-type {
-            margin-top: 5px;
-        }
-
-        p {
-            margin-bottom: 15px;
-            color: var(--text);
-        }
-
-        strong {
-            color: var(--primary);
-        }
-
-        [data-theme="dark"] strong {
-            color: var(--gold);
-        }
+        p { margin-bottom: 15px; color: var(--text); }
+        strong { color: var(--primary); }
+        [data-theme="dark"] strong { color: var(--gold); }
 
         /* Highlight Box */
         .highlight {
@@ -285,36 +223,14 @@
             margin: 25px 0;
             border-radius: 0 8px 8px 0;
         }
-
-        [data-theme="dark"] .highlight {
-            background: linear-gradient(135deg, #2a1a1d 0%, #2a2520 100%);
-        }
-
-        .highlight h3 {
-            margin-top: 0;
-            color: var(--accent);
-        }
-
-        .highlight ul {
-            margin-bottom: 0;
-        }
+        [data-theme="dark"] .highlight { background: linear-gradient(135deg, #2a1a1d 0%, #2a2520 100%); }
+        .highlight h3 { margin-top: 0; color: var(--accent); }
+        .highlight ul { margin-bottom: 0; }
 
         /* Lists */
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        ul li {
-            padding: 10px 0 10px 28px;
-            position: relative;
-            border-bottom: 1px solid var(--border);
-        }
-
-        ul li:last-child {
-            border-bottom: none;
-        }
-
+        ul { list-style: none; padding: 0; }
+        ul li { padding: 10px 0 10px 28px; position: relative; border-bottom: 1px solid var(--border); }
+        ul li:last-child { border-bottom: none; }
         ul li::before {
             content: "";
             position: absolute;
@@ -327,17 +243,8 @@
         }
 
         /* Tables */
-        .table-wrapper {
-            overflow-x: auto;
-            margin: 20px 0;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.95rem;
-        }
-
+        .table-wrapper { overflow-x: auto; margin: 20px 0; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
         th {
             background: var(--primary);
             color: white;
@@ -348,24 +255,11 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-
-        [data-theme="dark"] th {
-            background: #2a2a2a;
-            color: var(--gold);
-        }
-
-        td {
-            padding: 14px 16px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        tr:hover td {
-            background: var(--table-hover);
-        }
-
-        tr:last-child td {
-            border-bottom: none;
-        }
+        [data-theme="dark"] th { background: #2a2a2a; color: var(--gold); }
+        td { padding: 14px 16px; border-bottom: 1px solid var(--border); }
+        tr:hover td { background: var(--table-hover); }
+        tr:last-child td { border-bottom: none; }
+        tr.highlight-row { background: rgba(233, 69, 96, 0.1); }
 
         /* Budget Total */
         .budget-total {
@@ -376,32 +270,12 @@
             text-align: center;
             margin-top: 25px;
         }
-
-        [data-theme="dark"] .budget-total {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a3e 100%);
-            border: 1px solid var(--border);
-        }
-
-        .budget-total .label {
-            font-size: 0.85rem;
-            opacity: 0.8;
-            margin-bottom: 5px;
-        }
-
-        .budget-total .amount {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--gold);
-        }
+        [data-theme="dark"] .budget-total { background: linear-gradient(135deg, #1a1a1a 0%, #2a2a3e 100%); border: 1px solid var(--border); }
+        .budget-total .label { font-size: 0.85rem; opacity: 0.8; margin-bottom: 5px; }
+        .budget-total .amount { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--gold); }
 
         /* Talking Points */
-        .points-grid {
-            display: grid;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
+        .points-grid { display: grid; gap: 15px; margin-top: 20px; }
         .point {
             display: flex;
             align-items: flex-start;
@@ -411,11 +285,7 @@
             border-radius: 8px;
             transition: all 0.2s;
         }
-
-        .point:hover {
-            background: var(--point-hover);
-        }
-
+        .point:hover { background: var(--point-hover); }
         .point-check {
             width: 24px;
             height: 24px;
@@ -428,16 +298,8 @@
             color: white;
             font-size: 0.75rem;
         }
-
-        .point-text strong {
-            display: block;
-            margin-bottom: 3px;
-        }
-
-        .point-text span {
-            color: var(--text-light);
-            font-size: 0.9rem;
-        }
+        .point-text strong { display: block; margin-bottom: 3px; }
+        .point-text span { color: var(--text-light); font-size: 0.9rem; }
 
         /* Final Note */
         .final-note {
@@ -447,24 +309,9 @@
             border-radius: 12px;
             text-align: center;
         }
-
-        [data-theme="dark"] .final-note {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a3e 100%);
-            border: 1px solid var(--border);
-        }
-
-        .final-note h3 {
-            color: var(--gold);
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-        }
-
-        .final-note p {
-            color: rgba(255,255,255,0.9);
-            max-width: 600px;
-            margin: 0 auto;
-        }
+        [data-theme="dark"] .final-note { background: linear-gradient(135deg, #1a1a1a 0%, #2a2a3e 100%); border: 1px solid var(--border); }
+        .final-note h3 { color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 15px; }
+        .final-note p { color: rgba(255,255,255,0.9); max-width: 600px; margin: 0 auto; }
 
         /* Footer */
         footer {
@@ -474,456 +321,102 @@
             border-top: 1px solid var(--border);
             transition: background 0.3s;
         }
-
-        .signature {
-            margin-bottom: 20px;
-        }
-
-        .signature-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            color: var(--primary);
-            margin-bottom: 5px;
-        }
-
-        [data-theme="dark"] .signature-name {
-            color: var(--gold);
-        }
-
-        .signature-title {
-            color: var(--text-light);
-            font-size: 0.95rem;
-        }
-
-        .footer-note {
-            font-size: 0.8rem;
-            color: var(--text-light);
-            margin-top: 30px;
-        }
+        .signature { margin-bottom: 20px; }
+        .signature-name { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--primary); margin-bottom: 5px; }
+        [data-theme="dark"] .signature-name { color: var(--gold); }
+        .signature-title { color: var(--text-light); font-size: 0.95rem; }
+        .footer-note { font-size: 0.8rem; color: var(--text-light); margin-top: 30px; }
 
         /* Print Styles */
         @media print {
-            .action-bar {
-                display: none;
-            }
-
-            body {
-                font-size: 11pt;
-                background: white;
-                color: #333;
-            }
-
-            section {
-                box-shadow: none;
-                border: 1px solid #ddd;
-                page-break-inside: avoid;
-            }
-
-            .hero {
-                padding: 30px 0;
-            }
-
-            .hero h1 {
-                font-size: 24pt;
-            }
+            .action-bar { display: none; }
+            body { font-size: 11pt; background: white; color: #333; }
+            section { box-shadow: none; border: 1px solid #ddd; page-break-inside: avoid; }
+            .hero { padding: 30px 0; }
+            .hero h1 { font-size: 24pt; }
         }
 
         /* Mobile */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero-meta {
-                gap: 20px;
-            }
-
-            section {
-                padding: 25px 20px;
-            }
-
-            .container {
-                padding: 0 20px;
-            }
-
-            th, td {
-                padding: 10px 12px;
-                font-size: 0.85rem;
-            }
-
-            .action-bar .container {
-                gap: 10px;
-            }
-
-            .btn {
-                padding: 8px 14px;
-                font-size: 0.8rem;
-            }
-
-            .theme-toggle {
-                padding: 6px 10px;
-            }
+            .hero h1 { font-size: 2rem; }
+            .hero-meta { gap: 20px; }
+            section { padding: 25px 20px; }
+            .container { padding: 0 20px; }
+            th, td { padding: 10px 12px; font-size: 0.85rem; }
+            .action-bar .container { gap: 10px; }
+            .btn { padding: 8px 14px; font-size: 0.8rem; }
+            .theme-toggle { padding: 6px 10px; }
         }
+
+        /* Hidden until loaded */
+        #proposal-content { display: none; }
+        #proposal-content.loaded { display: block; }
     </style>
 </head>
 <body>
 
-    <!-- Hero Header -->
-    <header class="hero">
-        <div class="container">
-            <span class="hero-badge">Exclusive Collaboration</span>
-            <h1>Artist-Branded Cannabis Strain</h1>
-            <p class="hero-sub">MJBizCon 2026 Launch Proposal</p>
-            <div class="hero-meta">
-                <span><strong>Artist</strong>Jayy Wick</span>
-                <span><strong>Cultivator</strong>Bryan Rousey</span>
-                <span><strong>Launch Date</strong>December 1-4, 2026</span>
-            </div>
-        </div>
-    </header>
-
-    <!-- Action Bar -->
-    <div class="action-bar">
-        <div class="container">
-            <button class="btn btn-primary" onclick="window.print()">
-                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z"/><path d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2V7z"/></svg>
-                PDF
-            </button>
-            <a href="mailto:?subject=Jayy%20Wick%20Cannabis%20Strain%20Proposal&body=Check%20out%20this%20proposal" class="btn btn-outline">
-                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/></svg>
-                Email
-            </a>
-            <button class="theme-toggle" onclick="cycleTheme()" title="Toggle theme">
-                <!-- Sun icon for light mode -->
-                <svg class="theme-icon light" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
-                </svg>
-                <!-- Moon icon for dark mode -->
-                <svg class="theme-icon dark" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
-                </svg>
-                <!-- Auto icon for system mode -->
-                <svg class="theme-icon system" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M0 1.5A1.5 1.5 0 0 1 1.5 0h13A1.5 1.5 0 0 1 16 1.5v13a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 14.5v-13zM1.5 1a.5.5 0 0 0-.5.5v13a.5.5 0 0 0 .5.5H8V1H1.5zM15 14.5V1.5a.5.5 0 0 0-.5-.5H9v14h5.5a.5.5 0 0 0 .5-.5z"/>
-                </svg>
-                <span id="theme-label">Light</span>
-            </button>
-        </div>
+    <!-- Loading State -->
+    <div id="loading-state" class="loading">
+        <div class="loading-spinner"></div>
+        <p>Loading proposal...</p>
     </div>
 
-    <main>
-        <div class="container">
+    <!-- Error State (hidden by default) -->
+    <div id="error-state" class="error-state" style="display: none;">
+        <h1>Proposal Not Found</h1>
+        <p>The proposal you're looking for doesn't exist or the link is invalid.</p>
+        <code id="error-code">?id=...</code>
+    </div>
 
-            <!-- Executive Summary -->
-            <section>
-                <h2>1. Executive Summary</h2>
-                <p>This project proposes a strategic collaboration between cannabis breeder <strong>Bryan Rousey</strong> and hip hop artist <strong>Jayy Wick</strong> to develop, produce, launch, and commercialize an exclusive artist-branded cannabis strain - timed with <strong>MJBizCon 2026</strong> (December 1-4 in Las Vegas).</p>
-
-                <p>The strain will align with Jayy Wick's creative identity and launch alongside music releases, live events, and merchandise.</p>
-
-                <div class="highlight">
-                    <h3>Why This Matters</h3>
-                    <ul>
-                        <li>Aligns Jayy Wick's cultural brand with cannabis industry exposure</li>
-                        <li>Uses MJBizCon - the largest cannabis trade convention - as a launch platform</li>
-                        <li>Builds ongoing revenue through licensed flower runs, dispensary distribution, and artist-directed sales</li>
-                        <li>Invests in professional cultivation infrastructure and proprietary genetics</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Artist Profile -->
-            <section>
-                <h2>2. Artist Profile - Jayy Wick</h2>
-
-                <h3>Artist Snapshot</h3>
-                <ul>
-                    <li>Hip-hop artist with recent single <em>Pork Chop Sammich</em></li>
-                    <li>Hip-hop/rap genre with growing social media presence</li>
-                    <li>Active on Apple Music and streaming platforms</li>
-                </ul>
-
-                <h3>Value to Cannabis Brand</h3>
-                <ul>
-                    <li>Authentic cultural relevance where cannabis intersects hip-hop fans</li>
-                    <li>Active content creation potential for promotion</li>
-                    <li>Growing identity that benefits from lifestyle branding synergy</li>
-                </ul>
-            </section>
-
-            <!-- Project Goals -->
-            <section>
-                <h2>3. Project Goals & Outcomes</h2>
-
-                <h3>A. Product Development</h3>
-                <ul>
-                    <li><strong>Brand Strain Name:</strong> Co-developed with Jayy Wick</li>
-                    <li><strong>Genetics:</strong> Custom-bred phenotype targeting exceptional terpene profile</li>
-                    <li><strong>Final Strain Selection:</strong> 6 months breeding + phenotype hunt</li>
-                    <li><strong>Commercial Production:</strong> Two full flower runs before launch</li>
-                </ul>
-
-                <h3>B. Brand Integration</h3>
-                <ul>
-                    <li><strong>Packaging & Artwork:</strong> Original design reflecting Jayy Wick's music/imagery</li>
-                    <li><strong>Marketing Collateral:</strong> Digital, print, lifestyle photos, video assets</li>
-                    <li><strong>Seasonal Drops:</strong> Coordinated with music releases or tour dates</li>
-                </ul>
-
-                <h3>C. Distribution & Sales</h3>
-                <ul>
-                    <li><strong>Dispensary Presence:</strong> Las Vegas / Nevada dispensaries</li>
-                    <li><strong>Tour Merch + Cannabis Bundles:</strong> Optional artist tours</li>
-                    <li><strong>Online & Direct Sales:</strong> Compliant NFT/collector editions (if applicable)</li>
-                </ul>
-            </section>
-
-            <!-- Timeline -->
-            <section>
-                <h2>4. Project Timeline</h2>
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Phase</th>
-                                <th>Timeline</th>
-                                <th>Key Tasks</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Breeding & Phenotype Selection</td>
-                                <td>Jan - Jun 2026</td>
-                                <td>Create & stabilize custom genetics</td>
-                            </tr>
-                            <tr>
-                                <td>Greenhouse Build & Setup</td>
-                                <td>Dec 2025 - Jun 2026</td>
-                                <td>Install systems, infrastructure, remote ops</td>
-                            </tr>
-                            <tr>
-                                <td>First Flower Run</td>
-                                <td>Jun - Aug 2026</td>
-                                <td>Plant, grow, harvest</td>
-                            </tr>
-                            <tr>
-                                <td>Second Flower Run</td>
-                                <td>Aug - Nov 2026</td>
-                                <td>Increased volume for launch inventory</td>
-                            </tr>
-                            <tr>
-                                <td>Product Packaging & Labeling</td>
-                                <td>Jul - Sep 2026</td>
-                                <td>Artwork, compliance, market prep</td>
-                            </tr>
-                            <tr>
-                                <td>Pre-Launch Marketing</td>
-                                <td>Oct - Nov 2026</td>
-                                <td>Campaign rollout</td>
-                            </tr>
-                            <tr style="background: rgba(233, 69, 96, 0.1);">
-                                <td><strong>Official Launch</strong></td>
-                                <td><strong>Dec 1-4, 2026</strong></td>
-                                <td><strong>MJBizCon - live event push</strong></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- Financial Overview -->
-            <section>
-                <h2>5. Financial Overview</h2>
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Category</th>
-                                <th>Amount</th>
-                                <th>Details</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Greenhouse Build & Infrastructure</td>
-                                <td>$10,000</td>
-                                <td>Climate control, irrigation, safety</td>
-                            </tr>
-                            <tr>
-                                <td>Greenhouse Operations (12 Months)</td>
-                                <td>$20,000</td>
-                                <td>Nutrients, labor, utilities</td>
-                            </tr>
-                            <tr>
-                                <td>Breeding & Cultivation Time</td>
-                                <td>$20,000 - $30,000</td>
-                                <td>Project lead compensation</td>
-                            </tr>
-                            <tr>
-                                <td>Marketing & Branding</td>
-                                <td>$10,000 - $15,000</td>
-                                <td>Packaging, design, pre-launch ads</td>
-                            </tr>
-                            <tr>
-                                <td>Event Presence (MJBizCon)</td>
-                                <td>$10,000</td>
-                                <td>Booth, staffing, promos</td>
-                            </tr>
-                            <tr>
-                                <td>Contingency (15%)</td>
-                                <td>$9,000 - $10,500</td>
-                                <td>Risk buffer</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="budget-total">
-                    <div class="label">Total Estimated Budget</div>
-                    <div class="amount">$70,000 - $85,000</div>
-                </div>
-
-                <p style="margin-top: 20px; font-size: 0.9rem; color: var(--text-light);">
-                    <em>Note: Capital needed upfront with staged draw based on milestone delivery.</em>
-                </p>
-            </section>
-
-            <!-- Operational Setup -->
-            <section>
-                <h2>6. Operational Setup</h2>
-
-                <h3>Location</h3>
-                <p>Facility located just outside Las Vegas - key for:</p>
-                <ul>
-                    <li>Logistical convenience for MJBizCon</li>
-                    <li>Nevada cannabis compliance</li>
-                    <li>Transportation to regional dispensaries</li>
-                </ul>
-
-                <h3>Compliance</h3>
-                <p>We'll coordinate with local licensed partners and ensure all product packaging and testing meets Nevada state requirements.</p>
-            </section>
-
-            <!-- Marketing Strategy -->
-            <section>
-                <h2>7. Marketing Strategy</h2>
-
-                <h3>Brand Identity</h3>
-                <ul>
-                    <li>Artist visuals + cannabis identity converge</li>
-                    <li>High-quality photo/video shoot with Jayy Wick</li>
-                    <li>Release at event + streaming platform cross-promo</li>
-                </ul>
-
-                <h3>Pre-Launch Awareness</h3>
-                <ul>
-                    <li>Teaser campaigns on social media</li>
-                    <li>Limited pre-order run</li>
-                    <li>Influencer integrations</li>
-                </ul>
-
-                <h3>Launch Events</h3>
-                <ul>
-                    <li>MJBizCon booth experience</li>
-                    <li>Pop-up launch party</li>
-                    <li>Special edition merchandise</li>
-                </ul>
-
-                <h3>Post-Launch</h3>
-                <ul>
-                    <li>Seasonal drops tied to music releases</li>
-                    <li>Tour integrations</li>
-                    <li>Bundle packages</li>
-                </ul>
-            </section>
-
-            <!-- Contract Structure -->
-            <section>
-                <h2>8. Contract Structure</h2>
-
-                <h3>Term</h3>
-                <p>12-month exclusive release period ending December 2027</p>
-
-                <h3>Revenue Split</h3>
-                <p>Negotiated percentage for artist / cultivation team / investor(s). Typical structures include:</p>
-                <ul>
-                    <li>Artist royalty % on wholesale</li>
-                    <li>Brand share of special product tiers</li>
-                    <li>Performance bonus metrics</li>
-                </ul>
-
-                <h3>Deliverables</h3>
-                <ul>
-                    <li>Timelines and milestones for product creation</li>
-                    <li>Branding & co-ownership clauses</li>
-                    <li>Rights for artist to use product in promotions</li>
-                    <li>Exclusivity region & channels</li>
-                </ul>
-            </section>
-
-            <!-- Investor Talking Points -->
-            <section>
-                <h2>9. Investor Talking Points</h2>
-                <div class="points-grid">
-                    <div class="point">
-                        <div class="point-check">1</div>
-                        <div class="point-text">
-                            <strong>Cultural Relevance</strong>
-                            <span>Hip hop + cannabis = enduring market synergy</span>
-                        </div>
-                    </div>
-                    <div class="point">
-                        <div class="point-check">2</div>
-                        <div class="point-text">
-                            <strong>High Visibility Launch</strong>
-                            <span>MJBizCon 2026 - peak investment spotlight</span>
-                        </div>
-                    </div>
-                    <div class="point">
-                        <div class="point-check">3</div>
-                        <div class="point-text">
-                            <strong>Revenue Diversity</strong>
-                            <span>Wholesale, retail, direct sales, tour merchandise</span>
-                        </div>
-                    </div>
-                    <div class="point">
-                        <div class="point-check">4</div>
-                        <div class="point-text">
-                            <strong>Compliant & Scalable</strong>
-                            <span>Nevada location + regulatory adherence</span>
-                        </div>
-                    </div>
-                    <div class="point">
-                        <div class="point-check">5</div>
-                        <div class="point-text">
-                            <strong>Unique IP</strong>
-                            <span>Proprietary strain tied to artist name</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Final Note -->
-            <div class="final-note">
-                <h3>The Opportunity</h3>
-                <p>This project isn't just about a product - it's a <strong>lifestyle brand launch</strong> with music, cannabis culture, and ongoing monetization opportunities. If positioned right, this could become one of the most talked-about artist collaborations in the cannabis space for 2026.</p>
+    <!-- Proposal Content (hidden until loaded) -->
+    <div id="proposal-content">
+        <!-- Hero Header -->
+        <header class="hero">
+            <div class="container">
+                <span class="hero-badge" id="p-badge">Loading...</span>
+                <h1 id="p-title">Loading...</h1>
+                <p class="hero-sub" id="p-subtitle">Loading...</p>
+                <div class="hero-meta" id="p-meta"></div>
             </div>
+        </header>
 
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="signature">
-                <div class="signature-name">Bryan Rousey</div>
-                <div class="signature-title">Cannabis Breeder & Cultivator</div>
+        <!-- Action Bar -->
+        <div class="action-bar">
+            <div class="container">
+                <button class="btn btn-primary" onclick="window.print()">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z"/><path d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2V7z"/></svg>
+                    PDF
+                </button>
+                <a href="#" id="email-share" class="btn btn-outline">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/></svg>
+                    Email
+                </a>
+                <button class="theme-toggle" onclick="cycleTheme()" title="Toggle theme">
+                    <svg class="theme-icon light" fill="currentColor" viewBox="0 0 16 16"><path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/></svg>
+                    <svg class="theme-icon dark" fill="currentColor" viewBox="0 0 16 16"><path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/></svg>
+                    <svg class="theme-icon system" fill="currentColor" viewBox="0 0 16 16"><path d="M0 1.5A1.5 1.5 0 0 1 1.5 0h13A1.5 1.5 0 0 1 16 1.5v13a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 14.5v-13zM1.5 1a.5.5 0 0 0-.5.5v13a.5.5 0 0 0 .5.5H8V1H1.5zM15 14.5V1.5a.5.5 0 0 0-.5-.5H9v14h5.5a.5.5 0 0 0 .5-.5z"/></svg>
+                    <span id="theme-label">Light</span>
+                </button>
             </div>
-            <p class="footer-note">
-                Confidential Business Proposal - For intended recipients only
-            </p>
         </div>
-    </footer>
+
+        <main>
+            <div class="container" id="sections-container">
+                <!-- Sections will be dynamically inserted here -->
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="signature">
+                    <div class="signature-name" id="p-sig-name">Loading...</div>
+                    <div class="signature-title" id="p-sig-title">Loading...</div>
+                </div>
+                <p class="footer-note" id="p-footer">Loading...</p>
+            </div>
+        </footer>
+    </div>
 
     <script>
         // Theme management
@@ -937,24 +430,17 @@
         function applyTheme(theme) {
             const html = document.documentElement;
             const label = document.getElementById('theme-label');
+            if (!label) return;
 
             if (theme === 'system') {
-                const systemTheme = getSystemTheme();
-                html.setAttribute('data-theme', systemTheme);
+                html.setAttribute('data-theme', getSystemTheme());
                 label.textContent = 'Auto';
-                // Keep data-theme-mode for icon display
-                html.setAttribute('data-theme-mode', 'system');
             } else {
                 html.setAttribute('data-theme', theme);
-                html.setAttribute('data-theme-mode', theme);
                 label.textContent = theme.charAt(0).toUpperCase() + theme.slice(1);
             }
 
-            // Update icon visibility
-            document.querySelectorAll('.theme-icon').forEach(icon => {
-                icon.style.display = 'none';
-            });
-            const activeIcon = document.querySelector(`.theme-icon.${theme === 'system' ? 'system' : html.getAttribute('data-theme')}`);
+            document.querySelectorAll('.theme-icon').forEach(icon => icon.style.display = 'none');
             if (theme === 'system') {
                 document.querySelector('.theme-icon.system').style.display = 'block';
             } else {
@@ -969,19 +455,242 @@
             applyTheme(themes[currentThemeIndex]);
         }
 
-        // Initialize theme on load
+        // Proposal loading
+        async function loadProposal() {
+            const params = new URLSearchParams(window.location.search);
+            const proposalId = params.get('id');
+
+            if (!proposalId) {
+                showError('No proposal ID provided. Use ?id=YOUR_CODE');
+                return;
+            }
+
+            try {
+                const response = await fetch(`data/${proposalId}.json`);
+                if (!response.ok) throw new Error('Not found');
+
+                const data = await response.json();
+                renderProposal(data);
+            } catch (error) {
+                showError(`Proposal "${proposalId}" not found`);
+            }
+        }
+
+        function showError(message) {
+            document.getElementById('loading-state').style.display = 'none';
+            document.getElementById('error-state').style.display = 'flex';
+            document.getElementById('error-code').textContent = message;
+        }
+
+        function renderProposal(data) {
+            // Update page title
+            document.title = `${data.title} | Proposal`;
+
+            // Update hero
+            document.getElementById('p-badge').textContent = data.badge;
+            document.getElementById('p-title').textContent = data.title;
+            document.getElementById('p-subtitle').textContent = data.subtitle;
+
+            // Update meta
+            const metaHtml = Object.entries(data.meta).map(([key, value]) => {
+                const label = key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1');
+                return `<span><strong>${label}</strong>${value}</span>`;
+            }).join('');
+            document.getElementById('p-meta').innerHTML = metaHtml;
+
+            // Update email share link
+            const shareUrl = window.location.href;
+            document.getElementById('email-share').href = `mailto:?subject=${encodeURIComponent(data.title)}&body=${encodeURIComponent('Check out this proposal: ' + shareUrl)}`;
+
+            // Render sections
+            const container = document.getElementById('sections-container');
+            container.innerHTML = renderSections(data.sections);
+
+            // Update footer
+            document.getElementById('p-sig-name').textContent = data.signature.name;
+            document.getElementById('p-sig-title').textContent = data.signature.title;
+            document.getElementById('p-footer').textContent = data.footer;
+
+            // Show content
+            document.getElementById('loading-state').style.display = 'none';
+            document.getElementById('proposal-content').classList.add('loaded');
+        }
+
+        function renderSections(sections) {
+            let html = '';
+
+            // Summary
+            if (sections.summary) {
+                const s = sections.summary;
+                html += `<section>
+                    <h2>${s.title}</h2>
+                    <p>${s.content}</p>
+                    ${s.content2 ? `<p>${s.content2}</p>` : ''}
+                    ${s.highlight ? `
+                        <div class="highlight">
+                            <h3>${s.highlight.title}</h3>
+                            <ul>${s.highlight.points.map(p => `<li>${p}</li>`).join('')}</ul>
+                        </div>
+                    ` : ''}
+                </section>`;
+            }
+
+            // Artist profile
+            if (sections.artist) {
+                const s = sections.artist;
+                html += `<section>
+                    <h2>${s.title}</h2>
+                    <h3>${s.snapshot.title}</h3>
+                    <ul>${s.snapshot.points.map(p => `<li>${p}</li>`).join('')}</ul>
+                    <h3>${s.value.title}</h3>
+                    <ul>${s.value.points.map(p => `<li>${p}</li>`).join('')}</ul>
+                </section>`;
+            }
+
+            // Goals
+            if (sections.goals) {
+                const s = sections.goals;
+                html += `<section>
+                    <h2>${s.title}</h2>
+                    <h3>${s.productDev.title}</h3>
+                    <ul>${s.productDev.points.map(p => `<li>${p}</li>`).join('')}</ul>
+                    <h3>${s.brandIntegration.title}</h3>
+                    <ul>${s.brandIntegration.points.map(p => `<li>${p}</li>`).join('')}</ul>
+                    <h3>${s.distribution.title}</h3>
+                    <ul>${s.distribution.points.map(p => `<li>${p}</li>`).join('')}</ul>
+                </section>`;
+            }
+
+            // Timeline
+            if (sections.timeline) {
+                const s = sections.timeline;
+                html += `<section>
+                    <h2>${s.title}</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead><tr><th>Phase</th><th>Timeline</th><th>Key Tasks</th></tr></thead>
+                            <tbody>
+                                ${s.phases.map(p => `
+                                    <tr class="${p.highlight ? 'highlight-row' : ''}">
+                                        <td>${p.highlight ? '<strong>' : ''}${p.phase}${p.highlight ? '</strong>' : ''}</td>
+                                        <td>${p.highlight ? '<strong>' : ''}${p.timeline}${p.highlight ? '</strong>' : ''}</td>
+                                        <td>${p.highlight ? '<strong>' : ''}${p.tasks}${p.highlight ? '</strong>' : ''}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </section>`;
+            }
+
+            // Financial
+            if (sections.financial) {
+                const s = sections.financial;
+                html += `<section>
+                    <h2>${s.title}</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead><tr><th>Category</th><th>Amount</th><th>Details</th></tr></thead>
+                            <tbody>
+                                ${s.budget.map(b => `<tr><td>${b.category}</td><td>${b.amount}</td><td>${b.details}</td></tr>`).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="budget-total">
+                        <div class="label">Total Estimated Budget</div>
+                        <div class="amount">${s.total}</div>
+                    </div>
+                    <p style="margin-top: 20px; font-size: 0.9rem; color: var(--text-light);"><em>${s.note}</em></p>
+                </section>`;
+            }
+
+            // Operational
+            if (sections.operational) {
+                const s = sections.operational;
+                html += `<section>
+                    <h2>${s.title}</h2>
+                    <h3>${s.location.title}</h3>
+                    <p>${s.location.content}</p>
+                    <ul>${s.location.points.map(p => `<li>${p}</li>`).join('')}</ul>
+                    <h3>${s.compliance.title}</h3>
+                    <p>${s.compliance.content}</p>
+                </section>`;
+            }
+
+            // Marketing
+            if (sections.marketing) {
+                const s = sections.marketing;
+                html += `<section>
+                    <h2>${s.title}</h2>
+                    <h3>${s.brandIdentity.title}</h3>
+                    <ul>${s.brandIdentity.points.map(p => `<li>${p}</li>`).join('')}</ul>
+                    <h3>${s.preLaunch.title}</h3>
+                    <ul>${s.preLaunch.points.map(p => `<li>${p}</li>`).join('')}</ul>
+                    <h3>${s.launchEvents.title}</h3>
+                    <ul>${s.launchEvents.points.map(p => `<li>${p}</li>`).join('')}</ul>
+                    <h3>${s.postLaunch.title}</h3>
+                    <ul>${s.postLaunch.points.map(p => `<li>${p}</li>`).join('')}</ul>
+                </section>`;
+            }
+
+            // Contract
+            if (sections.contract) {
+                const s = sections.contract;
+                html += `<section>
+                    <h2>${s.title}</h2>
+                    <h3>${s.term.title}</h3>
+                    <p>${s.term.content}</p>
+                    <h3>${s.revenueSplit.title}</h3>
+                    <p>${s.revenueSplit.content}</p>
+                    <ul>${s.revenueSplit.points.map(p => `<li>${p}</li>`).join('')}</ul>
+                    <h3>${s.deliverables.title}</h3>
+                    <ul>${s.deliverables.points.map(p => `<li>${p}</li>`).join('')}</ul>
+                </section>`;
+            }
+
+            // Talking Points
+            if (sections.talkingPoints) {
+                const s = sections.talkingPoints;
+                html += `<section>
+                    <h2>${s.title}</h2>
+                    <div class="points-grid">
+                        ${s.points.map(p => `
+                            <div class="point">
+                                <div class="point-check">${p.number}</div>
+                                <div class="point-text">
+                                    <strong>${p.title}</strong>
+                                    <span>${p.desc}</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </section>`;
+            }
+
+            // Final Note
+            if (sections.finalNote) {
+                const s = sections.finalNote;
+                html += `<div class="final-note">
+                    <h3>${s.title}</h3>
+                    <p>${s.content}</p>
+                </div>`;
+            }
+
+            return html;
+        }
+
+        // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             const savedTheme = localStorage.getItem('proposal-theme') || 'light';
             currentThemeIndex = themes.indexOf(savedTheme);
             if (currentThemeIndex === -1) currentThemeIndex = 0;
             applyTheme(themes[currentThemeIndex]);
 
-            // Listen for system theme changes
             window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function() {
-                if (themes[currentThemeIndex] === 'system') {
-                    applyTheme('system');
-                }
+                if (themes[currentThemeIndex] === 'system') applyTheme('system');
             });
+
+            loadProposal();
         });
     </script>
 

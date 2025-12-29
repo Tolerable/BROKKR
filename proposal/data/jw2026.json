@@ -1,0 +1,194 @@
+{
+  "id": "jw2026",
+  "title": "Artist-Branded Cannabis Strain",
+  "subtitle": "MJBizCon 2026 Launch Proposal",
+  "badge": "Exclusive Collaboration",
+  "meta": {
+    "artist": "Jayy Wick",
+    "cultivator": "Bryan Rousey",
+    "launchDate": "December 1-4, 2026"
+  },
+  "sections": {
+    "summary": {
+      "title": "1. Executive Summary",
+      "content": "This project proposes a strategic collaboration between cannabis breeder <strong>Bryan Rousey</strong> and hip hop artist <strong>Jayy Wick</strong> to develop, produce, launch, and commercialize an exclusive artist-branded cannabis strain - timed with <strong>MJBizCon 2026</strong> (December 1-4 in Las Vegas).",
+      "content2": "The strain will align with Jayy Wick's creative identity and launch alongside music releases, live events, and merchandise.",
+      "highlight": {
+        "title": "Why This Matters",
+        "points": [
+          "Aligns Jayy Wick's cultural brand with cannabis industry exposure",
+          "Uses MJBizCon - the largest cannabis trade convention - as a launch platform",
+          "Builds ongoing revenue through licensed flower runs, dispensary distribution, and artist-directed sales",
+          "Invests in professional cultivation infrastructure and proprietary genetics"
+        ]
+      }
+    },
+    "artist": {
+      "title": "2. Artist Profile - Jayy Wick",
+      "snapshot": {
+        "title": "Artist Snapshot",
+        "points": [
+          "Hip-hop artist with recent single <em>Pork Chop Sammich</em>",
+          "Hip-hop/rap genre with growing social media presence",
+          "Active on Apple Music and streaming platforms"
+        ]
+      },
+      "value": {
+        "title": "Value to Cannabis Brand",
+        "points": [
+          "Authentic cultural relevance where cannabis intersects hip-hop fans",
+          "Active content creation potential for promotion",
+          "Growing identity that benefits from lifestyle branding synergy"
+        ]
+      }
+    },
+    "goals": {
+      "title": "3. Project Goals & Outcomes",
+      "productDev": {
+        "title": "A. Product Development",
+        "points": [
+          "<strong>Brand Strain Name:</strong> Co-developed with Jayy Wick",
+          "<strong>Genetics:</strong> Custom-bred phenotype targeting exceptional terpene profile",
+          "<strong>Final Strain Selection:</strong> 6 months breeding + phenotype hunt",
+          "<strong>Commercial Production:</strong> Two full flower runs before launch"
+        ]
+      },
+      "brandIntegration": {
+        "title": "B. Brand Integration",
+        "points": [
+          "<strong>Packaging & Artwork:</strong> Original design reflecting Jayy Wick's music/imagery",
+          "<strong>Marketing Collateral:</strong> Digital, print, lifestyle photos, video assets",
+          "<strong>Seasonal Drops:</strong> Coordinated with music releases or tour dates"
+        ]
+      },
+      "distribution": {
+        "title": "C. Distribution & Sales",
+        "points": [
+          "<strong>Dispensary Presence:</strong> Las Vegas / Nevada dispensaries",
+          "<strong>Tour Merch + Cannabis Bundles:</strong> Optional artist tours",
+          "<strong>Online & Direct Sales:</strong> Compliant NFT/collector editions (if applicable)"
+        ]
+      }
+    },
+    "timeline": {
+      "title": "4. Project Timeline",
+      "phases": [
+        {"phase": "Breeding & Phenotype Selection", "timeline": "Jan - Jun 2026", "tasks": "Create & stabilize custom genetics"},
+        {"phase": "Greenhouse Build & Setup", "timeline": "Dec 2025 - Jun 2026", "tasks": "Install systems, infrastructure, remote ops"},
+        {"phase": "First Flower Run", "timeline": "Jun - Aug 2026", "tasks": "Plant, grow, harvest"},
+        {"phase": "Second Flower Run", "timeline": "Aug - Nov 2026", "tasks": "Increased volume for launch inventory"},
+        {"phase": "Product Packaging & Labeling", "timeline": "Jul - Sep 2026", "tasks": "Artwork, compliance, market prep"},
+        {"phase": "Pre-Launch Marketing", "timeline": "Oct - Nov 2026", "tasks": "Campaign rollout"},
+        {"phase": "Official Launch", "timeline": "Dec 1-4, 2026", "tasks": "MJBizCon - live event push", "highlight": true}
+      ]
+    },
+    "financial": {
+      "title": "5. Financial Overview",
+      "budget": [
+        {"category": "Greenhouse Build & Infrastructure", "amount": "$10,000", "details": "Climate control, irrigation, safety"},
+        {"category": "Greenhouse Operations (12 Months)", "amount": "$20,000", "details": "Nutrients, labor, utilities"},
+        {"category": "Breeding & Cultivation Time", "amount": "$20,000 - $30,000", "details": "Project lead compensation"},
+        {"category": "Marketing & Branding", "amount": "$10,000 - $15,000", "details": "Packaging, design, pre-launch ads"},
+        {"category": "Event Presence (MJBizCon)", "amount": "$10,000", "details": "Booth, staffing, promos"},
+        {"category": "Contingency (15%)", "amount": "$9,000 - $10,500", "details": "Risk buffer"}
+      ],
+      "total": "$70,000 - $85,000",
+      "note": "Capital needed upfront with staged draw based on milestone delivery."
+    },
+    "operational": {
+      "title": "6. Operational Setup",
+      "location": {
+        "title": "Location",
+        "content": "Facility located just outside Las Vegas - key for:",
+        "points": [
+          "Logistical convenience for MJBizCon",
+          "Nevada cannabis compliance",
+          "Transportation to regional dispensaries"
+        ]
+      },
+      "compliance": {
+        "title": "Compliance",
+        "content": "We'll coordinate with local licensed partners and ensure all product packaging and testing meets Nevada state requirements."
+      }
+    },
+    "marketing": {
+      "title": "7. Marketing Strategy",
+      "brandIdentity": {
+        "title": "Brand Identity",
+        "points": [
+          "Artist visuals + cannabis identity converge",
+          "High-quality photo/video shoot with Jayy Wick",
+          "Release at event + streaming platform cross-promo"
+        ]
+      },
+      "preLaunch": {
+        "title": "Pre-Launch Awareness",
+        "points": [
+          "Teaser campaigns on social media",
+          "Limited pre-order run",
+          "Influencer integrations"
+        ]
+      },
+      "launchEvents": {
+        "title": "Launch Events",
+        "points": [
+          "MJBizCon booth experience",
+          "Pop-up launch party",
+          "Special edition merchandise"
+        ]
+      },
+      "postLaunch": {
+        "title": "Post-Launch",
+        "points": [
+          "Seasonal drops tied to music releases",
+          "Tour integrations",
+          "Bundle packages"
+        ]
+      }
+    },
+    "contract": {
+      "title": "8. Contract Structure",
+      "term": {
+        "title": "Term",
+        "content": "12-month exclusive release period ending December 2027"
+      },
+      "revenueSplit": {
+        "title": "Revenue Split",
+        "content": "Negotiated percentage for artist / cultivation team / investor(s). Typical structures include:",
+        "points": [
+          "Artist royalty % on wholesale",
+          "Brand share of special product tiers",
+          "Performance bonus metrics"
+        ]
+      },
+      "deliverables": {
+        "title": "Deliverables",
+        "points": [
+          "Timelines and milestones for product creation",
+          "Branding & co-ownership clauses",
+          "Rights for artist to use product in promotions",
+          "Exclusivity region & channels"
+        ]
+      }
+    },
+    "talkingPoints": {
+      "title": "9. Investor Talking Points",
+      "points": [
+        {"number": 1, "title": "Cultural Relevance", "desc": "Hip hop + cannabis = enduring market synergy"},
+        {"number": 2, "title": "High Visibility Launch", "desc": "MJBizCon 2026 - peak investment spotlight"},
+        {"number": 3, "title": "Revenue Diversity", "desc": "Wholesale, retail, direct sales, tour merchandise"},
+        {"number": 4, "title": "Compliant & Scalable", "desc": "Nevada location + regulatory adherence"},
+        {"number": 5, "title": "Unique IP", "desc": "Proprietary strain tied to artist name"}
+      ]
+    },
+    "finalNote": {
+      "title": "The Opportunity",
+      "content": "This project isn't just about a product - it's a <strong>lifestyle brand launch</strong> with music, cannabis culture, and ongoing monetization opportunities. If positioned right, this could become one of the most talked-about artist collaborations in the cannabis space for 2026."
+    }
+  },
+  "signature": {
+    "name": "Bryan Rousey",
+    "title": "Cannabis Breeder & Cultivator"
+  },
+  "footer": "Confidential Business Proposal - For intended recipients only"
+}
