@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BROKKR | Proposal Management</title>
+    <script>
+        // If someone visits with ?id=xxx, redirect to the public viewer
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('id')) {
+            window.location.href = 'view.html?id=' + params.get('id');
+        }
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
