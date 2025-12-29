@@ -215,7 +215,7 @@
                 <span class="user-info" id="user-info"></span>
             </div>
             <div class="actions">
-                <a href="https://eztunes.xyz/bugs/?site=brokkr" target="_blank" class="btn btn-secondary">Report Bug</a>
+                <button class="btn btn-secondary" onclick="showBugModal()">Report Bug</button>
                 <button class="btn" onclick="showCreateForm()">+ New Proposal</button>
                 <button class="btn btn-secondary" onclick="handleSignOut()">Sign Out</button>
             </div>
@@ -294,6 +294,36 @@
                 <button class="btn" onclick="saveProposal()">Save & Publish</button>
                 <button class="btn btn-secondary" onclick="hideForm()">Cancel</button>
                 <button class="btn btn-secondary" onclick="previewProposal()">Preview</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bug Report Modal -->
+    <div id="bugModal" class="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:1000; align-items:center; justify-content:center;">
+        <div style="background:#1a1a1a; border-radius:12px; padding:30px; max-width:500px; width:90%; max-height:90vh; overflow-y:auto;">
+            <h3 style="color:#ffd700; margin-bottom:20px;">Report a Bug</h3>
+            <div id="bugError" class="error-msg" style="display:none;"></div>
+            <div class="form-group">
+                <label>Title *</label>
+                <input type="text" id="bugTitle" placeholder="Brief description of the issue" style="width:100%; padding:12px; background:#0d0d0d; border:1px solid #333; color:#fff; border-radius:6px; margin-bottom:15px;">
+            </div>
+            <div class="form-group">
+                <label>Description *</label>
+                <textarea id="bugDescription" rows="5" placeholder="What happened? Steps to reproduce?" style="width:100%; padding:12px; background:#0d0d0d; border:1px solid #333; color:#fff; border-radius:6px; margin-bottom:15px; resize:vertical;"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Priority</label>
+                <select id="bugPriority" style="width:100%; padding:12px; background:#0d0d0d; border:1px solid #333; color:#fff; border-radius:6px; margin-bottom:20px;">
+                    <option value="low">Low - Minor issue</option>
+                    <option value="medium" selected>Medium - Affects usage</option>
+                    <option value="high">High - Breaks feature</option>
+                    <option value="critical">Critical - Can't use at all</option>
+                </select>
+            </div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <button class="btn" onclick="submitBugReport()">Submit Bug</button>
+                <button class="btn btn-secondary" onclick="hideBugModal()">Cancel</button>
+                <a href="https://eztunes.xyz/bugs/" target="_blank" class="btn btn-secondary" style="text-decoration:none;">View All Bugs</a>
             </div>
         </div>
     </div>
@@ -589,6 +619,67 @@
             try { if (window.passport) await window.passport.init(); } catch(e) { console.warn("Passport init skipped"); }
             updateUI();
         });
+
+        // Bug Report Modal
+        function showBugModal() {
+            document.getElementById('bugModal').style.display = 'flex';
+            document.getElementById('bugTitle').value = '';
+            document.getElementById('bugDescription').value = '';
+            document.getElementById('bugPriority').value = 'medium';
+            document.getElementById('bugError').style.display = 'none';
+        }
+
+        function hideBugModal() {
+            document.getElementById('bugModal').style.display = 'none';
+        }
+
+        async function submitBugReport() {
+            const title = document.getElementById('bugTitle').value.trim();
+            const description = document.getElementById('bugDescription').value.trim();
+            const priority = document.getElementById('bugPriority').value;
+
+            if (!title || !description) {
+                document.getElementById('bugError').textContent = 'Title and description are required';
+                document.getElementById('bugError').style.display = 'block';
+                return;
+            }
+
+            // Submit to EZTUNES bugs system
+            const BUGS_URL = 'https://bugpycickribmdfprryq.supabase.co';
+            const BUGS_KEY = 'sb_publishable_c9Q2joJ8g7g7ntdrzbnzbA_RJfa_5jt';
+
+            try {
+                const response = await fetch(BUGS_URL + '/rest/v1/rpc/submit_eztunes_bug', {
+                    method: 'POST',
+                    headers: {
+                        'apikey': BUGS_KEY,
+                        'Authorization': 'Bearer ' + BUGS_KEY,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        p_game_name: 'BROKKR Proposals',
+                        p_title: title,
+                        p_description: description,
+                        p_category: 'general',
+                        p_priority: priority
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    hideBugModal();
+                    alert('Bug report submitted! Thank you for your feedback.');
+                } else {
+                    document.getElementById('bugError').textContent = result.error || 'Failed to submit bug';
+                    document.getElementById('bugError').style.display = 'block';
+                }
+            } catch (err) {
+                document.getElementById('bugError').textContent = 'Error submitting bug: ' + err.message;
+                document.getElementById('bugError').style.display = 'block';
+            }
+        }
+
     </script>
 </body>
 </html>
