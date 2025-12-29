@@ -264,6 +264,11 @@
                 <input type="text" id="prop-subtitle" placeholder="Brief subtitle">
             </div>
 
+            <div class="form-group">
+                <label>Reference URL (Admin Only - GPT chat, doc, file link)</label>
+                <input type="url" id="prop-ref-url" placeholder="https://chatgpt.com/c/... or any reference link">
+            </div>
+
             <div class="form-row">
                 <div class="form-group">
                     <label>Artist/Client Name</label>
@@ -469,6 +474,7 @@
             document.getElementById('prop-sig-title').value = '';
             document.getElementById('prop-summary').value = '';
             document.getElementById('prop-json').value = '';
+            document.getElementById('prop-ref-url').value = '';
             document.getElementById('proposal-form').classList.add('active');
         }
 
@@ -499,6 +505,7 @@
                 document.getElementById('prop-title').value = data.title || '';
                 document.getElementById('prop-subtitle').value = data.subtitle || '';
                 document.getElementById('prop-artist').value = data.meta?.artist || '';
+                document.getElementById('prop-ref-url').value = data.meta?.reference_url || '';
                 document.getElementById('prop-sig-name').value = data.signature?.name || '';
                 document.getElementById('prop-sig-title').value = data.signature?.title || '';
                 document.getElementById('prop-summary').value = data.sections?.summary?.content || '';
@@ -537,7 +544,10 @@
                     title: document.getElementById('prop-title').value || 'Untitled Proposal',
                     subtitle: document.getElementById('prop-subtitle').value || '',
                     badge: document.getElementById('prop-badge').value || 'Proposal',
-                    meta: { artist: document.getElementById('prop-artist').value || '' },
+                    meta: { 
+                        artist: document.getElementById('prop-artist').value || '',
+                        reference_url: document.getElementById('prop-ref-url').value || ''
+                    },
                     sections: {
                         summary: {
                             title: '1. Executive Summary',
