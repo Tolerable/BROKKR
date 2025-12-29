@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BROKKR Proposal System</title>
+    <title>BROKKR | Proposal Management</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -156,8 +156,9 @@
 </head>
 <body>
     <div class="header">
-        <h1>BROKKR Proposal System</h1>
-        <p>Create and manage business proposals</p>
+        <h1>BROKKR</h1>
+        <p>Proposal Management System</p>
+        <p style="font-size: 0.75rem; color: #666; margin-top: 10px;">Powered by AI-MINISTRIES</p>
     </div>
 
     <!-- Auth Section -->
@@ -167,7 +168,7 @@
         <input type="password" id="auth-password" placeholder="Password">
         <button class="btn" onclick="signIn()">Sign In</button>
         <p style="margin-top: 20px; color: #666; font-size: 0.85rem;">
-            Don't have access? Contact admin.
+            BROKKR Admin Access Only
         </p>
     </div>
 
@@ -511,5 +512,10 @@
             setTimeout(() => { el.className = 'status'; }, 5000);
         }
     </script>
+
+    <footer style="text-align: center; padding: 40px; color: #444; font-size: 0.8rem; border-top: 1px solid #222; margin-top: 60px;">
+        <p>BROKKR Proposal System</p>
+        <p style="margin-top: 5px;">Powered by <a href="https://ai-ministries.com" style="color: #e94560; text-decoration: none;">AI-MINISTRIES</a></p>
+    </footer>
 </body>
 </html>
