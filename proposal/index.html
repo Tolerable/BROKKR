@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +16,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
     <style>
-        :root {
+        /* Light Theme (default) */
+        :root, [data-theme="light"] {
             --primary: #1a1a2e;
             --accent: #e94560;
             --accent-dark: #c73e54;
@@ -24,8 +25,33 @@
             --text: #333;
             --text-light: #666;
             --bg: #fafafa;
+            --card-bg: #fff;
             --white: #fff;
             --border: #e5e5e5;
+            --hero-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            --hero-text: #ffffff;
+            --table-hover: #f9f9f9;
+            --point-bg: #f8f9fa;
+            --point-hover: #f0f1f2;
+        }
+
+        /* Dark Theme */
+        [data-theme="dark"] {
+            --primary: #e8e8e8;
+            --accent: #e94560;
+            --accent-dark: #ff6b84;
+            --gold: #ffd700;
+            --text: #e8e8e8;
+            --text-light: #aaa;
+            --bg: #0d0d0d;
+            --card-bg: #1a1a1a;
+            --white: #1a1a1a;
+            --border: #333;
+            --hero-bg: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            --hero-text: #ffffff;
+            --table-hover: #222;
+            --point-bg: #1f1f1f;
+            --point-hover: #2a2a2a;
         }
 
         * {
@@ -40,6 +66,7 @@
             color: var(--text);
             line-height: 1.7;
             font-size: 16px;
+            transition: background 0.3s, color 0.3s;
         }
 
         .container {
@@ -50,8 +77,8 @@
 
         /* Hero Header */
         .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, #16213e 100%);
-            color: var(--white);
+            background: var(--hero-bg);
+            color: var(--hero-text);
             padding: 60px 0 50px;
             text-align: center;
         }
@@ -75,12 +102,14 @@
             font-weight: 700;
             margin-bottom: 15px;
             line-height: 1.2;
+            color: #ffffff;
         }
 
         .hero-sub {
             font-size: 1.15rem;
-            opacity: 0.9;
+            color: #ffffff;
             margin-bottom: 30px;
+            font-weight: 400;
         }
 
         .hero-meta {
@@ -89,7 +118,7 @@
             gap: 40px;
             flex-wrap: wrap;
             font-size: 0.9rem;
-            opacity: 0.85;
+            color: rgba(255,255,255,0.9);
         }
 
         .hero-meta span {
@@ -104,17 +133,19 @@
 
         /* Action Bar */
         .action-bar {
-            background: var(--white);
+            background: var(--card-bg);
             border-bottom: 1px solid var(--border);
             padding: 15px 0;
             position: sticky;
             top: 0;
             z-index: 100;
+            transition: background 0.3s;
         }
 
         .action-bar .container {
             display: flex;
             justify-content: center;
+            align-items: center;
             gap: 15px;
             flex-wrap: wrap;
         }
@@ -131,6 +162,7 @@
             cursor: pointer;
             transition: all 0.2s;
             border: none;
+            font-family: inherit;
         }
 
         .btn-primary {
@@ -153,17 +185,54 @@
             color: var(--accent);
         }
 
+        /* Theme Toggle */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: var(--point-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            color: var(--text);
+            transition: all 0.2s;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+        }
+
+        .theme-toggle svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .theme-icon {
+            display: none;
+        }
+
+        [data-theme="light"] .theme-icon.light { display: block; }
+        [data-theme="dark"] .theme-icon.dark { display: block; }
+        [data-theme="system"] .theme-icon.system { display: block; }
+
         /* Main Content */
         main {
             padding: 50px 0;
         }
 
         section {
-            background: var(--white);
+            background: var(--card-bg);
             border-radius: 12px;
             padding: 35px 40px;
             margin-bottom: 25px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            transition: background 0.3s;
+        }
+
+        [data-theme="dark"] section {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
 
         h2 {
@@ -176,11 +245,19 @@
             display: inline-block;
         }
 
+        [data-theme="dark"] h2 {
+            color: var(--gold);
+        }
+
         h3 {
             font-size: 1rem;
             font-weight: 600;
             color: var(--primary);
             margin: 25px 0 12px;
+        }
+
+        [data-theme="dark"] h3 {
+            color: var(--text);
         }
 
         h3:first-of-type {
@@ -196,6 +273,10 @@
             color: var(--primary);
         }
 
+        [data-theme="dark"] strong {
+            color: var(--gold);
+        }
+
         /* Highlight Box */
         .highlight {
             background: linear-gradient(135deg, #fff5f6 0%, #fef8f0 100%);
@@ -203,6 +284,10 @@
             padding: 25px 30px;
             margin: 25px 0;
             border-radius: 0 8px 8px 0;
+        }
+
+        [data-theme="dark"] .highlight {
+            background: linear-gradient(135deg, #2a1a1d 0%, #2a2520 100%);
         }
 
         .highlight h3 {
@@ -223,7 +308,7 @@
         ul li {
             padding: 10px 0 10px 28px;
             position: relative;
-            border-bottom: 1px solid #f0f0f0;
+            border-bottom: 1px solid var(--border);
         }
 
         ul li:last-child {
@@ -264,13 +349,18 @@
             letter-spacing: 0.5px;
         }
 
+        [data-theme="dark"] th {
+            background: #2a2a2a;
+            color: var(--gold);
+        }
+
         td {
             padding: 14px 16px;
             border-bottom: 1px solid var(--border);
         }
 
         tr:hover td {
-            background: #f9f9f9;
+            background: var(--table-hover);
         }
 
         tr:last-child td {
@@ -285,6 +375,11 @@
             border-radius: 8px;
             text-align: center;
             margin-top: 25px;
+        }
+
+        [data-theme="dark"] .budget-total {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a3e 100%);
+            border: 1px solid var(--border);
         }
 
         .budget-total .label {
@@ -312,13 +407,13 @@
             align-items: flex-start;
             gap: 15px;
             padding: 18px 20px;
-            background: #f8f9fa;
+            background: var(--point-bg);
             border-radius: 8px;
             transition: all 0.2s;
         }
 
         .point:hover {
-            background: #f0f1f2;
+            background: var(--point-hover);
         }
 
         .point-check {
@@ -353,6 +448,11 @@
             text-align: center;
         }
 
+        [data-theme="dark"] .final-note {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a3e 100%);
+            border: 1px solid var(--border);
+        }
+
         .final-note h3 {
             color: var(--gold);
             font-family: 'Playfair Display', serif;
@@ -370,8 +470,9 @@
         footer {
             text-align: center;
             padding: 50px 0;
-            background: var(--white);
+            background: var(--card-bg);
             border-top: 1px solid var(--border);
+            transition: background 0.3s;
         }
 
         .signature {
@@ -383,6 +484,10 @@
             font-size: 1.5rem;
             color: var(--primary);
             margin-bottom: 5px;
+        }
+
+        [data-theme="dark"] .signature-name {
+            color: var(--gold);
         }
 
         .signature-title {
@@ -404,6 +509,8 @@
 
             body {
                 font-size: 11pt;
+                background: white;
+                color: #333;
             }
 
             section {
@@ -443,6 +550,19 @@
                 padding: 10px 12px;
                 font-size: 0.85rem;
             }
+
+            .action-bar .container {
+                gap: 10px;
+            }
+
+            .btn {
+                padding: 8px 14px;
+                font-size: 0.8rem;
+            }
+
+            .theme-toggle {
+                padding: 6px 10px;
+            }
         }
     </style>
 </head>
@@ -467,12 +587,27 @@
         <div class="container">
             <button class="btn btn-primary" onclick="window.print()">
                 <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z"/><path d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2V7z"/></svg>
-                Download PDF
+                PDF
             </button>
             <a href="mailto:?subject=Jayy%20Wick%20Cannabis%20Strain%20Proposal&body=Check%20out%20this%20proposal" class="btn btn-outline">
                 <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/></svg>
-                Share via Email
+                Email
             </a>
+            <button class="theme-toggle" onclick="cycleTheme()" title="Toggle theme">
+                <!-- Sun icon for light mode -->
+                <svg class="theme-icon light" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+                </svg>
+                <!-- Moon icon for dark mode -->
+                <svg class="theme-icon dark" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+                </svg>
+                <!-- Auto icon for system mode -->
+                <svg class="theme-icon system" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M0 1.5A1.5 1.5 0 0 1 1.5 0h13A1.5 1.5 0 0 1 16 1.5v13a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 14.5v-13zM1.5 1a.5.5 0 0 0-.5.5v13a.5.5 0 0 0 .5.5H8V1H1.5zM15 14.5V1.5a.5.5 0 0 0-.5-.5H9v14h5.5a.5.5 0 0 0 .5-.5z"/>
+                </svg>
+                <span id="theme-label">Light</span>
+            </button>
         </div>
     </div>
 
@@ -558,22 +693,22 @@
                         <tbody>
                             <tr>
                                 <td>Breeding & Phenotype Selection</td>
-                                <td>Jun - Nov 2025</td>
+                                <td>Jan - Jun 2026</td>
                                 <td>Create & stabilize custom genetics</td>
                             </tr>
                             <tr>
                                 <td>Greenhouse Build & Setup</td>
-                                <td>Jun - Nov 2025</td>
+                                <td>Dec 2025 - Jun 2026</td>
                                 <td>Install systems, infrastructure, remote ops</td>
                             </tr>
                             <tr>
                                 <td>First Flower Run</td>
-                                <td>Dec 2025 - Mar 2026</td>
+                                <td>Jun - Aug 2026</td>
                                 <td>Plant, grow, harvest</td>
                             </tr>
                             <tr>
                                 <td>Second Flower Run</td>
-                                <td>Mar - Jun 2026</td>
+                                <td>Aug - Nov 2026</td>
                                 <td>Increased volume for launch inventory</td>
                             </tr>
                             <tr>
@@ -586,7 +721,7 @@
                                 <td>Oct - Nov 2026</td>
                                 <td>Campaign rollout</td>
                             </tr>
-                            <tr style="background: #fff5f6;">
+                            <tr style="background: rgba(233, 69, 96, 0.1);">
                                 <td><strong>Official Launch</strong></td>
                                 <td><strong>Dec 1-4, 2026</strong></td>
                                 <td><strong>MJBizCon - live event push</strong></td>
@@ -789,6 +924,66 @@
             </p>
         </div>
     </footer>
+
+    <script>
+        // Theme management
+        const themes = ['light', 'dark', 'system'];
+        let currentThemeIndex = 0;
+
+        function getSystemTheme() {
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+
+        function applyTheme(theme) {
+            const html = document.documentElement;
+            const label = document.getElementById('theme-label');
+
+            if (theme === 'system') {
+                const systemTheme = getSystemTheme();
+                html.setAttribute('data-theme', systemTheme);
+                label.textContent = 'Auto';
+                // Keep data-theme-mode for icon display
+                html.setAttribute('data-theme-mode', 'system');
+            } else {
+                html.setAttribute('data-theme', theme);
+                html.setAttribute('data-theme-mode', theme);
+                label.textContent = theme.charAt(0).toUpperCase() + theme.slice(1);
+            }
+
+            // Update icon visibility
+            document.querySelectorAll('.theme-icon').forEach(icon => {
+                icon.style.display = 'none';
+            });
+            const activeIcon = document.querySelector(`.theme-icon.${theme === 'system' ? 'system' : html.getAttribute('data-theme')}`);
+            if (theme === 'system') {
+                document.querySelector('.theme-icon.system').style.display = 'block';
+            } else {
+                document.querySelector(`.theme-icon.${theme}`).style.display = 'block';
+            }
+
+            localStorage.setItem('proposal-theme', theme);
+        }
+
+        function cycleTheme() {
+            currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+            applyTheme(themes[currentThemeIndex]);
+        }
+
+        // Initialize theme on load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('proposal-theme') || 'light';
+            currentThemeIndex = themes.indexOf(savedTheme);
+            if (currentThemeIndex === -1) currentThemeIndex = 0;
+            applyTheme(themes[currentThemeIndex]);
+
+            // Listen for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function() {
+                if (themes[currentThemeIndex] === 'system') {
+                    applyTheme('system');
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
